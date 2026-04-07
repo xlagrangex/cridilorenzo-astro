@@ -1,0 +1,101 @@
+---
+const socialLinks = [
+  { label: "Facebook", href: "https://www.facebook.com/cridilorenzo/", icon: "/images/Footer-Social-Icon.svg" },
+  { label: "Instagram", href: "https://www.instagram.com/cridilorenzo", icon: "/images/instagram-stroke-rounded.svg" },
+  { label: "YouTube", href: "https://www.youtube.com/@cridilorenzo", icon: "/images/youtube-stroke-rounded.svg" },
+  { label: "TikTok", href: "https://www.tiktok.com/@cridilorenzo", icon: "/images/TikTok.svg" },
+];
+
+const pageLinks = [
+  { label: "Chi sono", href: "#chi-sono" },
+  { label: "Servizi", href: "#servizi" },
+  { label: "Strumenti", href: "#strumenti" },
+  { label: "Blog", href: "#" },
+];
+---
+
+<footer class="footer-bg pt-16 pb-6">
+  <div class="wrapper px-4 md:px-8 lg:px-12">
+    <!-- Top: Newsletter + Social -->
+    <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
+      <!-- Left: Newsletter -->
+      <div class="flex-1">
+        <h3 class="text-white text-[1.8rem] font-medium mb-4">Iscriviti alla newsletter</h3>
+        <p class="text-white text-base leading-[155%] mb-6 opacity-80">
+          Ricevi gratuitamente la mini-guida all'interpretazione dei sogni e scopri come ascoltare il linguaggio della tua anima.
+        </p>
+        <form class="flex flex-col gap-3 mt-6">
+          <input
+            type="email"
+            placeholder="Indirizzo email"
+            required
+            class="bg-white/10 border border-white/10 rounded-[10px] px-5 py-3 text-white placeholder:text-white/50 text-base focus:border-white/40 outline-none"
+          />
+          <label class="flex items-start gap-2 text-white/60 text-xs cursor-pointer">
+            <input type="checkbox" required class="mt-1" />
+            <span>Ho letto la Privacy Policy e acconsento al trattamento dei dati per l'invio della newsletter.</span>
+          </label>
+          <button type="submit" class="bg-white/10 border border-white/20 rounded-[10px] px-5 py-3 text-white text-sm font-medium hover:bg-white/20 transition-colors">
+            Ricevi la guida
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Social links -->
+      <div class="flex-1 md:max-w-xs">
+        <h3 class="text-white text-xl font-medium mb-6">Seguimi su ...</h3>
+        <div class="flex flex-col gap-4">
+          {socialLinks.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between py-2 border-b border-white/10">
+              <span class="text-white text-base font-medium transition-opacity group-hover:opacity-60">{s.label}</span>
+              <img src={s.icon} alt={s.label} class="w-5 h-5 invert opacity-60 group-hover:opacity-100 transition-opacity" loading="lazy" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <!-- Pagine -->
+      <div class="border border-white/10 rounded-[15px] p-5">
+        <h4 class="text-white/60 text-sm font-medium mb-3">Pagine</h4>
+        <div class="grid grid-cols-2 gap-2">
+          {pageLinks.map((link) => (
+            <a href={link.href} class="group relative overflow-clip h-[24px]">
+              <span class="block text-white text-sm transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">{link.label}</span>
+              <span class="absolute inset-0 block text-white text-sm translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">{link.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Contatti -->
+      <div class="border border-white/10 rounded-[15px] p-5">
+        <h4 class="text-white/60 text-sm font-medium mb-3">Contatti</h4>
+        <div class="flex flex-col gap-2">
+          <a href="mailto:info@cridilorenzo.com" class="text-white text-sm hover:opacity-60 transition-opacity">info@cridilorenzo.com</a>
+          <a href="tel:+393473301278" class="text-white text-sm hover:opacity-60 transition-opacity">+39 3473301278</a>
+        </div>
+      </div>
+
+      <!-- Dove sono -->
+      <div class="border border-white/10 rounded-[15px] p-5">
+        <h4 class="text-white/60 text-sm font-medium mb-3">Dove sono</h4>
+        <div class="flex flex-col gap-2">
+          <span class="text-white text-sm">Milano (MI)</span>
+          <span class="text-white text-sm">P.iva 14452680961</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="border-t border-white/10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <span class="text-white/40 text-sm">&copy; {new Date().getFullYear()} Christian Di Lorenzo. Tutti i diritti riservati.</span>
+      <div class="flex items-center gap-4">
+        <a href="/legal/privacy-policy" class="text-white/40 text-sm hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/legal/cookie-policy" class="text-white/40 text-sm hover:text-white transition-colors">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>

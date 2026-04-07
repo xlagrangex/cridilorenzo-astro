@@ -1,0 +1,408 @@
+@import "tailwindcss";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource/instrument-serif";
+
+@theme {
+  --font-sans: "DM Sans Variable", "DM Sans", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+
+  /* Colori principali dal sito Webflow */
+  --color-bg: #f4f2ee;
+  --color-bg-warm: #ebe7e0;
+  --color-bg-card: #d8d0c1;
+  --color-text: #3e3e3e;
+  --color-text-dark: #15141a;
+  --color-text-muted: #373737cc;
+  --color-accent: #2a9d8f;
+  --color-accent-hover: #238b7f;
+  --color-footer-bg: #17253f;
+  --color-submit: #9eaafa;
+  --color-submit-hover: #17253f;
+  --color-stroke: #43495480;
+  --color-white: #ffffff;
+  --color-black: #0b0b0b;
+  --color-slider-arrow: #634adb;
+}
+
+/* Base */
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+/* Smooth scroll via Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Heading globali — stile DM Sans dal Webflow */
+h1 {
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 2.75rem;
+  font-weight: 500;
+  letter-spacing: -0.02rem;
+  line-height: 110%;
+}
+
+h2 {
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02rem;
+  line-height: 100%;
+}
+
+h3 {
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.96px;
+  line-height: 130%;
+}
+
+h4 {
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+@media (min-width: 768px) {
+  h1 { font-size: 4.5rem; }
+  h2 { font-size: 3.25rem; }
+  h3 { font-size: 1.5rem; }
+}
+
+/* Instrument Serif italic per accenti */
+.italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+/* Paragrafi regular */
+.regular-text {
+  color: var(--color-text);
+  font-size: 18px;
+  line-height: 155.556%;
+  letter-spacing: -0.03125rem;
+  margin-bottom: 20px;
+}
+
+/* Subtitle tag [ SEZIONE ] */
+.sub-title {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+/* ═══════════ LIQUID BLOB FILL — shared ═══════════ */
+.btn-primary,
+.btn-secondary,
+.btn-submit {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+
+.btn-primary::before,
+.btn-secondary::before,
+.btn-submit::before {
+  content: "";
+  position: absolute;
+  top: var(--blob-y, 50%);
+  left: var(--blob-x, 50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0, 1), height 0.6s cubic-bezier(0.4, 0, 0, 1);
+  z-index: -1;
+}
+
+.btn-primary:hover::before,
+.btn-secondary:hover::before,
+.btn-submit:hover::before {
+  width: 400%;
+  height: 400%;
+}
+
+/* Primary button — teal verde */
+.btn-primary {
+  color: var(--color-white);
+  background-color: var(--color-accent);
+  border: 1px solid transparent;
+  padding: 1.2rem 1.5rem;
+}
+
+.btn-primary::before {
+  background: radial-gradient(circle, var(--color-accent-hover) 0%, #1a7a6f 100%);
+}
+
+/* Secondary button — outline */
+.btn-secondary {
+  color: var(--color-text-dark);
+  background-color: transparent;
+  border: 1px solid var(--color-text-dark);
+  padding: 1rem 1.5rem;
+}
+
+.btn-secondary::before {
+  background: radial-gradient(circle, var(--color-text-dark) 0%, #000 100%);
+}
+
+.btn-secondary:hover {
+  color: var(--color-white);
+  border-color: transparent;
+}
+
+/* Submit button — viola */
+.btn-submit {
+  color: var(--color-white);
+  background-color: var(--color-submit);
+  border: 1px solid transparent;
+  padding: 1.25rem 1.5rem;
+  line-height: 150%;
+}
+
+.btn-submit::before {
+  background: radial-gradient(circle, var(--color-submit-hover) 0%, #0e1a30 100%);
+}
+
+.btn-submit:hover {
+  color: var(--color-white);
+}
+
+/* Tag pill */
+.tag {
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.tag-pill {
+  color: var(--color-text-dark);
+  text-transform: uppercase;
+  background-color: var(--color-bg-warm);
+  border-radius: 10px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 171.429%;
+}
+
+/* Card rounded */
+.card {
+  background-color: var(--color-bg-warm);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+/* Mission rounded icon */
+.icon-rounded {
+  background-color: var(--color-bg-card);
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icon-rounded img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Wrapper globale */
+.wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Contact field */
+.contact-field {
+  color: var(--color-text);
+  background-color: var(--color-bg-warm);
+  border: 1px solid rgba(255, 249, 242, 0.05);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  line-height: 150%;
+  letter-spacing: -0.02rem;
+  width: 100%;
+}
+
+.contact-field:focus {
+  border-color: rgba(55, 55, 55, 0.8);
+  outline: none;
+}
+
+.contact-field::placeholder {
+  color: var(--color-text-dark);
+}
+
+/* Process inner */
+.process-inner {
+  z-index: 1;
+  background-color: var(--color-bg-card);
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Accordion */
+.accordion-item {
+  border-bottom: 1px solid var(--color-stroke);
+}
+
+.accordion-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  cursor: pointer;
+}
+
+.accordion-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.accordion-description {
+  padding-bottom: 1.25rem;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 160%;
+}
+
+/* Hero review card */
+.hero-review-card {
+  background-color: var(--color-bg-warm);
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 384px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Rainbow button — flow continuo in una direzione */
+@keyframes rainbow-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: -200% 50%; }
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* ═══════════════════════════════════════════
+   ETHEREAL BLUR — Page Transition
+   (Astro View Transitions / ClientRouter)
+   ═══════════════════════════════════════════ */
+
+@keyframes ethereal-blur-out {
+  0% {
+    filter: blur(0px) brightness(1) saturate(1);
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    filter: blur(50px) brightness(0.4) saturate(0.3);
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ethereal-blur-in {
+  0% {
+    filter: blur(50px) brightness(0.4) saturate(0.3);
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    filter: blur(0px) brightness(1) saturate(1);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+::view-transition-old(root) {
+  animation: ethereal-blur-out 0.7s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: ethereal-blur-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.2s;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0.9s;
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+/* Menu open */
+#site-content {
+  transition: filter 0.5s ease;
+}
+
+body.menu-open #site-content {
+  filter: blur(15px);
+}
+
+/* Footer */
+.footer-bg {
+  background-color: var(--color-footer-bg);
+}

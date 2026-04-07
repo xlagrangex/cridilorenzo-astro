@@ -1,0 +1,61 @@
+---
+import HamburgerMenu from "./react/HamburgerMenu.tsx";
+
+const navLinks = [
+  { label: "Chi sono", href: "#chi-sono" },
+  { label: "Servizi", href: "#servizi" },
+  { label: "Come funziona", href: "#come-funziona" },
+  { label: "Strumenti", href: "#strumenti" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contatti", href: "#contact" },
+];
+
+const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
+---
+
+<nav class="fixed top-0 z-[100] w-full bg-[#f4f2ee]/90 pt-2 backdrop-blur-[14px]">
+  <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-12">
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <!-- Brand -->
+        <a href="/" class="inline-block">
+          <img src="/images/logo-dilorenzo.png" alt="Christian Di Lorenzo — Counselor Professionista" class="h-10 md:h-12 w-auto" />
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden items-center gap-6 lg:flex">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="group relative inline-flex items-center text-[#15141a] text-sm font-medium"
+            >
+              <div class="relative overflow-clip h-[28px] flex items-center">
+                <span class="block transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+                  {link.label}
+                </span>
+                <span class="absolute inset-0 flex items-center translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
+                  {link.label}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- CTA button -->
+        <a
+          href={calendarUrl}
+          target="_blank"
+          class="btn-primary hidden !py-3 !px-5 !text-sm lg:inline-flex"
+        >
+          Prenota un colloquio gratuito
+        </a>
+
+        <!-- Hamburger (mobile) -->
+        <HamburgerMenu client:load />
+      </div>
+
+      <!-- Bottom line -->
+      <div class="h-px w-full bg-[#15141a]/10"></div>
+    </div>
+  </div>
+</nav>

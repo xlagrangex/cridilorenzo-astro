@@ -1,0 +1,433 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FaqAccordion from "../components/react/FaqAccordion.tsx";
+import RainbowButton from "../components/react/RainbowButton.tsx";
+
+const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
+
+const servizi = [
+  { title: "Affrontare rapporti conflittuali", desc: "Difficoltà di coppia, in famiglia o nelle relazioni importanti.", img: "/images/affrontare-rapporti.webp" },
+  { title: "Rompere schemi e blocchi interiori", desc: "Quei meccanismi che si ripetono e ti fanno sentire fermo o intrappolato.", img: "/images/rompere-schemi.webp" },
+  { title: "Crescita personale", desc: "Quando senti che è il momento di capirti più a fondo e fare un passo avanti nella tua vita.", img: "/images/crescita-personale.webp" },
+  { title: "Aumentare la consapevolezza di te", desc: "Comprendere emozioni, reazioni, bisogni e parti di te che restano spesso in secondo piano.", img: "/images/consapevolezza-di-se.webp" },
+  { title: "Gestire ansia, stress e paure", desc: "Quando il peso emotivo diventa difficile da sostenere da soli.", img: "/images/ansia.webp" },
+  { title: "Raggiungere nuovi obiettivi personali", desc: "Quando vuoi cambiare qualcosa ma ti senti bloccato o confuso.", img: "/images/goal.webp" },
+  { title: "Ritrovare te stesso", desc: "Nei momenti in cui ti senti distante da ciò che sei davvero.", img: "/images/ritrovare-se-stessi.webp" },
+  { title: "Attraversare una perdita o un distacco", desc: "La fine di una relazione, un cambiamento importante, un lutto.", img: "/images/attraversare-una-perdita.webp" },
+];
+
+const percheScegliermi = [
+  { title: "Ho attraversato il mio cammino interiore", desc: "Prima di accompagnare gli altri, ho attraversato il mio percorso personale, chiamato \"opera al nero\": anni di lavoro interiore e confronto con le mie ombre.", icon: "/images/Compass_1Compass.png" },
+  { title: "Un lavoro profondo sui sogni", desc: "Integro l'interpretazione dei sogni secondo l'approccio di Gabriella Tupini, uno strumento prezioso per accedere ai contenuti inconsci.", icon: "/images/Crescent-Moon_1Crescent-Moon.png" },
+  { title: "Nessuna lente ideologica", desc: "Non porto credenze religiose o filosofiche nel percorso. Lo spazio che costruisco è neutro, aperto, libero.", icon: "/images/Scales_1Scales.png" },
+  { title: "Un percorso costruito insieme", desc: "Ogni cammino nasce dall'ascolto autentico e si costruisce passo dopo passo, rispettando la tua storia, le tue relazioni e il tuo tempo.", icon: "/images/Heart_1Heart.png" },
+  { title: "Oltre gli schemi mentali", desc: "Ho lavorato per sciogliere condizionamenti e automatismi della mente. Questo mi consente di ascoltare davvero.", icon: "/images/Ocean-Wave_1Ocean-Wave.png" },
+];
+
+const strumenti = [
+  { num: "1", title: "Interpretazione dei sogni", desc: "I sogni parlano attraverso immagini e simboli. Aiutano a comprendere emozioni profonde, parti nascoste di noi e schemi che si ripetono.", icon: "/images/Crescent-Moon_1Crescent-Moon.png" },
+  { num: "2", title: "Genogramma", desc: "Una mappa della storia familiare che aiuta a riconoscere dinamiche e schemi relazionali che influenzano il presente.", icon: "/images/Puzzle_1Puzzle.png" },
+  { num: "3", title: "Costellazioni familiari", desc: "Permettono di osservare le dinamiche relazionali e familiari che influenzano il presente, per ritrovare il proprio posto con più chiarezza.", icon: "/images/Oak-Tree_1Oak-Tree.png" },
+  { num: "4", title: "Scrittura espressiva e di consapevolezza", desc: "La scrittura può diventare uno spazio di ascolto interiore, per dare forma a emozioni, immagini e vissuti.", icon: "/images/Autograph_1Autograph.png" },
+];
+
+const puntiChiave = [
+  { title: "Durata incontro", value: "45 minuti", icon: "/images/Timer.png" },
+  { title: "Modalità", value: "Completamente online", icon: "/images/System-Information.png" },
+  { title: "Privacy", value: "Riservatezza garantita", icon: "/images/Privacy.png" },
+  { title: "Costo", value: "70€ a incontro", icon: "/images/Cash.png" },
+];
+---
+
+<Layout title="Christian Dilorenzo - Counselor">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="pt-24 md:pt-32 pb-16">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="mx-auto" data-animate="fade-in-up">
+        <div class="flex flex-col lg:flex-row gap-7">
+          <!-- Hero card -->
+          <div class="group/hero bg-[#f4f2ee] rounded-[20px] relative overflow-hidden w-full px-8 py-12 md:px-16 md:py-16 flex flex-col gap-15">
+            <div class="flex flex-col gap-7 max-w-[610px] relative z-[4]">
+              <div class="flex flex-col gap-4">
+                <h1>Uno spazio per <br><span class="italic font-medium">fermarti e fare chiarezza</span></h1>
+                <p class="regular-text opacity-80 !mb-0">
+                  Se stai vivendo un periodo di difficoltà, cambiamento o smarrimento, possiamo lavorarci insieme. Gli incontri sono <strong>un tempo dedicato a te</strong>, per comprendere meglio ciò che accade dentro e trasformarlo in <strong>consapevolezza, benessere ed equilibrio</strong>.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-4">
+                <RainbowButton href={calendarUrl} client:load>
+                  Prenota un colloquio gratuito
+                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </RainbowButton>
+                <a href="#chi-sono" class="btn-secondary group">
+                  <span class="inline-flex items-center gap-2">
+                    Chi sono
+                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Rating card -->
+            <a href="https://it.trustpilot.com/review/cridilorenzo.com" target="_blank" class="hero-review-card relative z-[4] group transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <div class="flex flex-col gap-3">
+                <div class="flex items-center gap-3">
+                  <img loading="lazy" src="/images/kindpng_7219870.png" alt="Trustpilot" class="h-auto w-[140px] object-contain" />
+                  <img src="/images/freccia-destra.svg" loading="lazy" alt="" class="w-4 h-4 opacity-50 transition-transform duration-300 group-hover:translate-x-1" />
+                </div>
+                <p class="text-[#15141a] text-lg font-medium leading-[156%] m-0">4.9/5 Soddisfazione clienti</p>
+              </div>
+              <p class="text-[#373737cc] text-base m-0 transition-colors duration-300 group-hover:text-[#15141a]">Scopri cosa raccontano le persone che hanno intrapreso questo percorso.</p>
+            </a>
+
+            <!-- Hero image (come nel Webflow: absolute, appiccicata a destra, esce dal box) -->
+            <img loading="lazy" src="/images/christian-hero-section.webp" alt="Christian Di Lorenzo" class="hidden lg:block absolute top-0 bottom-0 right-0 z-[1] h-full w-auto object-contain transition-transform duration-700 ease-out group-hover/hero:scale-[1.03]" />
+            <!-- Sfumatura solo in basso -->
+            <div class="hidden lg:block absolute bottom-0 right-0 z-[2] w-[50%] h-[30%] bg-gradient-to-t from-[#f4f2ee] to-transparent pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CHI SONO ═══════════ -->
+  <section id="chi-sono" class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <!-- Row 1: image left, text right -->
+      <div class="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 items-center mb-12" data-animate="fade-in-up">
+        <div class="relative">
+          <div class="aspect-[3/2] overflow-hidden rounded-[20px]">
+            <img src="/images/studio-da-councelor.webp" alt="Studio" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="flex flex-col gap-2.5 max-w-[469px]">
+          <div class="flex flex-wrap gap-2">
+            <span class="tag-pill">Chi sono</span>
+            <span class="tag-pill">counselor professionista</span>
+          </div>
+          <h3 class="text-[32px] font-medium text-[#15141a] tracking-tight mb-3">Ciao, sono Christian</h3>
+          <p class="regular-text !text-base">
+            Sono una persona che ha imparato, nel tempo, a <strong>fermarsi e ad ascoltarsi davvero</strong>. E oggi faccio questo anche con gli altri.<br><br>
+            Sono counselor e accompagno le persone in uno <strong>spazio di ascolto</strong> e di <strong>esplorazione interiore</strong>, principalmente online.<br>
+            Un luogo semplice, umano, dove poter portare ciò che si sente — <strong>confusione, stanchezza, emozioni che pesano, momenti di blocco</strong> — senza dover dimostrare nulla.<br><br>
+            Il mio modo di lavorare nasce dal mio <strong>percorso personale</strong>.<br>
+            So cosa significa sentirsi lontani da sé, non capirsi, vivere <strong>schemi che sembrano ripetersi</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2: text left, image right -->
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-8 items-center" data-animate="fade-in-up">
+        <div class="flex flex-col gap-2.5 max-w-[469px] order-2 md:order-1">
+          <p class="regular-text !text-base">
+            So quanto può fare la differenza incontrare qualcuno che ti aiuta a guardarti dentro con <strong>rispetto e senza giudizio</strong>.<br><br>
+            Uno degli strumenti che utilizzo è l'<strong>interpretazione dei sogni</strong>, perché i sogni parlano di noi in modo sincero e profondo.<br>
+            A volte mostrano parti che durante il giorno non riusciamo a vedere, ma che hanno molto da dire sulla nostra vita, sulle nostre ferite e anche sulle nostre risorse.<br><br>
+            Negli incontri non si tratta di "aggiustare" qualcosa, ma di <strong>incontrarsi</strong>, fare chiarezza, dare un nome a ciò che si muove dentro e <strong>ritrovare un po' più di spazio, respiro e libertà</strong> nel proprio modo di vivere.
+          </p>
+          <a href={calendarUrl} target="_blank" class="btn-primary self-start">Prenota un colloquio gratuito</a>
+        </div>
+        <div class="relative order-1 md:order-2">
+          <div class="aspect-[3/2] overflow-hidden rounded-[20px]">
+            <img src="/images/chi-sono_.webp" alt="Christian" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVIZI (slider cards) ═══════════ -->
+  <section id="servizi" class="bg-[#f4f2ee] py-16 md:py-20 overflow-hidden">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="max-w-2xl mb-10" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ SERVIZI ]</p>
+        <h2>In cosa posso <span class="italic">accompagnarti</span></h2>
+        <p class="regular-text mt-5">
+          Ti accompagno quando senti che dentro qualcosa chiede attenzione, ma non sai bene da dove iniziare. Posso esserti accanto per:
+        </p>
+      </div>
+
+      <!-- Horizontal scroll cards -->
+      <div class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide" data-animate="fade-in-up">
+        {servizi.map((s) => (
+          <div class="flex-shrink-0 w-[280px] snap-start flex flex-col">
+            <div class="rounded-[20px] overflow-hidden max-h-[250px] mb-5">
+              <img src={s.img} alt={s.title} loading="eager" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex flex-col gap-2.5">
+              <h3 class="text-xl font-medium">{s.title}</h3>
+              <p class="text-base text-[#3e3e3e] m-0">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Conclusione -->
+      <div class="flex flex-col items-center mt-10 max-w-[650px] mx-auto text-center gap-4" data-animate="fade-in-up">
+        <p class="regular-text text-center !mb-2">Ogni percorso è uno spazio di ascolto e di comprensione, dove ciò che senti ha valore e può trovare un significato.</p>
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COME FUNZIONA ═══════════ -->
+  <section id="come-funziona" class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="text-center max-w-[45rem] mx-auto mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ COME FUNZIONA ]</p>
+        <h2 class="text-center">Un percorso <span class="italic">chiaro e trasparente</span></h2>
+        <p class="regular-text mt-5 text-center">Dal primo contatto gratuito all'accompagnamento nel tempo, ogni passo è pensato per offrirti ascolto autentico e un sostegno costante.</p>
+      </div>
+
+      <!-- Hero image come funziona -->
+      <div class="flex justify-center mb-12" data-animate="fade-in-up">
+        <img src="/images/councelor.webp" alt="Counselor" loading="lazy" class="rounded-[20px] w-full max-w-[864px]" />
+      </div>
+
+      <!-- 3 boxes -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" data-animate="fade-in-up">
+        <div class="bg-[#d8d0c1] rounded-[20px] p-6 relative">
+          <div class="bg-[#d8d0c1] rounded-[10px] w-[100px] -mt-9 mb-5 py-1 px-2">
+            <p class="tag m-0 text-center">PASSO 1</p>
+          </div>
+          <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">Prenota il colloquio conoscitivo gratuito</h3>
+          <p class="text-base text-[#3e3e3e] m-0">Prenota un <strong>incontro gratuito di 45 minuti</strong> per conoscerci, comprendere la tua situazione e ascoltare le tue esigenze.</p>
+        </div>
+        <div class="bg-[#d8d0c1] rounded-[20px] p-6 relative">
+          <div class="bg-[#d8d0c1] rounded-[10px] w-[100px] -mt-9 mb-5 py-1 px-2">
+            <p class="tag m-0 text-center">PASSO 2</p>
+          </div>
+          <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">Ricevi una proposta per il tuo percorso</h3>
+          <p class="text-base text-[#3e3e3e] m-0">Ti sarà inviata una <strong>sintesi</strong> di ciò che è emerso nel <strong>nostro incontro</strong>, insieme a una proposta di percorso e ai primi strumenti.</p>
+        </div>
+        <div class="bg-[#ebe7e0] rounded-[20px] p-6 relative">
+          <div class="bg-[#ebe7e0] rounded-[10px] w-[150px] -mt-9 mb-5 py-1 px-2">
+            <p class="tag m-0 text-center">CONTINUIAMO</p>
+          </div>
+          <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">Quanto costa?</h3>
+          <p class="text-base text-[#3e3e3e] m-0">Colloquio conoscitivo</p>
+          <h3 class="text-[28px] font-bold text-[#3e3e3e] mb-3">GRATUITO</h3>
+          <p class="text-base text-[#3e3e3e] m-0">Relazione Iniziale</p>
+          <h3 class="text-[28px] font-bold text-[#3e3e3e] mb-3">GRATUITA</h3>
+          <p class="text-base text-[#3e3e3e] m-0">Singolo incontro da 45 minuti</p>
+          <h3 class="text-[28px] font-bold text-[#3e3e3e]">70€</h3>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PERCHÉ SCEGLIERE ME ═══════════ -->
+  <section class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ CHI SCEGLIERE ]</p>
+        <h2 class="text-center">Perché scegliere me</h2>
+        <p class="regular-text mt-5 text-center">Scegliere qualcuno con cui intraprendere un percorso interiore è una decisione delicata. Al di là dei titoli, ci sono qualità umane e professionali fondamentali.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" data-animate="fade-in-up">
+        {percheScegliermi.slice(0, 3).map((item) => (
+          <div class="bg-[#ebe7e0] rounded-[20px] p-5 flex flex-col items-center text-center">
+            <div class="icon-rounded">
+              <img src={item.icon} alt="" class="w-7 h-7" loading="lazy" />
+            </div>
+            <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">{item.title}</h3>
+            <p class="text-base text-[#3e3e3e] m-0">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-animate="fade-in-up">
+        {percheScegliermi.slice(3).map((item) => (
+          <div class="bg-[#ebe7e0] rounded-[20px] p-5 flex flex-col items-center text-center">
+            <div class="icon-rounded">
+              <img src={item.icon} alt="" class="w-7 h-7" loading="lazy" />
+            </div>
+            <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">{item.title}</h3>
+            <p class="text-base text-[#3e3e3e] m-0">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ DI COSA MI OCCUPO (tabs) ═══════════ -->
+  <section class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="mb-10" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ DI COSA MI OCCUPO ]</p>
+        <h2>Ti accompagno in percorsi di <span class="italic">consapevolezza e crescita personale</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-in-up">
+        <div class="rounded-[20px] overflow-hidden relative">
+          <img src="/images/Why-Chose-Img-01_1Why-Chose-Img-01.avif" style="min-height:300px" alt="Counseling" loading="lazy" class="w-full h-full object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a80] p-6 backdrop-blur-sm">
+            <h3 class="text-white text-xl font-medium mb-2">Percorso di Counseling</h3>
+            <p class="text-white/80 text-sm m-0">Uno spazio di ascolto e accompagnamento per fare chiarezza, comprendere ciò che stai vivendo e ritrovare una direzione più autentica.</p>
+          </div>
+        </div>
+        <div class="rounded-[20px] overflow-hidden relative">
+          <img src="/images/interpretazione-sogni-psicoterapia-centro-psicologia-lecco-1.png" alt="Sogni" loading="lazy" class="w-full h-full object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a80] p-6 backdrop-blur-sm">
+            <h3 class="text-white text-xl font-medium mb-2">Interpretazione dei Sogni</h3>
+            <p class="text-white/80 text-sm m-0">I sogni come linguaggio simbolico dell'inconscio: uno strumento prezioso per esplorare parti profonde di te.</p>
+          </div>
+        </div>
+        <div class="rounded-[20px] overflow-hidden relative">
+          <img src="/images/counseling-1500x430-1.png" alt="Relazioni" loading="lazy" class="w-full h-full object-cover min-h-[300px]" />
+          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a80] p-6 backdrop-blur-sm">
+            <h3 class="text-white text-xl font-medium mb-2">Supporto relazioni e autostima</h3>
+            <p class="text-white/80 text-sm m-0">Un accompagnamento per riconoscere schemi relazionali, rafforzare l'autostima e costruire rapporti più consapevoli.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ STRUMENTI ═══════════ -->
+  <section id="strumenti" class="py-16 md:py-24 overflow-hidden">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="max-w-2xl mb-10" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ STRUMENTI ]</p>
+        <h2>Gli strumenti <span class="italic">del percorso</span></h2>
+        <p class="regular-text mt-5">Non esistono tecniche standard o protocolli rigidi. Ogni persona è diversa, e il lavoro nasce da ciò che porti tu, momento per momento.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-0" data-animate="fade-in-up">
+        {strumenti.map((s) => (
+          <div class="bg-[#d8d0c1] rounded-[20px] p-8 relative">
+            <div class="flex items-center justify-between mb-8">
+              <span class="text-4xl font-medium text-[#3e3e3e]/30">{s.num}</span>
+              <img src={s.icon} alt="" class="w-10 h-10" loading="lazy" />
+            </div>
+            <h3 class="text-xl font-medium text-[#3e3e3e] mb-4">{s.title}</h3>
+            <p class="text-base text-[#3e3e3e] m-0">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center mt-10">
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PUNTI CHIAVE ═══════════ -->
+  <section class="bg-[#ebe7e0] py-16 md:py-20">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ PUNTI CHIAVE ]</p>
+        <h2 class="text-center">Trasparenza & Riservatezza</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-0 w-full max-w-[80%] mx-auto mb-10" data-animate="fade-in-up">
+        {puntiChiave.map((pk) => (
+          <div class="flex flex-col items-center text-center p-4 md:p-8">
+            <div class="icon-rounded">
+              <img src={pk.icon} alt="" class="w-7 h-7" loading="lazy" />
+            </div>
+            <h3 class="text-base font-medium text-[#3e3e3e] mb-2">{pk.title}</h3>
+            <p class="text-sm text-[#3e3e3e] m-0">{pk.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center">
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONFRONTO ═══════════ -->
+  <section class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="text-center mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ QUALE PERCORSO FA PER TE? ]</p>
+        <h3 class="text-3xl md:text-4xl">Due approcci diversi, <span class="italic">lo stesso rispetto per la persona</span></h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-animate="fade-in-up">
+        <!-- Psicologo -->
+        <div class="rounded-[20px] border border-[#43495480] p-8">
+          <h3 class="text-2xl font-medium text-[#15141a] mb-4">Psicologo</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            <li class="regular-text !mb-2 !text-base">Si occupa di diagnosi e trattamento di disturbi psicologici;</li>
+            <li class="regular-text !mb-2 !text-base">Lavora in ambito clinico e sanitario;</li>
+            <li class="regular-text !mb-2 !text-base">Utilizza strumenti terapeutici e protocolli specifici;</li>
+            <li class="regular-text !mb-2 !text-base">Indicato in presenza di sintomi strutturati o sofferenza clinica;</li>
+            <li class="regular-text !mb-0 !text-base">Percorsi regolamentati e orientati alla cura;</li>
+          </ul>
+        </div>
+
+        <!-- Counselor -->
+        <div class="rounded-[20px] border border-[#43495480] p-8 bg-[#ebe7e0] bg-cover bg-center" style="background-image: url('/images/bg-process_1bg-process.webp');">
+          <h3 class="text-2xl font-medium text-[#15141a] mb-4">Counselor</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            <li class="regular-text !mb-2 !text-base">Offre uno spazio di <strong>ascolto e accompagnamento</strong> non clinico;</li>
+            <li class="regular-text !mb-2 !text-base">Lavora su <strong>consapevolezza</strong>, <strong>crescita personale</strong> e orientamento;</li>
+            <li class="regular-text !mb-2 !text-base">Aiuta a <strong>comprendere</strong> schemi e <strong>blocchi emotivi</strong>;</li>
+            <li class="regular-text !mb-2 !text-base">Si rivolge a persone che desiderano conoscersi meglio;</li>
+            <li class="regular-text !mb-0 !text-base">Percorsi orientati all'equilibrio e alle scelte personali;</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section id="faq" class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12" data-animate="fade-in-up">
+          <p class="sub-title mb-3">[ DOMANDE FREQUENTI ]</p>
+          <h2 class="text-center">Hai qualche <span class="italic">domanda?</span></h2>
+        </div>
+
+        <div data-animate="fade-in-up">
+          <FaqAccordion client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTATTI ═══════════ -->
+  <section id="contact" class="py-16 md:py-24">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 justify-between" data-animate="fade-in-up">
+        <!-- Left -->
+        <div class="flex flex-col gap-4 w-full max-w-[30rem]">
+          <h2>Cerchi uno spazio di ascolto? <br><span class="italic">Scrivimi due righe</span></h2>
+          <p class="regular-text">Se senti il bisogno di fermarti, fare chiarezza o capire se questo percorso fa per te, puoi lasciarmi un messaggio. Ti risponderò con attenzione per capire insieme come iniziare.</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="hidden md:block w-px h-[437px] bg-[#43495480]"></div>
+
+        <!-- Form -->
+        <div class="w-full max-w-md">
+          <form class="flex flex-col gap-4">
+            <input type="text" placeholder="Nome" required class="contact-field" />
+            <input type="email" placeholder="La tua email" required class="contact-field" />
+            <input type="tel" placeholder="Cellulare / Whatsapp" required class="contact-field" />
+            <textarea placeholder="Raccontami brevemente tutto ciò che può essere utile per preparare il nostro incontro" class="contact-field min-h-[117px] resize-y"></textarea>
+            <button type="submit" class="btn-submit w-full">Invia il messaggio</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  import { textHighlightOnScroll, fadeInUp } from "../lib/animations";
+
+  document.addEventListener("astro:page-load", () => {
+    fadeInUp('[data-animate="fade-in-up"]');
+  });
+</script>

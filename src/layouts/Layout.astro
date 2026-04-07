@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import SmoothScroll from "../components/react/SmoothScroll.tsx";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Counselor professionista: percorsi di ascolto e crescita personale per ritrovare equilibrio, chiarezza e benessere emotivo."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <SmoothScroll client:load />
+
+    <div id="site-content">
+      <Navbar />
+      <slot />
+      <Footer />
+    </div>
+
+    <!-- WhatsApp floating button -->
+    <a
+      href="https://api.whatsapp.com/send/?phone=393473301278&text=Ciao%2C+vorrei+maggiori+informazioni&type=phone_number&app_absent=0"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-6 right-6 z-50 transition-transform duration-300 hover:scale-110"
+    >
+      <img src="/images/image-297_1image-297.png" loading="lazy" alt="WhatsApp" class="w-14 h-14" />
+    </a>
+  </body>
+</html>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:before-swap", () => {
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    gsap.killTweensOf("*");
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    ScrollTrigger.refresh();
+
+    // Liquid blob fill — traccia posizione mouse sui bottoni
+    document.querySelectorAll<HTMLElement>(".btn-primary, .btn-secondary, .btn-submit").forEach((btn) => {
+      btn.addEventListener("mouseenter", (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = ((e as MouseEvent).clientX - rect.left) / rect.width * 100;
+        const y = ((e as MouseEvent).clientY - rect.top) / rect.height * 100;
+        btn.style.setProperty("--blob-x", x + "%");
+        btn.style.setProperty("--blob-y", y + "%");
+      });
+    });
+  });
+</script>
