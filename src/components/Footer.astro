@@ -25,15 +25,16 @@ const pageLinks = [
       <img src="/images/logo-dilorenzo.png" alt="Christian Di Lorenzo" class="h-10 md:h-12 w-auto brightness-0 invert" />
     </div>
 
-    <!-- Top: Newsletter + Social -->
-    <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-14">
-      <!-- Left: Newsletter -->
-      <div class="md:max-w-md">
-        <h3 class="text-white text-[1.8rem] font-medium mb-1">
+    <!-- Top: 3 colonne proporzionate su tutta la larghezza -->
+    <div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr] gap-10 md:gap-12 mb-14">
+
+      <!-- Col 1: Newsletter -->
+      <div>
+        <h3 class="text-white text-[1.5rem] font-medium mb-1">
           Iscriviti alla <span class="font-[family-name:var(--font-serif)] italic">newsletter</span>
         </h3>
-        <p class="text-white/70 text-base leading-[160%] mb-6">
-          Ricevi gratuitamente la mini-guida all'interpretazione dei sogni e scopri come ascoltare il linguaggio della tua anima.
+        <p class="text-white/60 text-sm leading-[160%] mb-5">
+          Ricevi la mini-guida gratuita all'interpretazione dei sogni.
         </p>
         <form id="newsletter-form" class="flex flex-col gap-3">
           <input type="hidden" name="tipo" value="Newsletter" />
@@ -42,13 +43,13 @@ const pageLinks = [
             name="email"
             placeholder="Indirizzo email"
             required
-            class="bg-white/8 border border-white/10 rounded-[10px] px-5 py-3 text-white placeholder:text-white/40 text-base focus:border-white/30 outline-none transition-colors"
+            class="bg-white/8 border border-white/10 rounded-[10px] px-4 py-2.5 text-white placeholder:text-white/40 text-sm focus:border-white/30 outline-none transition-colors"
           />
-          <label class="flex items-start gap-2 text-white/50 text-xs cursor-pointer leading-[150%]">
+          <label class="flex items-start gap-2 text-white/40 text-xs cursor-pointer leading-[150%]">
             <input type="checkbox" required class="mt-0.5 accent-[#2a9d8f]" />
-            <span>Ho letto la Privacy Policy e acconsento al trattamento dei dati per l'invio della newsletter.</span>
+            <span>Acconsento al trattamento dei dati.</span>
           </label>
-          <button type="submit" class="bg-white/10 border border-white/15 rounded-[10px] px-5 py-3 text-white text-sm font-medium hover:bg-white/20 transition-colors">
+          <button type="submit" class="bg-white/10 border border-white/15 rounded-[10px] px-4 py-2.5 text-white text-sm font-medium hover:bg-white/20 transition-colors">
             Ricevi la guida
           </button>
         </form>
@@ -87,18 +88,34 @@ const pageLinks = [
         </script>
       </div>
 
-      <!-- Right: Social links (stile originale con righe) -->
-      <div class="flex-1 md:max-w-xs">
-        <h3 class="text-white text-xl font-medium mb-6">
-          Seguimi su <span class="font-[family-name:var(--font-serif)] italic">...</span>
+      <!-- Col 2: Social -->
+      <div>
+        <h3 class="text-white text-[1.5rem] font-medium mb-5">
+          Seguimi <span class="font-[family-name:var(--font-serif)] italic">su</span>
         </h3>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3">
           {socialLinks.map((s) => (
             <a href={s.href} target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between py-2 border-b border-white/10">
-              <span class="text-white text-base font-medium transition-opacity group-hover:opacity-60">{s.label}</span>
+              <span class="text-white/80 text-sm font-medium transition-opacity group-hover:opacity-60">{s.label}</span>
               <img src={s.icon} alt={s.label} class="w-5 h-5 brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity" loading="lazy" />
             </a>
           ))}
+        </div>
+      </div>
+
+      <!-- Col 3: Contatti + Dove sono -->
+      <div>
+        <h3 class="text-white text-[1.5rem] font-medium mb-5">
+          <span class="font-[family-name:var(--font-serif)] italic">Contatti</span>
+        </h3>
+        <div class="flex flex-col gap-3">
+          <a href="mailto:info@cridilorenzo.com" class="text-white/70 text-sm hover:text-white transition-colors">info@cridilorenzo.com</a>
+          <a href="tel:+393473301278" class="text-white/70 text-sm hover:text-white transition-colors">+39 347 330 1278</a>
+          <a href="https://api.whatsapp.com/send/?phone=393473301278" target="_blank" class="text-white/70 text-sm hover:text-white transition-colors">WhatsApp</a>
+          <div class="h-px bg-white/10 my-1"></div>
+          <span class="text-white/50 text-sm">Milano (MI)</span>
+          <span class="text-white/50 text-sm">P.IVA 14452680961</span>
+          <span class="text-white/50 text-sm">Ricevo online</span>
         </div>
       </div>
     </div>
