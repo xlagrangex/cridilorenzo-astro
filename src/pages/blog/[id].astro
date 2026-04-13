@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
+---
+
+<Layout title={`${post.data.title} — Christian Di Lorenzo`} description={post.data.description}>
+  <article class="pt-28 md:pt-36 pb-16">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="max-w-3xl mx-auto">
+        <!-- Back link -->
+        <a href="/blog" class="inline-flex items-center gap-2 text-sm text-[#373737cc] mb-8 hover:text-[#2a9d8f] transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          Torna al blog
+        </a>
+
+        <!-- Meta -->
+        <div class="mb-8" data-animate="fade-in-up">
+          {post.data.tags && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              {post.data.tags.map((tag: string) => (
+                <span class="tag-pill !text-xs">{tag}</span>
+              ))}
+            </div>
+          )}
+          <h1 class="!text-[2.5rem] md:!text-[3.25rem] !leading-[110%] mb-4">{post.data.title}</h1>
+          <time class="text-sm text-[#373737cc]">
+            {new Date(post.data.date).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" })}
+          </time>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-lg max-w-none" data-animate="fade-in-up">
+          <Content />
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 p-8 bg-[#f4f2ee] rounded-[20px] text-center" data-animate="fade-in-up">
+          <h3 class="text-2xl font-medium text-[#15141a] mb-3">Vuoi parlarne insieme?</h3>
+          <p class="regular-text text-center !mb-6">Il primo colloquio conoscitivo è gratuito. Prenota uno spazio per te.</p>
+          <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<script>
+  import { fadeInUp } from "../../lib/animations";
+  document.addEventListener("astro:page-load", () => {
+    fadeInUp('[data-animate="fade-in-up"]');
+  });
+</script>

@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: vincenzopetrone/cridilorenzo-astro
+  branch: main
+
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+locale: "it"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Descrizione", name: "description", widget: "text" }
+      - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Immagine", name: "image", widget: "image", required: false }
+      - { label: "Tag", name: "tags", widget: "list", required: false }
+      - { label: "Bozza", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Contenuto", name: "body", widget: "markdown" }

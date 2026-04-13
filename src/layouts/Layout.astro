@@ -63,7 +63,10 @@ const {
   });
 
   document.addEventListener("astro:page-load", () => {
-    ScrollTrigger.refresh();
+    // Delay refresh per dare tempo alle pagine di re-inizializzare le animazioni
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
     // Liquid blob fill — traccia posizione mouse sui bottoni
     document.querySelectorAll<HTMLElement>(".btn-primary, .btn-secondary, .btn-submit").forEach((btn) => {

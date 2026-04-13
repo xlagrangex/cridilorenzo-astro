@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { label: "Chi sono", href: "#chi-sono" },
-  { label: "Servizi", href: "#servizi" },
-  { label: "Come funziona", href: "#come-funziona" },
-  { label: "Strumenti", href: "#strumenti" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contatti", href: "#contact" },
+  { label: "Chi sono", href: "/#chi-sono" },
+  { label: "Servizi", href: "/#servizi" },
+  { label: "Come funziona", href: "/#come-funziona" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contatti", href: "/#contact" },
 ];
 
 const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";

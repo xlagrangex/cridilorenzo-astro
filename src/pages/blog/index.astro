@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title="Blog — Christian Di Lorenzo" description="Articoli su counseling, crescita personale, interpretazione dei sogni e consapevolezza.">
+  <section class="pt-28 md:pt-36 pb-16">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="max-w-3xl mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ BLOG ]</p>
+        <h1 class="!text-[3.25rem]">Articoli e <span class="italic">riflessioni</span></h1>
+        <p class="regular-text mt-5">Pensieri sul counseling, la crescita personale, l'interpretazione dei sogni e il percorso verso una maggiore consapevolezza.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate="fade-in-up">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} class="group block rounded-[20px] bg-[#f4f2ee] overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            {post.data.image && (
+              <div class="aspect-[16/10] overflow-hidden">
+                <img
+                  src={post.data.image}
+                  alt={post.data.title}
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+            )}
+            <div class="p-6">
+              {post.data.tags && (
+                <div class="flex flex-wrap gap-2 mb-3">
+                  {post.data.tags.map((tag: string) => (
+                    <span class="tag-pill !text-xs">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <h3 class="text-xl font-medium text-[#15141a] mb-2 group-hover:text-[#2a9d8f] transition-colors duration-300">{post.data.title}</h3>
+              <p class="text-sm text-[#3e3e3e] mb-3 line-clamp-2">{post.data.description}</p>
+              <time class="text-xs text-[#373737cc]">
+                {new Date(post.data.date).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" })}
+              </time>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { fadeInUp } from "../../lib/animations";
+  document.addEventListener("astro:page-load", () => {
+    fadeInUp('[data-animate="fade-in-up"]');
+  });
+</script>
