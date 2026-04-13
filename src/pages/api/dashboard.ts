@@ -21,8 +21,15 @@ export const GET: APIRoute = async ({ request }) => {
 
 // POST — login
 export const POST: APIRoute = async ({ request }) => {
-  const data = await request.formData();
-  const password = data.get("password")?.toString() || "";
+  let password = "";
+  const ct = request.headers.get("content-type") || "";
+  if (ct.includes("application/json")) {
+    const json = await request.json();
+    password = json.password || "";
+  } else {
+    const data = await request.formData();
+    password = data.get("password")?.toString() || "";
+  }
 
   if (password === DASHBOARD_PASSWORD) {
     return new Response(JSON.stringify({ success: true }), {

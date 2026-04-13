@@ -174,7 +174,7 @@ export const prerender = false;
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const fd = new FormData(loginForm);
-      const res = await fetch("/api/dashboard", { method: "POST", body: fd });
+      const res = await fetch("/api/dashboard", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({password: fd.get("password")}) });
       if (res.ok) {
         loginSection.style.display = "none";
         dashSection.style.display = "block";
