@@ -17,8 +17,13 @@ const pageLinks = [
 ];
 ---
 
-<footer class="bg-[#15141a] pt-16 pb-6">
-  <div class="wrapper px-4 md:px-8 lg:px-12">
+<footer class="bg-[#15141a] relative">
+  <!-- Bordo rainbow animato in cima -->
+  <div class="absolute top-0 left-0 right-0 h-[3px] animate-footer-rainbow" style="background: linear-gradient(90deg, #2a9d8f, #0d4f46, #5cead8, #134e44, #3bbfad, #0a3d36, #2a9d8f); background-size: 200% 100%;"></div>
+  <!-- Glow diffuso sotto il bordo -->
+  <div class="absolute top-0 left-0 right-0 h-[60px] animate-footer-rainbow opacity-30 pointer-events-none" style="background: linear-gradient(90deg, #2a9d8f, #0d4f46, #5cead8, #134e44, #3bbfad, #0a3d36, #2a9d8f); background-size: 200% 100%; filter: blur(30px);"></div>
+
+  <div class="wrapper px-4 md:px-8 lg:px-12 pt-16 pb-6 relative z-10">
 
     <!-- Logo -->
     <div class="mb-10">
