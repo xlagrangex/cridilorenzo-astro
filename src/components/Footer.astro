@@ -29,7 +29,7 @@ const pageLinks = [
     <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
       <!-- Left: Newsletter -->
       <div class="flex-1">
-        <h3 class="text-white text-[1.8rem] font-medium mb-4">Iscriviti alla newsletter</h3>
+        <h3 class="text-white text-[1.8rem] font-medium mb-4">Iscriviti alla <span class="font-[family-name:var(--font-serif)] italic">newsletter</span></h3>
         <p class="text-white text-base leading-[155%] mb-6 opacity-80">
           Ricevi gratuitamente la mini-guida all'interpretazione dei sogni e scopri come ascoltare il linguaggio della tua anima.
         </p>
@@ -86,7 +86,7 @@ const pageLinks = [
 
       <!-- Right: Social links -->
       <div class="flex-1 md:max-w-xs">
-        <h3 class="text-white text-xl font-medium mb-6">Seguimi su ...</h3>
+        <h3 class="text-white text-xl font-medium mb-6">Seguimi <span class="font-[family-name:var(--font-serif)] italic">su ...</span></h3>
         <div class="flex flex-col gap-4">
           {socialLinks.map((s) => (
             <a href={s.href} target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between py-2 border-b border-white/10">
@@ -102,7 +102,7 @@ const pageLinks = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <!-- Pagine -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Pagine</h4>
+        <h4 class="text-white text-sm font-medium mb-3"><span class="font-[family-name:var(--font-serif)] italic">Pagine</span></h4>
         <div class="grid grid-cols-2 gap-2">
           {pageLinks.map((link) => (
             <a href={link.href} class="group relative overflow-clip h-[24px]">
@@ -115,21 +115,25 @@ const pageLinks = [
 
       <!-- Contatti -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Contatti</h4>
-        <div class="flex flex-col gap-2">
+        <h4 class="text-white text-sm font-medium mb-3"><span class="font-[family-name:var(--font-serif)] italic">Contatti</span></h4>
+        <div class="flex flex-col gap-3">
           <a href="mailto:info@cridilorenzo.com" class="text-white/70 text-sm hover:text-white transition-colors">info@cridilorenzo.com</a>
           <a href="tel:+393473301278" class="text-white/70 text-sm hover:text-white transition-colors">+39 347 330 1278</a>
           <a href="https://api.whatsapp.com/send/?phone=393473301278" target="_blank" class="text-white/70 text-sm hover:text-white transition-colors">WhatsApp</a>
+          <div class="h-px bg-white/5 my-1"></div>
+          <span class="text-white/40 text-xs">Rispondeo entro 24 ore</span>
         </div>
       </div>
 
       <!-- Dove sono -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Dove sono</h4>
-        <div class="flex flex-col gap-2">
+        <h4 class="text-white text-sm font-medium mb-3"><span class="font-[family-name:var(--font-serif)] italic">Dove sono</span></h4>
+        <div class="flex flex-col gap-3">
           <span class="text-white/70 text-sm">Milano (MI)</span>
-          <span class="text-white/70 text-sm">P.IVA 14452680961</span>
-          <span class="text-white/70 text-sm">Ricevo online</span>
+          <span class="text-white/70 text-sm">Ricevo esclusivamente online</span>
+          <div class="h-px bg-white/5 my-1"></div>
+          <span class="text-white/40 text-xs">P.IVA 14452680961</span>
+          <span class="text-white/40 text-xs">Counselor professionista</span>
         </div>
       </div>
     </div>
