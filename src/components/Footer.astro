@@ -41,28 +41,40 @@ const pageLinks = [
             Ricevi la guida
           </button>
         </form>
-        <script>
-          document.getElementById("newsletter-form")?.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const form = e.target as HTMLFormElement;
-            const btn = form.querySelector("button") as HTMLButtonElement;
-            btn.textContent = "Invio...";
-            btn.disabled = true;
-            try {
-              const fd = new FormData(form);
-              fd.set("name", "Newsletter");
-              const res = await fetch("/api/contact", { method: "POST", body: fd });
-              if (res.ok) {
-                form.reset();
-                (window as any).showToast?.("Iscrizione confermata! Controlla la tua email.", "success");
-              } else {
-                (window as any).showToast?.("Ops, qualcosa non ha funzionato.", "error");
-              }
-            } catch {
-              (window as any).showToast?.("Errore di connessione.", "error");
-            }
-            btn.textContent = "Ricevi la guida";
-            btn.disabled = false;
+        <script is:inline>
+          document.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("newsletter-form");
+            if (!form) return;
+
+            form.addEventListener("submit", function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              var btn = form.querySelector("button");
+              var originalText = btn.textContent;
+              btn.textContent = "Invio...";
+              btn.disabled = true;
+
+              var fd = new FormData(form);
+              fd.set("name", "—");
+
+              fetch("/api/contact", { method: "POST", body: fd })
+                .then(function(res) {
+                  if (res.ok) {
+                    form.reset();
+                    if (window.showToast) window.showToast("Iscrizione confermata! Controlla la tua email.", "success");
+                  } else {
+                    if (window.showToast) window.showToast("Ops, qualcosa non ha funzionato.", "error");
+                  }
+                })
+                .catch(function() {
+                  if (window.showToast) window.showToast("Errore di connessione.", "error");
+                })
+                .finally(function() {
+                  btn.textContent = originalText;
+                  btn.disabled = false;
+                });
+            });
           });
         </script>
       </div>
