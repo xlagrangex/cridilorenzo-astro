@@ -32,8 +32,9 @@ function emailWrapper(content: string) {
         </p>
         <div style="margin-bottom: 8px;">
           <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="${WHATSAPP_URL}" style="height:36px;v-text-anchor:middle;width:200px;" arcsize="50%" fillcolor="#25d366"><center style="color:#ffffff;font-family:sans-serif;font-size:13px;font-weight:600;">Scrivimi su WhatsApp</center></v:roundrect><![endif]-->
-          <a href="${WHATSAPP_URL}" target="_blank" style="background: #25d366; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; display: inline-block;">
-            💬 Scrivimi su WhatsApp
+          <a href="${WHATSAPP_URL}" target="_blank" style="background: #25d366; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 18px; height: 18px; filter: brightness(0) invert(1);" />
+            Scrivimi su WhatsApp
           </a>
         </div>
         <p style="margin: 12px 0 0; font-size: 10px; color: #c0c0c0;">
