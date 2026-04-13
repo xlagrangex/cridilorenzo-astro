@@ -10,7 +10,7 @@
     .login-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); text-align: center; max-width: 360px; width: 100%; }
     .login-box h1 { font-size: 1.5rem; font-weight: 500; margin-bottom: 8px; color: #15141a; }
     .login-box p { color: #929292; font-size: 0.9rem; margin-bottom: 20px; }
-    .login-box input { width: 100%; padding: 12px 16px; border: 1px solid #e4e4e4; border-radius: 10px; font-size: 1rem; margin-bottom: 12px; background: #f4f2ee; }
+    .login-box input { width: 100%; padding: 12px 16px; border: 1px solid #e4e4e4; border-radius: 10px; font-size: 1rem; margin-bottom: 12px; background: #f4f2ee; box-sizing: border-box; }
     .login-box input:focus { outline: none; border-color: #2a9d8f; }
     .login-box button { width: 100%; padding: 14px; background: #2a9d8f; color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; }
     .login-box button:hover { background: #238b7f; }
@@ -18,7 +18,7 @@
   </style>
 </head>
 <body>
-  <!-- Login overlay — nasconde Sveltia finché non autenticato -->
+
   <div class="login-overlay" id="login-overlay">
     <div class="login-box">
       <h1>Admin</h1>
@@ -32,9 +32,9 @@
   </div>
 
   <script>
-    // Controlla se già autenticato
-    if (localStorage.getItem("cms_token")) {
-      document.getElementById("login-overlay").style.display = "none";
+    var savedToken = localStorage.getItem("cms_token");
+    if (savedToken) {
+      injectAndLoad(savedToken);
     }
 
     document.getElementById("login-form").addEventListener("submit", async function(e) {
@@ -45,26 +45,32 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: pass })
       });
-
       if (res.ok) {
         var data = await res.json();
-        // Salva il token per Sveltia CMS
         localStorage.setItem("cms_token", data.token);
-        // Sveltia/Decap cerca il token in questo formato
-        localStorage.setItem("netlify-cms-user", JSON.stringify({
-          token: data.token,
-          name: "Christian DiLorenzo",
-          login: "admin",
-          avatar_url: ""
-        }));
-        document.getElementById("login-overlay").style.display = "none";
-        location.reload();
+        injectAndLoad(data.token);
       } else {
         document.getElementById("login-error").style.display = "block";
       }
     });
-  </script>
 
-  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    function injectAndLoad(token) {
+      document.getElementById("login-overlay").style.display = "none";
+
+      // Decap CMS usa "netlify-cms-user" in localStorage per saltare il login
+      localStorage.setItem("netlify-cms-user", JSON.stringify({
+        token: token,
+        name: "Admin",
+        login: "admin",
+        avatar_url: "",
+        backendName: "github"
+      }));
+
+      // Carica Decap CMS (non Sveltia — Decap rispetta il token in localStorage)
+      var s = document.createElement("script");
+      s.src = "https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js";
+      document.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>
