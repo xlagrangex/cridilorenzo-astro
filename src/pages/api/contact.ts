@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx5XCFjYE7L1sjDyUSdiAN_Iup0f-ApwyGUa1W0UZB3XNwdN8To2Z8gro18gxakCAWh/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVCTO8-26euAFdlv_cC2ZD4IW2EgHYjsBzFXkzmHUPhHkBii3FMpAMui8YN8AmHFt6/exec";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
