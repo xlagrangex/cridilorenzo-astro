@@ -167,7 +167,7 @@ export const POST: APIRoute = async ({ request }) => {
             </p>
             <div style="margin: 0 0 24px;">
               <a href="https://cridilorenzo.com/guida-sogni.pdf" target="_blank" style="background: #2a9d8f; color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px; display: inline-block;">
-                📄 Scarica la guida (PDF)
+                Scarica la guida (PDF)
               </a>
             </div>
             <p style="font-size: 15px; color: #3e3e3e; line-height: 170%; margin: 0 0 8px;">
