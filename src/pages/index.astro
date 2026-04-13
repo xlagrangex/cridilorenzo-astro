@@ -493,38 +493,47 @@ const puntiChiave = [
 </Layout>
 
 <script>
-  import { textHighlightOnScroll, fadeInUp } from "../lib/animations";
+  import { fadeInUp } from "../lib/animations";
 
   document.addEventListener("astro:page-load", () => {
     fadeInUp('[data-animate="fade-in-up"]');
+  });
+</script>
 
-    // Contact form — invio async con toast
-    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+<script is:inline>
+  // Contact form — invio async con toast (inline per garantire esecuzione)
+  document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("contact-form");
+    if (!form) return;
 
-    form?.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", function(e) {
       e.preventDefault();
-      const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+      e.stopPropagation();
+
+      var btn = form.querySelector("button[type=submit]");
+      var originalText = btn.textContent;
       btn.textContent = "Invio in corso...";
       btn.disabled = true;
 
-      try {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          body: new FormData(form),
-        });
-
+      fetch("/api/contact", {
+        method: "POST",
+        body: new FormData(form),
+      })
+      .then(function(res) {
         if (res.ok) {
           form.reset();
-          showToast("Messaggio inviato! Ti risponderò il prima possibile.", "success");
+          if (window.showToast) window.showToast("Messaggio inviato! Ti risponderò il prima possibile.", "success");
         } else {
-          showToast("Ops, qualcosa non ha funzionato. Riprova.", "error");
+          if (window.showToast) window.showToast("Ops, qualcosa non ha funzionato. Riprova.", "error");
         }
-      } catch {
-        showToast("Errore di connessione. Riprova.", "error");
-      } finally {
-        btn.textContent = "Invia il messaggio";
+      })
+      .catch(function() {
+        if (window.showToast) window.showToast("Errore di connessione. Riprova.", "error");
+      })
+      .finally(function() {
+        btn.textContent = originalText;
         btn.disabled = false;
-      }
+      });
     });
   });
 </script>
