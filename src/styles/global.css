@@ -561,7 +561,3 @@ body.menu-open #site-content {
   filter: blur(15px);
 }
 
-/* Footer */
-.footer-bg {
-  background-color: var(--color-footer-bg);
-}
