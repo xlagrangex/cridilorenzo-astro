@@ -515,9 +515,14 @@ const puntiChiave = [
       btn.textContent = "Invio in corso...";
       btn.disabled = true;
 
+      var formData = new FormData(form);
+      var jsonData = {};
+      formData.forEach(function(value, key) { jsonData[key] = value; });
+
       fetch("/api/contact", {
         method: "POST",
-        body: new FormData(form),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(jsonData),
       })
       .then(function(res) {
         if (res.ok) {

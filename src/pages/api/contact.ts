@@ -63,12 +63,24 @@ async function sendBrevoEmail(to: string, subject: string, htmlContent: string, 
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const data = await request.formData();
-    const name = data.get("name")?.toString() || "";
-    const email = data.get("email")?.toString() || "";
-    const phone = data.get("phone")?.toString() || "";
-    const message = data.get("message")?.toString() || "";
-    const tipo = data.get("tipo")?.toString() || "Contatto";
+    let name = "", email = "", phone = "", message = "", tipo = "Contatto";
+
+    const contentType = request.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      const json = await request.json();
+      name = json.name || "";
+      email = json.email || "";
+      phone = json.phone || "";
+      message = json.message || "";
+      tipo = json.tipo || "Contatto";
+    } else {
+      const data = await request.formData();
+      name = data.get("name")?.toString() || "";
+      email = data.get("email")?.toString() || "";
+      phone = data.get("phone")?.toString() || "";
+      message = data.get("message")?.toString() || "";
+      tipo = data.get("tipo")?.toString() || "Contatto";
+    }
 
     // 1. Salva su Google Sheet
     const sheetPromise = fetch(GOOGLE_SCRIPT_URL, {

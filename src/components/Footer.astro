@@ -77,8 +77,10 @@ const pageLinks = [
               btn.textContent = "Invio...";
               btn.disabled = true;
               var fd = new FormData(form);
-              fd.set("name", "—");
-              fetch("/api/contact", { method: "POST", body: fd })
+              var jsonData = {};
+              fd.forEach(function(value, key) { jsonData[key] = value; });
+              jsonData.name = "—";
+              fetch("/api/contact", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(jsonData) })
                 .then(function(res) {
                   if (res.ok) {
                     form.reset();
