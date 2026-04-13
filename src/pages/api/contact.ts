@@ -9,7 +9,7 @@ const LOGO_URL = "https://cridilorenzo.com/images/logo-dilorenzo.png";
 const CALENDAR_URL = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
 const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=393473301278&text=Ciao%2C+vorrei+maggiori+informazioni";
 
-function emailWrapper(content: string) {
+function emailWrapper(content: string, recipientEmail?: string) {
   return `
     <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
       <!-- Header con logo -->
@@ -40,6 +40,11 @@ function emailWrapper(content: string) {
         <p style="margin: 12px 0 0; font-size: 10px; color: #c0c0c0;">
           <a href="https://cridilorenzo.com" style="color: #c0c0c0; text-decoration: none;">cridilorenzo.com</a>
         </p>
+        ${recipientEmail ? `
+        <p style="margin: 8px 0 0; font-size: 10px;">
+          <a href="https://cridilorenzo.com/api/unsubscribe?email=${encodeURIComponent(recipientEmail)}" style="color: #c0c0c0; text-decoration: underline;">Cancellati dalla newsletter</a>
+        </p>
+        ` : ""}
       </div>
     </div>
   `;
@@ -151,7 +156,7 @@ export const POST: APIRoute = async ({ request }) => {
                 Prenota il colloquio gratuito
               </a>
             </div>
-          `)
+          `, email)
         );
       } else {
         confirmPromise = sendBrevoEmail(
@@ -181,8 +186,7 @@ export const POST: APIRoute = async ({ request }) => {
                 Prenota il colloquio gratuito
               </a>
             </div>
-            <p style="color: #c0c0c0; font-size: 11px; margin-top: 24px;">Se non desideri più ricevere email, rispondi con "cancellami".</p>
-          `)
+          `, email)
         );
       }
     }
