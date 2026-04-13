@@ -25,10 +25,10 @@ const pageLinks = [
       <img src="/images/logo-dilorenzo.png" alt="Christian Di Lorenzo" class="h-10 md:h-12 w-auto brightness-0 invert" />
     </div>
 
-    <!-- Top: Newsletter + Social (layout originale) -->
+    <!-- Top: Newsletter + Social -->
     <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-14">
       <!-- Left: Newsletter -->
-      <div class="flex-1">
+      <div class="md:max-w-md">
         <h3 class="text-white text-[1.8rem] font-medium mb-1">
           Iscriviti alla <span class="font-[family-name:var(--font-serif)] italic">newsletter</span>
         </h3>
@@ -103,12 +103,12 @@ const pageLinks = [
       </div>
     </div>
 
-    <!-- Bottom cards (stile originale con bordi + text-slide hover) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+    <!-- Bottom cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
       <!-- Pagine -->
-      <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Pagine</h4>
-        <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+      <div class="border border-white/10 rounded-[15px] p-6">
+        <h4 class="text-white text-sm font-medium mb-4">Pagine</h4>
+        <div class="grid grid-cols-2 gap-x-8 gap-y-3">
           {pageLinks.map((link) => (
             <a href={link.href} class="group relative overflow-clip h-[24px]">
               <span class="block text-white/70 text-sm transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">{link.label}</span>
@@ -118,21 +118,25 @@ const pageLinks = [
         </div>
       </div>
 
-      <!-- Contatti -->
-      <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Contatti</h4>
-        <div class="flex flex-col gap-2">
-          <a href="mailto:info@cridilorenzo.com" class="text-white/70 text-sm hover:text-white transition-colors">info@cridilorenzo.com</a>
-          <a href="tel:+393473301278" class="text-white/70 text-sm hover:text-white transition-colors">+39 347 330 1278</a>
-        </div>
-      </div>
-
-      <!-- Dove sono -->
-      <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Dove sono</h4>
-        <div class="flex flex-col gap-2">
-          <span class="text-white/70 text-sm">Milano (MI)</span>
-          <span class="text-white/70 text-sm">P.IVA 14452680961</span>
+      <!-- Contatti + Dove sono (uniti) -->
+      <div class="border border-white/10 rounded-[15px] p-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h4 class="text-white text-sm font-medium mb-4">Contatti</h4>
+            <div class="flex flex-col gap-3">
+              <a href="mailto:info@cridilorenzo.com" class="text-white/70 text-sm hover:text-white transition-colors">info@cridilorenzo.com</a>
+              <a href="tel:+393473301278" class="text-white/70 text-sm hover:text-white transition-colors">+39 347 330 1278</a>
+              <a href="https://api.whatsapp.com/send/?phone=393473301278" target="_blank" class="text-white/70 text-sm hover:text-white transition-colors">WhatsApp</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-white text-sm font-medium mb-4">Dove sono</h4>
+            <div class="flex flex-col gap-3">
+              <span class="text-white/70 text-sm">Milano (MI)</span>
+              <span class="text-white/70 text-sm">P.IVA 14452680961</span>
+              <span class="text-white/70 text-sm">Ricevo online</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
