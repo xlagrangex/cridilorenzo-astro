@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import TableOfContents from "../../components/react/TableOfContents.tsx";
+import ShareButtons from "../../components/react/ShareButtons.tsx";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -13,46 +15,188 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const allPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const relatedPosts = allPosts.filter((p) => p.id !== post.id).slice(0, 3);
+
 const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
+
+const wordCount = post.body ? post.body.split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+const canonicalUrl = `https://cridilorenzo.com/blog/${post.id}`;
+
+const formattedDate = new Date(post.data.date).toLocaleDateString("it-IT", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date,
+  dateModified: post.data.date,
+  author: { "@type": "Person", name: "Christian Di Lorenzo", url: "https://cridilorenzo.com", jobTitle: "Counselor Professionista" },
+  publisher: { "@type": "Person", name: "Christian Di Lorenzo" },
+  mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+  ...(post.data.image && { image: post.data.image }),
+  ...(post.data.tags && { keywords: post.data.tags.join(", ") }),
+};
 ---
 
 <Layout title={`${post.data.title} — Christian Di Lorenzo`} description={post.data.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
   <article class="pt-28 md:pt-36 pb-16">
     <div class="wrapper px-4 md:px-8 lg:px-12">
-      <div class="max-w-3xl mx-auto">
-        <!-- Back link -->
-        <a href="/blog" class="inline-flex items-center gap-2 text-sm text-[#373737cc] mb-8 hover:text-[#2a9d8f] transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-          Torna al blog
-        </a>
 
-        <!-- Meta -->
-        <div class="mb-8" data-animate="fade-in-up">
-          {post.data.tags && (
-            <div class="flex flex-wrap gap-2 mb-4">
-              {post.data.tags.map((tag: string) => (
-                <span class="tag-pill !text-xs">{tag}</span>
-              ))}
+      <!-- Breadcrumbs -->
+      <nav class="mb-8 flex items-center gap-2 text-sm text-[#373737cc]" data-animate="fade-in-up">
+        <a href="/" class="hover:text-[#2a9d8f] transition-colors">Home</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-[#2a9d8f] transition-colors">Blog</a>
+        <span>/</span>
+        <span class="text-[#15141a] font-medium truncate max-w-[300px]">{post.data.title}</span>
+      </nav>
+
+      <!-- Hero header — full container width -->
+      <header class="mb-10" data-animate="fade-in-up">
+        {post.data.tags && (
+          <div class="flex flex-wrap gap-2 mb-4">
+            {post.data.tags.map((tag: string) => (
+              <span class="tag-pill !text-xs">{tag}</span>
+            ))}
+          </div>
+        )}
+
+        <h1 class="!text-[2.5rem] md:!text-[3.5rem] !leading-[110%] mb-6 max-w-4xl">{post.data.title}</h1>
+        <p class="text-xl text-[#3e3e3e] leading-[160%] mb-6 max-w-3xl">{post.data.description}</p>
+
+        <!-- Meta row -->
+        <div class="flex flex-wrap items-center gap-4 text-sm text-[#373737cc] border-b border-[#e4e4e4] pb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#2a9d8f] flex items-center justify-center text-white font-semibold text-sm">CD</div>
+            <div>
+              <p class="text-[#15141a] font-medium m-0">Christian Di Lorenzo</p>
+              <p class="text-xs text-[#373737cc] m-0">Counselor Professionista</p>
             </div>
-          )}
-          <h1 class="!text-[2.5rem] md:!text-[3.25rem] !leading-[110%] mb-4">{post.data.title}</h1>
-          <time class="text-sm text-[#373737cc]">
-            {new Date(post.data.date).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" })}
-          </time>
+          </div>
+          <span class="hidden md:block w-px h-5 bg-[#e4e4e4]"></span>
+          <time>{formattedDate}</time>
+          <span class="hidden md:block w-px h-5 bg-[#e4e4e4]"></span>
+          <span>{readingTime} min di lettura</span>
+        </div>
+      </header>
+
+      <!-- Featured image — full container width -->
+      {post.data.image && (
+        <div class="mb-12 rounded-[20px] overflow-hidden aspect-[2.2/1]" data-animate="fade-in-up">
+          <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover" loading="eager" />
+        </div>
+      )}
+
+      <!-- ═══ CONTENT + SIDEBAR ═══ -->
+      <div class="flex gap-12 lg:gap-16">
+
+        <!-- Article body — prende tutto lo spazio -->
+        <div class="flex-1 min-w-0">
+          <!-- Mobile TOC -->
+          <div class="lg:hidden mb-8" data-animate="fade-in-up">
+            <TableOfContents client:load />
+          </div>
+
+          <div class="prose max-w-none" data-animate="fade-in-up">
+            <Content />
+          </div>
+
+          <!-- Mobile share -->
+          <div class="lg:hidden mt-8 pt-6 border-t border-[#e4e4e4]">
+            <ShareButtons title={post.data.title} url={canonicalUrl} client:load />
+          </div>
         </div>
 
-        <!-- Content -->
-        <div class="prose prose-lg max-w-none" data-animate="fade-in-up">
-          <Content />
-        </div>
+        <!-- Sidebar — desktop only -->
+        <aside class="hidden lg:block w-[280px] flex-shrink-0">
+          <div class="sticky top-28 flex flex-col gap-6">
+            <TableOfContents client:load />
+            <ShareButtons title={post.data.title} url={canonicalUrl} client:load />
 
-        <!-- CTA -->
-        <div class="mt-16 p-8 bg-[#f4f2ee] rounded-[20px] text-center" data-animate="fade-in-up">
-          <h3 class="text-2xl font-medium text-[#15141a] mb-3">Vuoi parlarne insieme?</h3>
-          <p class="regular-text text-center !mb-6">Il primo colloquio conoscitivo è gratuito. Prenota uno spazio per te.</p>
-          <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+            <!-- Mini CTA sidebar -->
+            <div class="rounded-[15px] bg-[#f4f2ee] p-5">
+              <p class="text-sm font-medium text-[#15141a] mb-2">Vuoi parlarne insieme?</p>
+              <p class="text-xs text-[#373737cc] mb-3">Il primo colloquio è gratuito.</p>
+              <a href={calendarUrl} target="_blank" class="btn-primary !py-2 !px-4 !text-xs w-full !text-center">
+                Prenota ora
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- ═══ BELOW CONTENT — full width ═══ -->
+
+      <!-- Author card -->
+      <div class="mt-14 p-6 md:p-8 bg-[#f4f2ee] rounded-[20px] flex flex-col md:flex-row items-start gap-5" data-animate="fade-in-up">
+        <div class="w-16 h-16 rounded-full bg-[#2a9d8f] flex items-center justify-center text-white font-bold text-xl flex-shrink-0">CD</div>
+        <div>
+          <h3 class="text-lg font-medium text-[#15141a] mb-1 !mt-0">Christian Di Lorenzo</h3>
+          <p class="text-sm text-[#373737cc] mb-3">Counselor Professionista — Accompagno le persone in percorsi di ascolto, consapevolezza e crescita personale. Lavoro con l'interpretazione dei sogni, il genogramma e le costellazioni familiari.</p>
+          <a href={calendarUrl} target="_blank" class="btn-primary !py-2.5 !px-4 !text-sm">Prenota un colloquio gratuito</a>
         </div>
       </div>
+
+      <!-- Prev / Next -->
+      <nav class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4" data-animate="fade-in-up">
+        {prevPost ? (
+          <a href={`/blog/${prevPost.id}`} class="group p-5 rounded-[15px] border border-[#e4e4e4] hover:border-[#2a9d8f] transition-colors">
+            <span class="text-xs text-[#373737cc] uppercase tracking-wider">← Precedente</span>
+            <p class="text-base font-medium text-[#15141a] mt-1 m-0 group-hover:text-[#2a9d8f] transition-colors">{prevPost.data.title}</p>
+          </a>
+        ) : <div />}
+        {nextPost && (
+          <a href={`/blog/${nextPost.id}`} class="group p-5 rounded-[15px] border border-[#e4e4e4] hover:border-[#2a9d8f] transition-colors text-right">
+            <span class="text-xs text-[#373737cc] uppercase tracking-wider">Successivo →</span>
+            <p class="text-base font-medium text-[#15141a] mt-1 m-0 group-hover:text-[#2a9d8f] transition-colors">{nextPost.data.title}</p>
+          </a>
+        )}
+      </nav>
+
+      <!-- CTA -->
+      <div class="mt-20 p-8 md:p-12 bg-[#f4f2ee] rounded-[20px] text-center" data-animate="fade-in-up">
+        <h2 class="text-center mb-3">Vuoi parlarne <span class="italic">insieme?</span></h2>
+        <p class="regular-text text-center !mb-6 max-w-lg mx-auto">Il primo colloquio conoscitivo è gratuito. Prenota uno spazio dedicato a te.</p>
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+      </div>
+
+      <!-- Related posts -->
+      {relatedPosts.length > 0 && (
+        <div class="mt-20" data-animate="fade-in-up">
+          <h2 class="mb-8">Articoli <span class="italic">correlati</span></h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedPosts.map((p) => (
+              <a href={`/blog/${p.id}`} class="group block rounded-[20px] bg-[#f4f2ee] overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                {p.data.image && (
+                  <div class="aspect-[16/10] overflow-hidden">
+                    <img src={p.data.image} alt={p.data.title} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                )}
+                <div class="p-5">
+                  <h3 class="text-base font-medium text-[#15141a] mb-2 group-hover:text-[#2a9d8f] transition-colors !text-base">{p.data.title}</h3>
+                  <p class="text-sm text-[#3e3e3e] m-0 line-clamp-2">{p.data.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   </article>
 </Layout>

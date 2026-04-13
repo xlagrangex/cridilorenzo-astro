@@ -174,50 +174,112 @@ const puntiChiave = [
   <!-- ═══════════ COME FUNZIONA ═══════════ -->
   <section id="come-funziona" class="py-16 md:py-24">
     <div class="wrapper px-4 md:px-8 lg:px-12">
-      <div class="text-center max-w-[45rem] mx-auto mb-12" data-animate="fade-in-up">
-        <p class="sub-title mb-3">[ COME FUNZIONA ]</p>
-        <h2 class="text-center">Un percorso <span class="italic">chiaro e trasparente</span></h2>
-        <p class="regular-text mt-5 text-center">Dal primo contatto gratuito all'accompagnamento nel tempo, ogni passo è pensato per offrirti ascolto autentico e un sostegno costante.</p>
-      </div>
 
-      <!-- Hero image come funziona -->
-      <div class="flex justify-center mb-12" data-animate="fade-in-up">
-        <img src="/images/councelor.webp" alt="Counselor" loading="lazy" class="rounded-[20px] w-full max-w-[864px]" />
-      </div>
-
-      <!-- 3 boxes -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" data-animate="fade-in-up">
-        <div class="bg-[#d8d0c1] rounded-[20px] p-6 relative">
-          <div class="bg-[#d8d0c1] rounded-[10px] w-[100px] -mt-9 mb-5 py-1 px-2">
-            <p class="tag m-0 text-center">PASSO 1</p>
-          </div>
-          <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">Prenota il colloquio conoscitivo gratuito</h3>
-          <p class="text-base text-[#3e3e3e] m-0">Prenota un <strong>incontro gratuito di 45 minuti</strong> per conoscerci, comprendere la tua situazione e ascoltare le tue esigenze.</p>
+      <!-- Header + Image -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16" data-animate="fade-in-up">
+        <div>
+          <p class="sub-title mb-3">[ COME FUNZIONA ]</p>
+          <h2>Un percorso <span class="italic">chiaro e trasparente</span></h2>
+          <p class="regular-text mt-5">Dal primo contatto gratuito all'accompagnamento nel tempo, ogni passo è pensato per offrirti ascolto autentico e un sostegno costante.</p>
         </div>
-        <div class="bg-[#d8d0c1] rounded-[20px] p-6 relative">
-          <div class="bg-[#d8d0c1] rounded-[10px] w-[100px] -mt-9 mb-5 py-1 px-2">
-            <p class="tag m-0 text-center">PASSO 2</p>
-          </div>
-          <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">Ricevi una proposta per il tuo percorso</h3>
-          <p class="text-base text-[#3e3e3e] m-0">Ti sarà inviata una <strong>sintesi</strong> di ciò che è emerso nel <strong>nostro incontro</strong>, insieme a una proposta di percorso e ai primi strumenti.</p>
-        </div>
-        <div class="bg-[#ebe7e0] rounded-[20px] p-6 relative">
-          <div class="bg-[#ebe7e0] rounded-[10px] w-[150px] -mt-9 mb-5 py-1 px-2">
-            <p class="tag m-0 text-center">CONTINUIAMO</p>
-          </div>
-          <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">Quanto costa?</h3>
-          <p class="text-base text-[#3e3e3e] m-0">Colloquio conoscitivo</p>
-          <h3 class="text-[28px] font-bold text-[#3e3e3e] mb-3">GRATUITO</h3>
-          <p class="text-base text-[#3e3e3e] m-0">Relazione Iniziale</p>
-          <h3 class="text-[28px] font-bold text-[#3e3e3e] mb-3">GRATUITA</h3>
-          <p class="text-base text-[#3e3e3e] m-0">Singolo incontro da 45 minuti</p>
-          <h3 class="text-[28px] font-bold text-[#3e3e3e]">70€</h3>
+        <div class="rounded-[20px] overflow-hidden aspect-[4/3]">
+          <img src="/images/councelor.webp" alt="Counselor" loading="lazy" class="w-full h-full object-cover" />
         </div>
       </div>
 
-      <div class="flex justify-center">
+      <!-- Il percorso — 3 righe impilate, tutte si espandono all'hover -->
+      <div class="rounded-[20px] overflow-hidden bg-[#f4f2ee]" data-animate="fade-in-up">
+        <div class="p-8 md:p-10">
+          <h2 class="mb-2">Il <span class="italic">percorso</span></h2>
+          <p class="text-lg mb-8">Nessun pacchetto obbligatorio. Paghi solo gli incontri che fai, senza vincoli.</p>
+
+          <div class="flex flex-col gap-0 rounded-[15px] overflow-hidden">
+            <!-- Passo 1 -->
+            <div class="group bg-[#ebe7e0] p-6 md:p-8 cursor-default">
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                  <span class="text-sm font-bold text-[#2a9d8f] uppercase tracking-wider">Passo 1</span>
+                  <h3 class="text-xl font-medium m-0">Prenota il colloquio conoscitivo gratuito</h3>
+                </div>
+                <span class="text-2xl font-bold flex-shrink-0 text-[#2a9d8f]">Gratuito</span>
+              </div>
+              <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-400 ease-in-out">
+                <div class="overflow-hidden">
+                  <p class="text-base mt-5 m-0 leading-[170%]">Prenota un <strong>incontro gratuito di 45 minuti</strong> per conoscerci, comprendere la tua situazione e ascoltare le tue esigenze.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="h-px bg-[#d8d0c1]"></div>
+
+            <!-- Passo 2 -->
+            <div class="group bg-[#ebe7e0] p-6 md:p-8 cursor-default">
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                  <span class="text-sm font-bold text-[#2a9d8f] uppercase tracking-wider">Passo 2</span>
+                  <h3 class="text-xl font-medium m-0">Ricevi una proposta per il tuo percorso</h3>
+                </div>
+                <span class="text-2xl font-bold flex-shrink-0 text-[#2a9d8f]">Gratuita</span>
+              </div>
+              <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-400 ease-in-out">
+                <div class="overflow-hidden">
+                  <p class="text-base mt-5 m-0 leading-[170%]">Ti sarà inviata una <strong>sintesi</strong> di ciò che è emerso nel <strong>nostro incontro</strong>, insieme a una proposta di percorso e ai primi strumenti che potremo utilizzare.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="h-px bg-[#d8d0c1]"></div>
+
+            <!-- Continuiamo — pricing con gradiente verde -->
+            <div class="group p-6 md:p-8 cursor-default text-white" style="background: linear-gradient(135deg, #1a7a6f 0%, #2a9d8f 40%, #3bbfad 100%);">
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                  <span class="text-sm font-bold text-white/70 uppercase tracking-wider">Continuiamo</span>
+                  <h3 class="text-xl font-medium text-white m-0">Ogni incontro successivo</h3>
+                </div>
+                <div class="flex items-baseline gap-2 flex-shrink-0">
+                  <span class="text-3xl font-bold text-white">70€</span>
+                  <span class="text-base text-white/70">/ 45 min</span>
+                </div>
+              </div>
+              <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-400 ease-in-out">
+                <div class="overflow-hidden">
+                  <div class="pt-5 mt-5 border-t border-white/20">
+                    <p class="text-base text-white/90 mb-4">Online, con cadenza da concordare insieme.</p>
+                    <ul class="flex flex-col gap-3">
+                      <li class="flex items-start gap-3 text-base text-white/90">
+                        <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Ascolto, dialogo e strumenti dedicati
+                      </li>
+                      <li class="flex items-start gap-3 text-base text-white/90">
+                        <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Interpretazione dei sogni inclusa
+                      </li>
+                      <li class="flex items-start gap-3 text-base text-white/90">
+                        <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Nessun vincolo di durata minima
+                      </li>
+                      <li class="flex items-start gap-3 text-base text-white/90">
+                        <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Puoi interrompere in qualsiasi momento
+                      </li>
+                      <li class="flex items-start gap-3 text-base text-white/90">
+                        <svg class="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Riservatezza totale garantita
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-10">
         <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
       </div>
+
     </div>
   </section>
 
@@ -266,21 +328,21 @@ const puntiChiave = [
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-in-up">
         <div class="rounded-[20px] overflow-hidden relative">
           <img src="/images/Why-Chose-Img-01_1Why-Chose-Img-01.avif" style="min-height:300px" alt="Counseling" loading="lazy" class="w-full h-full object-cover" />
-          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a80] p-6 backdrop-blur-sm">
+          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a]/85 p-6 backdrop-blur-md">
             <h3 class="text-white text-xl font-medium mb-2">Percorso di Counseling</h3>
             <p class="text-white/80 text-sm m-0">Uno spazio di ascolto e accompagnamento per fare chiarezza, comprendere ciò che stai vivendo e ritrovare una direzione più autentica.</p>
           </div>
         </div>
         <div class="rounded-[20px] overflow-hidden relative">
           <img src="/images/interpretazione-sogni-psicoterapia-centro-psicologia-lecco-1.png" alt="Sogni" loading="lazy" class="w-full h-full object-cover" />
-          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a80] p-6 backdrop-blur-sm">
+          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a]/85 p-6 backdrop-blur-md">
             <h3 class="text-white text-xl font-medium mb-2">Interpretazione dei Sogni</h3>
             <p class="text-white/80 text-sm m-0">I sogni come linguaggio simbolico dell'inconscio: uno strumento prezioso per esplorare parti profonde di te.</p>
           </div>
         </div>
         <div class="rounded-[20px] overflow-hidden relative">
           <img src="/images/counseling-1500x430-1.png" alt="Relazioni" loading="lazy" class="w-full h-full object-cover min-h-[300px]" />
-          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a80] p-6 backdrop-blur-sm">
+          <div class="absolute bottom-0 left-0 right-0 bg-[#15141a]/85 p-6 backdrop-blur-md">
             <h3 class="text-white text-xl font-medium mb-2">Supporto relazioni e autostima</h3>
             <p class="text-white/80 text-sm m-0">Un accompagnamento per riconoscere schemi relazionali, rafforzare l'autostima e costruire rapporti più consapevoli.</p>
           </div>
@@ -298,15 +360,17 @@ const puntiChiave = [
         <p class="regular-text mt-5">Non esistono tecniche standard o protocolli rigidi. Ogni persona è diversa, e il lavoro nasce da ciò che porti tu, momento per momento.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-0" data-animate="fade-in-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5" data-animate="fade-in-up">
         {strumenti.map((s) => (
-          <div class="bg-[#d8d0c1] rounded-[20px] p-8 relative">
-            <div class="flex items-center justify-between mb-8">
-              <span class="text-4xl font-medium text-[#3e3e3e]/30">{s.num}</span>
-              <img src={s.icon} alt="" class="w-10 h-10" loading="lazy" />
+          <div class="bg-[#ebe7e0] rounded-[20px] p-8 border border-[#e4e4e4] transition-all duration-300 hover:shadow-lg hover:border-[#b8ad9e] hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-5xl font-bold text-[#b8ad9e]/40 leading-none">{s.num}</span>
+              <div class="w-12 h-12 rounded-[10px] bg-[#d8d0c1] flex items-center justify-center">
+                <img src={s.icon} alt="" class="w-7 h-7" loading="lazy" />
+              </div>
             </div>
-            <h3 class="text-xl font-medium text-[#3e3e3e] mb-4">{s.title}</h3>
-            <p class="text-base text-[#3e3e3e] m-0">{s.desc}</p>
+            <h3 class="text-xl font-medium mb-3">{s.title}</h3>
+            <p class="text-base m-0 leading-[160%]">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -365,15 +429,18 @@ const puntiChiave = [
         </div>
 
         <!-- Counselor -->
-        <div class="rounded-[20px] border border-[#43495480] p-8 bg-[#ebe7e0] bg-cover bg-center" style="background-image: url('/images/bg-process_1bg-process.webp');">
-          <h3 class="text-2xl font-medium text-[#15141a] mb-4">Counselor</h3>
-          <ul class="list-disc pl-5 space-y-2">
-            <li class="regular-text !mb-2 !text-base">Offre uno spazio di <strong>ascolto e accompagnamento</strong> non clinico;</li>
-            <li class="regular-text !mb-2 !text-base">Lavora su <strong>consapevolezza</strong>, <strong>crescita personale</strong> e orientamento;</li>
-            <li class="regular-text !mb-2 !text-base">Aiuta a <strong>comprendere</strong> schemi e <strong>blocchi emotivi</strong>;</li>
-            <li class="regular-text !mb-2 !text-base">Si rivolge a persone che desiderano conoscersi meglio;</li>
-            <li class="regular-text !mb-0 !text-base">Percorsi orientati all'equilibrio e alle scelte personali;</li>
-          </ul>
+        <div class="rounded-[20px] border border-[#43495480] p-8 bg-[#ebe7e0] bg-cover bg-center relative overflow-hidden" style="background-image: url('/images/bg-process_1bg-process.webp');">
+          <div class="absolute inset-0 bg-[#15141a]/60"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-medium text-white mb-4">Counselor</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li class="!text-base !mb-2 text-white/90">Offre uno spazio di <strong class="text-white">ascolto e accompagnamento</strong> non clinico;</li>
+              <li class="!text-base !mb-2 text-white/90">Lavora su <strong class="text-white">consapevolezza</strong>, <strong class="text-white">crescita personale</strong> e orientamento;</li>
+              <li class="!text-base !mb-2 text-white/90">Aiuta a <strong class="text-white">comprendere</strong> schemi e <strong class="text-white">blocchi emotivi</strong>;</li>
+              <li class="!text-base !mb-2 text-white/90">Si rivolge a persone che desiderano conoscersi meglio;</li>
+              <li class="!text-base !mb-0 text-white/90">Percorsi orientati all'equilibrio e alle scelte personali;</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -410,13 +477,20 @@ const puntiChiave = [
 
         <!-- Form -->
         <div class="w-full max-w-md">
-          <form class="flex flex-col gap-4">
-            <input type="text" placeholder="Nome" required class="contact-field" />
-            <input type="email" placeholder="La tua email" required class="contact-field" />
-            <input type="tel" placeholder="Cellulare / Whatsapp" required class="contact-field" />
-            <textarea placeholder="Raccontami brevemente tutto ciò che può essere utile per preparare il nostro incontro" class="contact-field min-h-[117px] resize-y"></textarea>
+          <form id="contact-form" class="flex flex-col gap-4" method="POST" action="/api/contact">
+            <input type="text" name="name" placeholder="Nome" required class="contact-field" />
+            <input type="email" name="email" placeholder="La tua email" required class="contact-field" />
+            <input type="tel" name="phone" placeholder="Cellulare / Whatsapp" required class="contact-field" />
+            <textarea name="message" placeholder="Raccontami brevemente tutto ciò che può essere utile per preparare il nostro incontro" class="contact-field min-h-[117px] resize-y"></textarea>
             <button type="submit" class="btn-submit w-full">Invia il messaggio</button>
           </form>
+          <div id="contact-success" class="hidden rounded-[15px] bg-[#2a9d8f] p-6 text-center text-white">
+            <p class="text-lg font-medium m-0 mb-2">Messaggio inviato!</p>
+            <p class="text-sm text-white/80 m-0">Grazie per avermi scritto. Ti risponderò il prima possibile.</p>
+          </div>
+          <div id="contact-error" class="hidden rounded-[15px] bg-red-100 p-6 text-center text-red-700">
+            <p class="text-base font-medium m-0">Ops, qualcosa non ha funzionato. Riprova o contattami direttamente.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -429,5 +503,36 @@ const puntiChiave = [
 
   document.addEventListener("astro:page-load", () => {
     fadeInUp('[data-animate="fade-in-up"]');
+
+    // Contact form — invio async
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const success = document.getElementById("contact-success");
+    const error = document.getElementById("contact-error");
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+      btn.textContent = "Invio in corso...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          body: new FormData(form),
+        });
+
+        if (res.ok) {
+          form.classList.add("hidden");
+          success?.classList.remove("hidden");
+        } else {
+          error?.classList.remove("hidden");
+        }
+      } catch {
+        error?.classList.remove("hidden");
+      } finally {
+        btn.textContent = "Invia il messaggio";
+        btn.disabled = false;
+      }
+    });
   });
 </script>

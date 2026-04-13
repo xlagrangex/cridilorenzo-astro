@@ -31,7 +31,7 @@ const pageLinks = [
             required
             class="bg-white/10 border border-white/10 rounded-[10px] px-5 py-3 text-white placeholder:text-white/50 text-base focus:border-white/40 outline-none"
           />
-          <label class="flex items-start gap-2 text-white/60 text-xs cursor-pointer">
+          <label class="flex items-start gap-2 text-white/80 text-xs cursor-pointer">
             <input type="checkbox" required class="mt-1" />
             <span>Ho letto la Privacy Policy e acconsento al trattamento dei dati per l'invio della newsletter.</span>
           </label>
@@ -48,7 +48,7 @@ const pageLinks = [
           {socialLinks.map((s) => (
             <a href={s.href} target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between py-2 border-b border-white/10">
               <span class="text-white text-base font-medium transition-opacity group-hover:opacity-60">{s.label}</span>
-              <img src={s.icon} alt={s.label} class="w-5 h-5 invert opacity-60 group-hover:opacity-100 transition-opacity" loading="lazy" />
+              <img src={s.icon} alt={s.label} class="w-5 h-5 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" />
             </a>
           ))}
         </div>
@@ -59,7 +59,7 @@ const pageLinks = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <!-- Pagine -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white/60 text-sm font-medium mb-3">Pagine</h4>
+        <h4 class="text-white text-sm font-medium mb-3">Pagine</h4>
         <div class="grid grid-cols-2 gap-2">
           {pageLinks.map((link) => (
             <a href={link.href} class="group relative overflow-clip h-[24px]">
@@ -72,7 +72,7 @@ const pageLinks = [
 
       <!-- Contatti -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white/60 text-sm font-medium mb-3">Contatti</h4>
+        <h4 class="text-white text-sm font-medium mb-3">Contatti</h4>
         <div class="flex flex-col gap-2">
           <a href="mailto:info@cridilorenzo.com" class="text-white text-sm hover:opacity-60 transition-opacity">info@cridilorenzo.com</a>
           <a href="tel:+393473301278" class="text-white text-sm hover:opacity-60 transition-opacity">+39 3473301278</a>
@@ -81,7 +81,7 @@ const pageLinks = [
 
       <!-- Dove sono -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white/60 text-sm font-medium mb-3">Dove sono</h4>
+        <h4 class="text-white text-sm font-medium mb-3">Dove sono</h4>
         <div class="flex flex-col gap-2">
           <span class="text-white text-sm">Milano (MI)</span>
           <span class="text-white text-sm">P.iva 14452680961</span>
@@ -91,10 +91,10 @@ const pageLinks = [
 
     <!-- Copyright -->
     <div class="border-t border-white/10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <span class="text-white/40 text-sm">&copy; {new Date().getFullYear()} Christian Di Lorenzo. Tutti i diritti riservati.</span>
+      <span class="text-white/70 text-sm">&copy; {new Date().getFullYear()} Christian Di Lorenzo. Tutti i diritti riservati.</span>
       <div class="flex items-center gap-4">
-        <a href="/legal/privacy-policy" class="text-white/40 text-sm hover:text-white transition-colors">Privacy Policy</a>
-        <a href="/legal/cookie-policy" class="text-white/40 text-sm hover:text-white transition-colors">Cookie Policy</a>
+        <a href="/legal/privacy-policy" class="text-white/70 text-sm hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/legal/cookie-policy" class="text-white/70 text-sm hover:text-white transition-colors">Cookie Policy</a>
       </div>
     </div>
   </div>
