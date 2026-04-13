@@ -41,10 +41,6 @@ const pageLinks = [
             Ricevi la guida
           </button>
         </form>
-        <div id="newsletter-success" class="hidden mt-4 rounded-[10px] bg-[#2a9d8f] p-4 text-center text-white text-sm">
-          Grazie! Controlla la tua email.
-        </div>
-
         <script>
           document.getElementById("newsletter-form")?.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -57,10 +53,14 @@ const pageLinks = [
               fd.set("name", "Newsletter");
               const res = await fetch("/api/contact", { method: "POST", body: fd });
               if (res.ok) {
-                form.classList.add("hidden");
-                document.getElementById("newsletter-success")?.classList.remove("hidden");
+                form.reset();
+                (window as any).showToast?.("Iscrizione confermata! Controlla la tua email.", "success");
+              } else {
+                (window as any).showToast?.("Ops, qualcosa non ha funzionato.", "error");
               }
-            } catch {}
+            } catch {
+              (window as any).showToast?.("Errore di connessione.", "error");
+            }
             btn.textContent = "Ricevi la guida";
             btn.disabled = false;
           });

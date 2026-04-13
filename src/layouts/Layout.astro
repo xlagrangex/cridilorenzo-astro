@@ -48,6 +48,9 @@ const {
     >
       <img src="/images/image-297_1image-297.png" loading="lazy" alt="WhatsApp" class="w-14 h-14" />
     </a>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="fixed top-6 right-6 z-[999] flex flex-col gap-3 pointer-events-none"></div>
   </body>
 </html>
 
@@ -56,6 +59,30 @@ const {
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // Toast notification globale
+  (window as any).showToast = function(message: string, type: "success" | "error" = "success") {
+    const container = document.getElementById("toast-container");
+    if (!container) return;
+
+    const icon = type === "success"
+      ? '<svg width="20" height="20" fill="none" stroke="#2a9d8f" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+      : '<svg width="20" height="20" fill="none" stroke="#e53e3e" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>';
+
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `${icon}<span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add("toast-exit");
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
+  };
+
+  function showToast(message: string, type: "success" | "error" = "success") {
+    (window as any).showToast(message, type);
+  }
 
   document.addEventListener("astro:before-swap", () => {
     ScrollTrigger.getAll().forEach(t => t.kill());

@@ -485,13 +485,6 @@ const puntiChiave = [
             <textarea name="message" placeholder="Raccontami brevemente tutto ciò che può essere utile per preparare il nostro incontro" class="contact-field min-h-[117px] resize-y"></textarea>
             <button type="submit" class="btn-submit w-full">Invia il messaggio</button>
           </form>
-          <div id="contact-success" class="hidden rounded-[15px] bg-[#2a9d8f] p-6 text-center text-white">
-            <p class="text-lg font-medium m-0 mb-2">Messaggio inviato!</p>
-            <p class="text-sm text-white/80 m-0">Grazie per avermi scritto. Ti risponderò il prima possibile.</p>
-          </div>
-          <div id="contact-error" class="hidden rounded-[15px] bg-red-100 p-6 text-center text-red-700">
-            <p class="text-base font-medium m-0">Ops, qualcosa non ha funzionato. Riprova o contattami direttamente.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -505,10 +498,8 @@ const puntiChiave = [
   document.addEventListener("astro:page-load", () => {
     fadeInUp('[data-animate="fade-in-up"]');
 
-    // Contact form — invio async
+    // Contact form — invio async con toast
     const form = document.getElementById("contact-form") as HTMLFormElement | null;
-    const success = document.getElementById("contact-success");
-    const error = document.getElementById("contact-error");
 
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -523,13 +514,13 @@ const puntiChiave = [
         });
 
         if (res.ok) {
-          form.classList.add("hidden");
-          success?.classList.remove("hidden");
+          form.reset();
+          showToast("Messaggio inviato! Ti risponderò il prima possibile.", "success");
         } else {
-          error?.classList.remove("hidden");
+          showToast("Ops, qualcosa non ha funzionato. Riprova.", "error");
         }
       } catch {
-        error?.classList.remove("hidden");
+        showToast("Errore di connessione. Riprova.", "error");
       } finally {
         btn.textContent = "Invia il messaggio";
         btn.disabled = false;
