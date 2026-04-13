@@ -7,57 +7,76 @@ const socialLinks = [
 ];
 
 const pageLinks = [
-  { label: "Chi sono", href: "#chi-sono" },
-  { label: "Servizi", href: "#servizi" },
-  { label: "Strumenti", href: "#strumenti" },
-  { label: "Blog", href: "#" },
+  { label: "Chi sono", href: "/#chi-sono" },
+  { label: "Servizi", href: "/#servizi" },
+  { label: "Come funziona", href: "/#come-funziona" },
+  { label: "Blog", href: "/blog" },
+  { label: "Strumenti", href: "/#strumenti" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contatti", href: "/#contact" },
 ];
+
+const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
 ---
 
-<footer class="footer-bg pt-16 pb-6">
+<footer class="bg-[#0b0b0b] pt-20 pb-8">
   <div class="wrapper px-4 md:px-8 lg:px-12">
-    <!-- Top: Newsletter + Social -->
-    <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
-      <!-- Left: Newsletter -->
-      <div class="flex-1">
-        <h3 class="text-white text-[1.8rem] font-medium mb-4">Iscriviti alla newsletter</h3>
-        <p class="text-white text-base leading-[155%] mb-6 opacity-80">
+
+    <!-- Top: Logo + headline -->
+    <div class="flex flex-col items-center text-center mb-16">
+      <img src="/images/logo-dilorenzo.png" alt="Christian Di Lorenzo" class="h-12 md:h-16 w-auto brightness-0 invert mb-8" />
+      <h2 class="text-white text-3xl md:text-4xl font-medium mb-4">
+        Inizia il tuo percorso di <span class="font-[family-name:var(--font-serif)] italic">consapevolezza</span>
+      </h2>
+      <p class="text-white/60 text-lg max-w-xl mb-8">Il primo colloquio conoscitivo è gratuito. Prenota uno spazio dedicato a te.</p>
+      <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+    </div>
+
+    <!-- Divider -->
+    <div class="h-px bg-white/10 mb-12"></div>
+
+    <!-- Main grid: 3 colonne -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+
+      <!-- Col 1: Newsletter -->
+      <div>
+        <h3 class="text-white text-lg font-medium mb-2">
+          Iscriviti alla <span class="font-[family-name:var(--font-serif)] italic">newsletter</span>
+        </h3>
+        <p class="text-white/50 text-sm mb-5 leading-[160%]">
           Ricevi gratuitamente la mini-guida all'interpretazione dei sogni e scopri come ascoltare il linguaggio della tua anima.
         </p>
-        <form id="newsletter-form" class="flex flex-col gap-3 mt-6">
+        <form id="newsletter-form" class="flex flex-col gap-3">
           <input type="hidden" name="tipo" value="Newsletter" />
           <input
             type="email"
             name="email"
-            placeholder="Indirizzo email"
+            placeholder="La tua email"
             required
-            class="bg-white/10 border border-white/10 rounded-[10px] px-5 py-3 text-white placeholder:text-white/50 text-base focus:border-white/40 outline-none"
+            class="bg-white/8 border border-white/10 rounded-[10px] px-4 py-3 text-white placeholder:text-white/30 text-sm focus:border-white/30 outline-none transition-colors"
           />
-          <label class="flex items-start gap-2 text-white/80 text-xs cursor-pointer">
-            <input type="checkbox" required class="mt-1" />
-            <span>Ho letto la Privacy Policy e acconsento al trattamento dei dati per l'invio della newsletter.</span>
+          <label class="flex items-start gap-2 text-white/40 text-xs cursor-pointer leading-[150%]">
+            <input type="checkbox" required class="mt-0.5 accent-[#2a9d8f]" />
+            <span>Ho letto la Privacy Policy e acconsento al trattamento dei dati.</span>
           </label>
-          <button type="submit" class="bg-white/10 border border-white/20 rounded-[10px] px-5 py-3 text-white text-sm font-medium hover:bg-white/20 transition-colors">
+          <button type="submit" class="bg-[#2a9d8f] hover:bg-[#238b7f] rounded-[10px] px-4 py-3 text-white text-sm font-medium transition-colors">
             Ricevi la guida
           </button>
         </form>
+
         <script is:inline>
           document.addEventListener("DOMContentLoaded", function() {
             var form = document.getElementById("newsletter-form");
             if (!form) return;
-
             form.addEventListener("submit", function(e) {
               e.preventDefault();
               e.stopPropagation();
-
               var btn = form.querySelector("button");
               var originalText = btn.textContent;
               btn.textContent = "Invio...";
               btn.disabled = true;
-
               var fd = new FormData(form);
               fd.set("name", "—");
-
               fetch("/api/contact", { method: "POST", body: fd })
                 .then(function(res) {
                   if (res.ok) {
@@ -79,61 +98,84 @@ const pageLinks = [
         </script>
       </div>
 
-      <!-- Right: Social links -->
-      <div class="flex-1 md:max-w-xs">
-        <h3 class="text-white text-xl font-medium mb-6">Seguimi su ...</h3>
-        <div class="flex flex-col gap-4">
-          {socialLinks.map((s) => (
-            <a href={s.href} target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between py-2 border-b border-white/10">
-              <span class="text-white text-base font-medium transition-opacity group-hover:opacity-60">{s.label}</span>
-              <img src={s.icon} alt={s.label} class="w-5 h-5 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" />
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-      <!-- Pagine -->
-      <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Pagine</h4>
-        <div class="grid grid-cols-2 gap-2">
+      <!-- Col 2: Navigazione -->
+      <div>
+        <h3 class="text-white text-lg font-medium mb-5">Navigazione</h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-3">
           {pageLinks.map((link) => (
-            <a href={link.href} class="group relative overflow-clip h-[24px]">
-              <span class="block text-white text-sm transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">{link.label}</span>
-              <span class="absolute inset-0 block text-white text-sm translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">{link.label}</span>
+            <a href={link.href} class="text-white/50 text-sm hover:text-white transition-colors duration-200">
+              {link.label}
             </a>
           ))}
         </div>
-      </div>
 
-      <!-- Contatti -->
-      <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Contatti</h4>
-        <div class="flex flex-col gap-2">
-          <a href="mailto:info@cridilorenzo.com" class="text-white text-sm hover:opacity-60 transition-opacity">info@cridilorenzo.com</a>
-          <a href="tel:+393473301278" class="text-white text-sm hover:opacity-60 transition-opacity">+39 3473301278</a>
+        <!-- Social -->
+        <div class="mt-8">
+          <h3 class="text-white text-lg font-medium mb-4">Seguimi</h3>
+          <div class="flex items-center gap-3">
+            {socialLinks.map((s) => (
+              <a href={s.href} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-10 h-10 rounded-full bg-white/8 hover:bg-white/15 transition-colors duration-200">
+                <img src={s.icon} alt={s.label} class="w-5 h-5 brightness-0 invert opacity-60" loading="lazy" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
-      <!-- Dove sono -->
-      <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-sm font-medium mb-3">Dove sono</h4>
-        <div class="flex flex-col gap-2">
-          <span class="text-white text-sm">Milano (MI)</span>
-          <span class="text-white text-sm">P.iva 14452680961</span>
+      <!-- Col 3: Contatti -->
+      <div>
+        <h3 class="text-white text-lg font-medium mb-5">Contatti</h3>
+        <div class="flex flex-col gap-4">
+          <a href="mailto:info@cridilorenzo.com" class="text-white/50 text-sm hover:text-white transition-colors">
+            info@cridilorenzo.com
+          </a>
+          <a href="tel:+393473301278" class="text-white/50 text-sm hover:text-white transition-colors">
+            +39 347 330 1278
+          </a>
+          <div class="text-white/50 text-sm">
+            <p class="m-0">Milano (MI)</p>
+            <p class="m-0 mt-1">P.IVA 14452680961</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Copyright -->
-    <div class="border-t border-white/10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <span class="text-white/70 text-sm">&copy; {new Date().getFullYear()} Christian Di Lorenzo. Tutti i diritti riservati.</span>
-      <div class="flex items-center gap-4">
-        <a href="/legal/privacy-policy" class="text-white/70 text-sm hover:text-white transition-colors">Privacy Policy</a>
-        <a href="/legal/cookie-policy" class="text-white/70 text-sm hover:text-white transition-colors">Cookie Policy</a>
+    <!-- Divider -->
+    <div class="h-px bg-white/10 mb-8"></div>
+
+    <!-- Disclaimer espandibile -->
+    <details class="mb-8 group">
+      <summary class="flex items-center gap-2 cursor-pointer text-white/40 text-xs font-medium hover:text-white/60 transition-colors select-none">
+        <svg class="w-4 h-4 transition-transform duration-200 group-open:rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        Disclaimer — Nota importante sul counseling
+      </summary>
+      <div class="mt-4 text-white/40 text-xs leading-[180%] max-w-4xl space-y-3">
+        <p class="m-0">
+          <strong class="text-white/60">Christian Di Lorenzo è un counselor professionista</strong>, non uno psicologo né uno psicoterapeuta. Il counseling non è un'attività sanitaria e non prevede diagnosi, trattamento o cura di patologie psicologiche o psichiatriche.
+        </p>
+        <p class="m-0">
+          Il counseling è un percorso di <strong class="text-white/60">accompagnamento e crescita personale</strong> rivolto a persone che non presentano disturbi clinici strutturati, ma che desiderano uno spazio di ascolto, consapevolezza e orientamento per affrontare momenti di difficoltà, cambiamento o confusione.
+        </p>
+        <p class="m-0">
+          <strong class="text-white/60">Il counseling non sostituisce in alcun modo la psicoterapia</strong>, il supporto psicologico o psichiatrico. In caso di disagio psicologico significativo, disturbi dell'umore, disturbi d'ansia strutturati, dipendenze o qualsiasi altra condizione clinica, si consiglia di rivolgersi a un professionista sanitario qualificato (psicologo, psicoterapeuta o psichiatra).
+        </p>
+        <p class="m-0">
+          Christian Di Lorenzo opera nel rispetto del <strong class="text-white/60">codice etico professionale</strong> e della riservatezza. Gli incontri si svolgono nel pieno rispetto della privacy della persona. Il counselor è tenuto al segreto professionale su tutto ciò che emerge durante gli incontri.
+        </p>
+        <p class="m-0">
+          I contenuti presenti su questo sito hanno finalità informativa e non costituiscono consulenza professionale, diagnosi o trattamento. L'utilizzo del sito e dei servizi offerti non instaura un rapporto professionale al di fuori degli incontri concordati.
+        </p>
+      </div>
+    </details>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <span class="text-white/30 text-xs">&copy; {new Date().getFullYear()} Christian Di Lorenzo — Counselor Professionista. Tutti i diritti riservati.</span>
+      <div class="flex items-center gap-5">
+        <a href="/legal/privacy-policy" class="text-white/30 text-xs hover:text-white/60 transition-colors">Privacy Policy</a>
+        <a href="/legal/cookie-policy" class="text-white/30 text-xs hover:text-white/60 transition-colors">Cookie Policy</a>
       </div>
     </div>
+
   </div>
 </footer>
