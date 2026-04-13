@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: vincenzopetrone/cridilorenzo-astro
+  repo: xlagrangex/cridilorenzo-astro
   branch: main
 
 media_folder: "public/images/blog"
