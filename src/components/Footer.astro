@@ -29,7 +29,7 @@ const pageLinks = [
     <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
       <!-- Left: Newsletter in box gradient -->
       <div class="flex-1 rounded-[20px] p-7 md:p-8" style="background: linear-gradient(135deg, #1a7a6f 0%, #2a9d8f 40%, #3bbfad 100%);">
-        <h3 class="text-white text-[1.8rem] font-medium mb-3">Iscriviti alla <span class="font-[family-name:var(--font-serif)] italic text-[2rem]">newsletter</span></h3>
+        <h3 class="text-white text-[1.8rem] font-medium mb-3">Iscriviti alla newsletter</h3>
         <p class="text-white/80 text-base leading-[155%] mb-5">
           Ricevi gratuitamente la mini-guida all'interpretazione dei sogni e scopri come ascoltare il linguaggio della tua anima.
         </p>
@@ -102,7 +102,7 @@ const pageLinks = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <!-- Pagine -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-base font-medium mb-3"><span class="font-[family-name:var(--font-serif)] italic text-lg">Pagine</span></h4>
+        <h4 class="text-white font-medium mb-3"><span class="font-[family-name:var(--font-serif)] italic text-xl">Pagine</span></h4>
         <div class="grid grid-cols-2 gap-2">
           {pageLinks.map((link) => (
             <a href={link.href} class="group relative overflow-clip h-[24px]">
@@ -115,7 +115,7 @@ const pageLinks = [
 
       <!-- Contatti -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-base font-medium mb-4"><span class="font-[family-name:var(--font-serif)] italic text-lg">Contatti</span></h4>
+        <h4 class="text-white font-medium mb-4"><span class="font-[family-name:var(--font-serif)] italic text-xl">Contatti</span></h4>
         <div class="flex flex-col gap-3">
           <a href="mailto:info@cridilorenzo.com" class="flex items-center gap-2.5 text-white/70 text-sm hover:text-white transition-colors">
             <svg class="w-4 h-4 opacity-50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
@@ -139,7 +139,7 @@ const pageLinks = [
 
       <!-- Dove sono -->
       <div class="border border-white/10 rounded-[15px] p-5">
-        <h4 class="text-white text-base font-medium mb-4"><span class="font-[family-name:var(--font-serif)] italic text-lg">Dove sono</span></h4>
+        <h4 class="text-white font-medium mb-4"><span class="font-[family-name:var(--font-serif)] italic text-xl">Dove sono</span></h4>
         <div class="flex flex-col gap-3">
           <span class="flex items-center gap-2.5 text-white/70 text-sm">
             <svg class="w-4 h-4 opacity-50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
@@ -175,14 +175,17 @@ const pageLinks = [
       </div>
     </details>
 
-    <!-- Copyright -->
+    <!-- Copyright + iubenda -->
     <div class="border-t border-white/10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       <span class="text-white/40 text-xs">&copy; {new Date().getFullYear()} Christian Di Lorenzo — Counselor Professionista. Tutti i diritti riservati.</span>
       <div class="flex items-center gap-4">
-        <a href="/legal/privacy-policy" class="text-white/40 text-xs hover:text-white/70 transition-colors">Privacy Policy</a>
-        <a href="/legal/cookie-policy" class="text-white/40 text-xs hover:text-white/70 transition-colors">Cookie Policy</a>
+        <a href="https://www.iubenda.com/privacy-policy/19514849" class="iubenda-white iubenda-noiframe iubenda-embed text-white/40 text-xs hover:text-white/70 transition-colors" title="Privacy Policy">Privacy Policy</a>
+        <a href="https://www.iubenda.com/privacy-policy/19514849/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed text-white/40 text-xs hover:text-white/70 transition-colors" title="Cookie Policy">Cookie Policy</a>
       </div>
     </div>
+    <script is:inline>
+      (function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);
+    </script>
 
   </div>
 </footer>
