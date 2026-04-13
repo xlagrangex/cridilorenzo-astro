@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 import SmoothScroll from "../components/react/SmoothScroll.tsx";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
@@ -29,6 +30,7 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
     <ClientRouter />
+    <Analytics />
   </head>
   <body>
     <SmoothScroll client:load />

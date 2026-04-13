@@ -130,14 +130,24 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Esegui tutto in parallelo
-    await Promise.all([sheetPromise, notifyPromise, confirmPromise].filter(Boolean));
+    const results = await Promise.allSettled([sheetPromise, notifyPromise, confirmPromise].filter(Boolean));
+
+    // Log errori per debug
+    const errors = results
+      .filter((r): r is PromiseRejectedResult => r.status === "rejected")
+      .map((r) => r.reason?.toString());
+
+    if (errors.length > 0) {
+      console.error("Contact API errors:", errors);
+    }
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch {
-    return new Response(JSON.stringify({ success: false }), {
+  } catch (err) {
+    console.error("Contact API crash:", err);
+    return new Response(JSON.stringify({ success: false, error: String(err) }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
