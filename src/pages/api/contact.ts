@@ -15,26 +15,33 @@ export const POST: APIRoute = async ({ request }) => {
     const message = data.get("message")?.toString() || "";
     const tipo = data.get("tipo")?.toString() || "Contatto";
 
-    const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${AIRTABLE_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        records: [{
-          fields: {
-            Nome: name,
-            Email: email,
-            Telefono: phone,
-            Messaggio: message,
-            Tipo: tipo,
-            Data: new Date().toISOString(),
-            Letto: false,
-          },
-        }],
-      }),
-    });
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
+    const headers = {
+      Authorization: `Bearer ${AIRTABLE_TOKEN}`,
+      "Content-Type": "application/json",
+    };
+
+    // Campi base
+    const fields: Record<string, any> = {
+      Nome: name,
+      Email: email,
+      Data: new Date().toISOString().split("T")[0],
+    };
+    if (phone) fields.Telefono = phone;
+    if (message) fields.Messaggio = message;
+
+    // Primo tentativo con Tipo e Letto
+    let body: any = { records: [{ fields: { ...fields, Tipo: tipo, Letto: false } }] };
+    let res = await fetch(url, { method: "POST", headers, body: JSON.stringify(body) });
+
+    // Se campo sconosciuto, riprova solo con i campi base
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      if (err?.error?.type === "UNKNOWN_FIELD_NAME") {
+        body = { records: [{ fields }] };
+        res = await fetch(url, { method: "POST", headers, body: JSON.stringify(body) });
+      }
+    }
 
     if (!res.ok) {
       const err = await res.text();
