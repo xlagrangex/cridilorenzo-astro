@@ -24,9 +24,11 @@ const pageLinks = [
         <p class="text-white text-base leading-[155%] mb-6 opacity-80">
           Ricevi gratuitamente la mini-guida all'interpretazione dei sogni e scopri come ascoltare il linguaggio della tua anima.
         </p>
-        <form class="flex flex-col gap-3 mt-6">
+        <form id="newsletter-form" class="flex flex-col gap-3 mt-6">
+          <input type="hidden" name="tipo" value="Newsletter" />
           <input
             type="email"
+            name="email"
             placeholder="Indirizzo email"
             required
             class="bg-white/10 border border-white/10 rounded-[10px] px-5 py-3 text-white placeholder:text-white/50 text-base focus:border-white/40 outline-none"
@@ -39,6 +41,30 @@ const pageLinks = [
             Ricevi la guida
           </button>
         </form>
+        <div id="newsletter-success" class="hidden mt-4 rounded-[10px] bg-[#2a9d8f] p-4 text-center text-white text-sm">
+          Grazie! Controlla la tua email.
+        </div>
+
+        <script>
+          document.getElementById("newsletter-form")?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const btn = form.querySelector("button") as HTMLButtonElement;
+            btn.textContent = "Invio...";
+            btn.disabled = true;
+            try {
+              const fd = new FormData(form);
+              fd.set("name", "Newsletter");
+              const res = await fetch("/api/contact", { method: "POST", body: fd });
+              if (res.ok) {
+                form.classList.add("hidden");
+                document.getElementById("newsletter-success")?.classList.remove("hidden");
+              }
+            } catch {}
+            btn.textContent = "Ricevi la guida";
+            btn.disabled = false;
+          });
+        </script>
       </div>
 
       <!-- Right: Social links -->

@@ -478,6 +478,7 @@ const puntiChiave = [
         <!-- Form -->
         <div class="w-full max-w-md">
           <form id="contact-form" class="flex flex-col gap-4" method="POST" action="/api/contact">
+            <input type="hidden" name="tipo" value="Contatto" />
             <input type="text" name="name" placeholder="Nome" required class="contact-field" />
             <input type="email" name="email" placeholder="La tua email" required class="contact-field" />
             <input type="tel" name="phone" placeholder="Cellulare / Whatsapp" required class="contact-field" />
