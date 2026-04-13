@@ -13,41 +13,58 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response("Missing code", { status: 400 });
   }
 
-  // Exchange code for token
-  const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      code,
-    }),
-  });
+  try {
+    const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        code,
+      }),
+    });
 
-  const tokenData = await tokenRes.json();
+    const tokenData = await tokenRes.json();
 
-  // Send token back to Decap CMS via postMessage
-  const content = `
-    <html><body><script>
-      (function() {
-        function recieveMessage(e) {
-          console.log("recieveMessage %o", e);
-          window.opener.postMessage(
-            'authorization:github:success:${JSON.stringify({ token: tokenData.access_token, provider: "github" })}',
-            e.origin
-          );
-          window.removeEventListener("message", recieveMessage, false);
-        }
-        window.addEventListener("message", recieveMessage, false);
-        window.opener.postMessage("authorizing:github", "*");
-      })();
-    </script></body></html>
-  `;
+    if (tokenData.error) {
+      return new Response(`<html><body><h2>Errore: ${tokenData.error_description}</h2><p><a href="/admin/">Torna all'admin</a></p></body></html>`, {
+        headers: { "Content-Type": "text/html" },
+      });
+    }
 
-  return new Response(content, {
-    headers: { "Content-Type": "text/html" },
-  });
+    const token = tokenData.access_token;
+
+    const html = `<!DOCTYPE html>
+<html>
+<head><title>Autorizzazione...</title></head>
+<body>
+<script>
+(function() {
+  var token = "${token}";
+  var provider = "github";
+
+  function sendMessage(e) {
+    var msg = "authorization:" + provider + ":success:" + JSON.stringify({ token: token, provider: provider });
+    window.opener.postMessage(msg, e.origin);
+    window.removeEventListener("message", sendMessage);
+  }
+
+  window.addEventListener("message", sendMessage);
+  window.opener.postMessage("authorizing:" + provider, "*");
+})();
+</script>
+</body>
+</html>`;
+
+    return new Response(html, {
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
+  } catch (err) {
+    return new Response(`<html><body><h2>Errore di connessione</h2><p>${err}</p><p><a href="/admin/">Torna all'admin</a></p></body></html>`, {
+      headers: { "Content-Type": "text/html" },
+    });
+  }
 };
