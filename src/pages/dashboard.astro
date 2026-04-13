@@ -74,15 +74,23 @@ export const prerender = false;
 
   <!-- Dashboard -->
   <div class="dashboard" id="dashboard-section">
+    <!-- Nav principale -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
+      <div style="display:flex; gap:8px;">
+        <button class="dash-tab active" id="nav-contatti" onclick="showSection('contatti')">Contatti</button>
+        <button class="dash-tab" id="nav-blog" onclick="showSection('blog')">Blog</button>
+      </div>
+      <button class="logout-btn" id="logout-btn">Esci</button>
+    </div>
+
+    <!-- SEZIONE CONTATTI -->
+    <div id="section-contatti">
     <div class="dash-header">
       <h1>Contatti ricevuti</h1>
-      <div style="display:flex; gap:12px; align-items:center;">
-        <div class="dash-tabs">
-          <button class="dash-tab active" data-tipo="">Tutti</button>
-          <button class="dash-tab" data-tipo="Contatto">Contatti</button>
-          <button class="dash-tab" data-tipo="Newsletter">Newsletter</button>
-        </div>
-        <button class="logout-btn" id="logout-btn">Esci</button>
+      <div class="dash-tabs">
+        <button class="dash-tab active" data-tipo="">Tutti</button>
+        <button class="dash-tab" data-tipo="Contatto">Contatti</button>
+        <button class="dash-tab" data-tipo="Newsletter">Newsletter</button>
       </div>
     </div>
 
@@ -111,6 +119,48 @@ export const prerender = false;
         </tbody>
       </table>
     </div>
+    </div><!-- /section-contatti -->
+
+    <!-- SEZIONE BLOG -->
+    <div id="section-blog" style="display:none;">
+      <div class="dash-header">
+        <h1>Gestione Blog</h1>
+        <button class="dash-tab" onclick="showEditor()" style="background:#2a9d8f;color:white;border-color:#2a9d8f;">+ Nuovo articolo</button>
+      </div>
+
+      <!-- Lista post -->
+      <div id="blog-list" class="table-wrap">
+        <table>
+          <thead><tr><th>Titolo</th><th>Data</th><th>Stato</th><th>Azioni</th></tr></thead>
+          <tbody id="blog-table-body"><tr><td colspan="4" class="empty">Caricamento...</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Editor -->
+      <div id="blog-editor" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h2 style="font-size:1.25rem;" id="editor-title-label">Nuovo articolo</h2>
+          <button class="logout-btn" onclick="hideEditor()">← Torna alla lista</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <input id="ed-title" placeholder="Titolo dell'articolo" style="padding:12px 16px;border:1px solid #e4e4e4;border-radius:10px;font-size:1rem;background:white;">
+          <input id="ed-desc" placeholder="Descrizione SEO (150-160 caratteri)" style="padding:12px 16px;border:1px solid #e4e4e4;border-radius:10px;font-size:0.9rem;background:white;">
+          <div style="display:flex;gap:12px;">
+            <input id="ed-date" type="date" style="padding:10px 14px;border:1px solid #e4e4e4;border-radius:10px;font-size:0.9rem;background:white;flex:1;">
+            <input id="ed-tags" placeholder="Tag (separati da virgola)" style="padding:10px 14px;border:1px solid #e4e4e4;border-radius:10px;font-size:0.9rem;background:white;flex:2;">
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <input id="ed-draft" type="checkbox"><label for="ed-draft" style="font-size:0.85rem;color:#929292;">Bozza (non pubblicare)</label>
+          </div>
+          <textarea id="ed-body" placeholder="Contenuto dell'articolo (Markdown)&#10;&#10;Usa ## per i titoli delle sezioni&#10;Usa **grassetto** per enfatizzare&#10;Usa > per le citazioni" style="padding:16px;border:1px solid #e4e4e4;border-radius:10px;font-size:0.9rem;min-height:400px;font-family:monospace;line-height:1.6;background:white;resize:vertical;"></textarea>
+          <div style="display:flex;gap:12px;">
+            <button onclick="savePost()" style="flex:1;padding:14px;background:#2a9d8f;color:white;border:none;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;">Pubblica</button>
+          </div>
+        </div>
+        <input type="hidden" id="ed-slug">
+        <input type="hidden" id="ed-sha">
+      </div>
+    </div><!-- /section-blog -->
   </div>
 
   <script>
@@ -197,6 +247,117 @@ export const prerender = false;
           <td style="white-space:nowrap">${date}</td>
         </tr>`;
       }).join("");
+    }
+
+    // ===== BLOG =====
+    function showSection(s) {
+      document.getElementById("section-contatti").style.display = s === "contatti" ? "block" : "none";
+      document.getElementById("section-blog").style.display = s === "blog" ? "block" : "none";
+      document.getElementById("nav-contatti").classList.toggle("active", s === "contatti");
+      document.getElementById("nav-blog").classList.toggle("active", s === "blog");
+      if (s === "blog") loadBlog();
+    }
+
+    function showEditor(post) {
+      document.getElementById("blog-list").style.display = "none";
+      document.getElementById("blog-editor").style.display = "block";
+      if (post) {
+        document.getElementById("editor-title-label").textContent = "Modifica articolo";
+        document.getElementById("ed-title").value = post.frontmatter.title || "";
+        document.getElementById("ed-desc").value = post.frontmatter.description || "";
+        document.getElementById("ed-date").value = post.frontmatter.date || "";
+        document.getElementById("ed-tags").value = (post.frontmatter.tags || "").replace(/[\[\]"]/g, "");
+        document.getElementById("ed-draft").checked = post.draft;
+        document.getElementById("ed-body").value = post.body || "";
+        document.getElementById("ed-slug").value = post.slug;
+        document.getElementById("ed-sha").value = post.sha;
+      } else {
+        document.getElementById("editor-title-label").textContent = "Nuovo articolo";
+        document.getElementById("ed-title").value = "";
+        document.getElementById("ed-desc").value = "";
+        document.getElementById("ed-date").value = new Date().toISOString().split("T")[0];
+        document.getElementById("ed-tags").value = "";
+        document.getElementById("ed-draft").checked = false;
+        document.getElementById("ed-body").value = "";
+        document.getElementById("ed-slug").value = "";
+        document.getElementById("ed-sha").value = "";
+      }
+    }
+
+    function hideEditor() {
+      document.getElementById("blog-list").style.display = "block";
+      document.getElementById("blog-editor").style.display = "none";
+      loadBlog();
+    }
+
+    var blogPosts = [];
+
+    async function loadBlog() {
+      var res = await fetch("/api/blog");
+      if (!res.ok) return;
+      var data = await res.json();
+      blogPosts = data.posts || [];
+      var tb = document.getElementById("blog-table-body");
+
+      if (blogPosts.length === 0) {
+        tb.innerHTML = '<tr><td colspan="4" class="empty">Nessun articolo</td></tr>';
+        return;
+      }
+
+      tb.innerHTML = blogPosts.map(function(p, i) {
+        var date = p.date ? new Date(p.date).toLocaleDateString("it-IT", {day:"2-digit",month:"short",year:"numeric"}) : "—";
+        return '<tr>' +
+          '<td><strong>' + (p.title || "—") + '</strong></td>' +
+          '<td style="white-space:nowrap">' + date + '</td>' +
+          '<td>' + (p.draft ? '<span class="badge badge-unread">Bozza</span>' : '<span class="badge badge-contatto">Pubblicato</span>') + '</td>' +
+          '<td><button onclick="editPost(' + i + ')" style="padding:4px 12px;border:1px solid #e4e4e4;border-radius:6px;background:white;cursor:pointer;font-size:0.8rem;margin-right:4px;">Modifica</button>' +
+          '<button onclick="deletePost(' + i + ')" style="padding:4px 12px;border:1px solid #e4e4e4;border-radius:6px;background:white;cursor:pointer;font-size:0.8rem;color:#e53e3e;">Elimina</button></td>' +
+          '</tr>';
+      }).join("");
+    }
+
+    function editPost(i) { showEditor(blogPosts[i]); }
+
+    async function deletePost(i) {
+      if (!confirm("Sei sicuro di voler eliminare questo articolo?")) return;
+      var p = blogPosts[i];
+      await fetch("/api/blog", {
+        method: "DELETE",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({filename: p.filename, sha: p.sha})
+      });
+      loadBlog();
+    }
+
+    async function savePost() {
+      var btn = document.querySelector('#blog-editor button[onclick="savePost()"]');
+      btn.textContent = "Salvataggio...";
+      btn.disabled = true;
+
+      var res = await fetch("/api/blog", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({
+          title: document.getElementById("ed-title").value,
+          description: document.getElementById("ed-desc").value,
+          date: document.getElementById("ed-date").value,
+          tags: document.getElementById("ed-tags").value,
+          draft: document.getElementById("ed-draft").checked,
+          body: document.getElementById("ed-body").value,
+          slug: document.getElementById("ed-slug").value,
+          sha: document.getElementById("ed-sha").value,
+        })
+      });
+
+      btn.textContent = "Pubblica";
+      btn.disabled = false;
+
+      if (res.ok) {
+        alert("Articolo salvato! Il sito si aggiornerà in 1-2 minuti.");
+        hideEditor();
+      } else {
+        alert("Errore nel salvataggio.");
+      }
     }
   </script>
 </body>
