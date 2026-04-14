@@ -45,20 +45,33 @@ export function textHighlightOnScroll(
  * Fade-in dal basso con scroll
  */
 export function fadeInUp(selector: string) {
-  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
-    gsap.set(el, { y: 40, opacity: 0 });
+  gsap.utils.toArray<HTMLElement>(selector).forEach((el, i) => {
+    const rect = el.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight;
 
-    gsap.to(el, {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-    });
+    if (isInViewport) {
+      // Già visibile — anima subito con delay scaglionato
+      gsap.fromTo(el,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, delay: i * 0.1, ease: "power3.out" }
+      );
+    } else {
+      // Fuori viewport — anima allo scroll
+      gsap.fromTo(el,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
   });
 }
 
