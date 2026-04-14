@@ -508,27 +508,55 @@ h4 {
    (Astro View Transitions / ClientRouter)
    ═══════════════════════════════════════════ */
 
-@keyframes fade-out {
-  0% { opacity: 1; filter: blur(0px); }
-  100% { opacity: 0; filter: blur(6px); }
+@keyframes ethereal-blur-out {
+  0% {
+    filter: blur(0px) brightness(1) saturate(1);
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    filter: blur(50px) brightness(0.4) saturate(0.3);
+    opacity: 0;
+    transform: scale(1.04);
+  }
 }
 
-@keyframes fade-in {
-  0% { opacity: 0; filter: blur(6px); }
-  100% { opacity: 1; filter: blur(0px); }
+@keyframes ethereal-blur-in {
+  0% {
+    filter: blur(50px) brightness(0.4) saturate(0.3);
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    filter: blur(0px) brightness(1) saturate(1);
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 ::view-transition-old(root) {
-  animation: fade-out 0.25s ease-out both;
+  animation: ethereal-blur-out 0.7s cubic-bezier(0.76, 0, 0.24, 1) both;
 }
 
 ::view-transition-new(root) {
-  animation: fade-in 0.3s ease-in both;
+  animation: ethereal-blur-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.2s;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0.9s;
 }
 
 ::view-transition-image-pair(root) {
   isolation: auto;
+  mix-blend-mode: normal;
 }
+
+/* Nasconde la nuova pagina finché l'animazione non parte */
+::view-transition-new(root) {
+  opacity: 0;
+}
+
 
 /* ═══════════ TOAST NOTIFICATION ═══════════ */
 .toast {
