@@ -575,8 +575,8 @@ const strumenti = [
 </script>
 
 <script is:inline>
-  // Contact form — invio async con toast (inline per garantire esecuzione)
-  document.addEventListener("DOMContentLoaded", function() {
+  // Contact form — invio async con toast
+  document.addEventListener("astro:page-load", function() {
     var form = document.getElementById("contact-form");
     if (!form) return;
 

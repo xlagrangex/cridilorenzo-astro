@@ -65,7 +65,7 @@ const {
       /* Il tooltip è sopra il btn, usiamo JS */
     </style>
     <script is:inline>
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("astro:page-load", function() {
         var btn = document.querySelector(".wa-btn");
         var tip = document.querySelector(".wa-tooltip");
         if (!btn || !tip) return;
