@@ -45,20 +45,24 @@ export function textHighlightOnScroll(
  * Fade-in dal basso con scroll
  */
 export function fadeInUp(selector: string) {
-  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
-    gsap.set(el, { y: 40, opacity: 0 });
+  if (!("IntersectionObserver" in window)) return;
 
-    gsap.to(el, {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-    });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.05, rootMargin: "0px 0px -5% 0px" }
+  );
+
+  document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+    if (!el.classList.contains("is-visible")) {
+      observer.observe(el);
+    }
   });
 }
 
