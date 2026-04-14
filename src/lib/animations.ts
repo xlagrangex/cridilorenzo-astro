@@ -45,24 +45,21 @@ export function textHighlightOnScroll(
  * Fade-in dal basso con scroll
  */
 export function fadeInUp(selector: string) {
-  if (!("IntersectionObserver" in window)) return;
+  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
+    // Reset esplicito prima di animare (fix View Transitions)
+    gsap.set(el, { y: 60, opacity: 0 });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          (entry.target as HTMLElement).classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.05, rootMargin: "0px 0px -5% 0px" }
-  );
-
-  document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
-    if (!el.classList.contains("is-visible")) {
-      observer.observe(el);
-    }
+    gsap.to(el, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
   });
 }
 
