@@ -35,6 +35,19 @@ export default function HamburgerMenu() {
         onClick={() => setOpen(false)}
       />
 
+      {/* Close button — dentro il portal, sempre cliccabile */}
+      <button
+        onClick={() => setOpen(false)}
+        className={`fixed top-5 right-5 z-[200] w-10 h-10 flex items-center justify-center transition-opacity duration-300 ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        aria-label="Chiudi menu"
+      >
+        <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
       {/* Panel */}
       <div
         className={`fixed right-0 top-0 z-[160] flex h-full w-full max-w-md flex-col justify-center gap-6 bg-[#15141a] px-10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
