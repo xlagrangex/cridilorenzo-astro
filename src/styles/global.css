@@ -593,6 +593,24 @@ h4 {
   100% { opacity: 0; transform: translateY(30px) scale(0.95); }
 }
 
+/* ═══════════ MOBILE: hover → focus/active for expandable items ═══════════ */
+@media (hover: none) {
+  /* Espandibili al tap su mobile — percorso + counselor */
+  .group:focus-within [class*="grid-rows-"],
+  .group\/item:focus [class*="grid-rows-"] {
+    grid-template-rows: 1fr !important;
+  }
+}
+
+/* Focus-within per gli espandibili */
+.group:focus-within .group-hover\:grid-rows-\[1fr\] {
+  grid-template-rows: 1fr;
+}
+
+.group\/item:focus .group-hover\/item\:grid-rows-\[1fr\] {
+  grid-template-rows: 1fr;
+}
+
 /* Menu open */
 #site-content {
   transition: filter 0.5s ease;

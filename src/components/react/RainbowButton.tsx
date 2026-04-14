@@ -36,7 +36,7 @@ export default function RainbowButton({ children, href, className = "" }: Rainbo
       />
 
       {/* Inner: il vero bottone scuro */}
-      <span className="relative z-[2] flex h-12 items-center gap-2 rounded-[10px] bg-[#15141a] px-6 py-3 text-base font-semibold text-white">
+      <span className="relative z-[2] flex h-10 md:h-12 items-center gap-2 rounded-[10px] bg-[#15141a] px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-semibold text-white whitespace-nowrap">
         {children}
       </span>
 
