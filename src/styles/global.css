@@ -549,12 +549,6 @@ h4 {
 
 ::view-transition-image-pair(root) {
   isolation: auto;
-  mix-blend-mode: normal;
-}
-
-/* Nasconde la nuova pagina finché l'animazione non parte */
-::view-transition-new(root) {
-  opacity: 0;
 }
 
 
