@@ -31,6 +31,12 @@ const strumenti = [
   { num: "4", title: "Scrittura espressiva e di consapevolezza", desc: "La scrittura può diventare uno spazio di ascolto interiore, per dare forma a emozioni, immagini e vissuti.", icon: "/images/Autograph_1Autograph.png" },
 ];
 
+const puntiChiave = [
+  { title: "Durata incontro", value: "45 minuti", icon: "/images/Timer.png" },
+  { title: "Modalità", value: "Completamente online", icon: "/images/System-Information.png" },
+  { title: "Privacy", value: "Riservatezza garantita", icon: "/images/Privacy.png" },
+  { title: "Costo", value: "70€ a incontro", icon: "/images/Cash.png" },
+];
 ---
 
 <Layout title="Christian Dilorenzo - Counselor">
@@ -375,68 +381,67 @@ const strumenti = [
     </div>
   </section>
 
-  <!-- ═══════════ CONFRONTO — Accordion + Tabella ═══════════ -->
+  <!-- ═══════════ PUNTI CHIAVE ═══════════ -->
+  <section class="bg-[#ebe7e0] py-16 md:py-20">
+    <div class="wrapper px-4 md:px-8 lg:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ PUNTI CHIAVE ]</p>
+        <h2 class="text-center">Trasparenza & Riservatezza</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-0 w-full max-w-[80%] mx-auto mb-10" data-animate="fade-in-up">
+        {puntiChiave.map((pk) => (
+          <div class="flex flex-col items-center text-center p-4 md:p-8">
+            <div class="icon-rounded">
+              <img src={pk.icon} alt="" class="w-7 h-7" loading="lazy" />
+            </div>
+            <h3 class="text-base font-medium text-[#3e3e3e] mb-2">{pk.title}</h3>
+            <p class="text-sm text-[#3e3e3e] m-0">{pk.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center">
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONFRONTO ═══════════ -->
   <section class="py-16 md:py-24">
     <div class="wrapper px-4 md:px-8 lg:px-12">
-      <div class="max-w-4xl mx-auto" data-animate="fade-in-up">
+      <div class="text-center mb-12" data-animate="fade-in-up">
+        <p class="sub-title mb-3">[ QUALE PERCORSO FA PER TE? ]</p>
+        <h3 class="text-3xl md:text-4xl">Due approcci diversi, <span class="italic">lo stesso rispetto per la persona</span></h3>
+      </div>
 
-        <!-- Accordion trigger -->
-        <details class="group rounded-[20px] bg-[#f4f2ee] overflow-hidden">
-          <summary class="flex items-center justify-between p-8 md:p-10 cursor-pointer select-none">
-            <div>
-              <p class="sub-title mb-2">[ QUALE PERCORSO FA PER TE? ]</p>
-              <h2 class="text-2xl md:text-3xl">Psicologo o Counselor? <span class="italic">Scopri la differenza</span></h2>
-            </div>
-            <div class="flex-shrink-0 ml-6 w-10 h-10 rounded-full bg-[#ebe7e0] flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-            </div>
-          </summary>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-animate="fade-in-up">
+        <!-- Psicologo -->
+        <div class="rounded-[20px] border border-[#43495480] p-8">
+          <h3 class="text-2xl font-medium text-[#15141a] mb-4">Psicologo</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            <li class="regular-text !mb-2 !text-base">Si occupa di diagnosi e trattamento di disturbi psicologici;</li>
+            <li class="regular-text !mb-2 !text-base">Lavora in ambito clinico e sanitario;</li>
+            <li class="regular-text !mb-2 !text-base">Utilizza strumenti terapeutici e protocolli specifici;</li>
+            <li class="regular-text !mb-2 !text-base">Indicato in presenza di sintomi strutturati o sofferenza clinica;</li>
+            <li class="regular-text !mb-0 !text-base">Percorsi regolamentati e orientati alla cura;</li>
+          </ul>
+        </div>
 
-          <!-- Tabella side-by-side -->
-          <div class="px-8 md:px-10 pb-8 md:pb-10">
-            <p class="text-base mb-8 max-w-2xl">Due approcci diversi, lo stesso rispetto per la persona. Ecco cosa li distingue:</p>
-
-            <!-- Header tabella -->
-            <div class="grid grid-cols-[1fr_100px_100px] md:grid-cols-[1fr_140px_140px] gap-0 mb-2">
-              <div></div>
-              <div class="text-center font-medium text-sm text-[#929292] pb-3">Psicologo</div>
-              <div class="text-center font-medium text-sm text-[#2a9d8f] pb-3">Counselor</div>
-            </div>
-
-            <!-- Righe -->
-            {[
-              { label: "Diagnosi e trattamento disturbi", psi: true, cou: false },
-              { label: "Ambito clinico e sanitario", psi: true, cou: false },
-              { label: "Protocolli terapeutici", psi: true, cou: false },
-              { label: "Sofferenza clinica strutturata", psi: true, cou: false },
-              { label: "Ascolto e accompagnamento", psi: false, cou: true },
-              { label: "Consapevolezza e crescita personale", psi: false, cou: true },
-              { label: "Comprensione schemi e blocchi emotivi", psi: false, cou: true },
-              { label: "Per chi vuole conoscersi meglio", psi: false, cou: true },
-              { label: "Equilibrio e scelte personali", psi: false, cou: true },
-            ].map((row, i) => (
-              <div class={`grid grid-cols-[1fr_100px_100px] md:grid-cols-[1fr_140px_140px] gap-0 items-center ${i % 2 === 0 ? 'bg-white' : 'bg-[#ebe7e0]/50'} rounded-lg`}>
-                <div class="py-3 px-4 text-sm">{row.label}</div>
-                <div class="py-3 text-center">
-                  {row.psi
-                    ? <svg class="w-5 h-5 mx-auto text-[#15141a]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                    : <span class="text-[#d8d0c1] text-lg">—</span>
-                  }
-                </div>
-                <div class="py-3 text-center">
-                  {row.cou
-                    ? <svg class="w-5 h-5 mx-auto text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                    : <span class="text-[#d8d0c1] text-lg">—</span>
-                  }
-                </div>
-              </div>
-            ))}
-
-            <!-- Nota -->
-            <p class="text-xs text-[#929292] mt-6 text-center">In caso di dubbio, il colloquio conoscitivo gratuito serve esattamente a capire insieme quale percorso è più adatto a te.</p>
+        <!-- Counselor -->
+        <div class="rounded-[20px] border border-[#43495480] p-8 bg-[#ebe7e0] bg-cover bg-center relative overflow-hidden" style="background-image: url('/images/bg-process_1bg-process.webp');">
+          <div class="absolute inset-0 bg-[#15141a]/60"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-medium text-white mb-4">Counselor</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li class="!text-base !mb-2 text-white/90">Offre uno spazio di <strong class="text-white">ascolto e accompagnamento</strong> non clinico;</li>
+              <li class="!text-base !mb-2 text-white/90">Lavora su <strong class="text-white">consapevolezza</strong>, <strong class="text-white">crescita personale</strong> e orientamento;</li>
+              <li class="!text-base !mb-2 text-white/90">Aiuta a <strong class="text-white">comprendere</strong> schemi e <strong class="text-white">blocchi emotivi</strong>;</li>
+              <li class="!text-base !mb-2 text-white/90">Si rivolge a persone che desiderano conoscersi meglio;</li>
+              <li class="!text-base !mb-0 text-white/90">Percorsi orientati all'equilibrio e alle scelte personali;</li>
+            </ul>
           </div>
-        </details>
-
+        </div>
       </div>
     </div>
   </section>
