@@ -618,5 +618,6 @@ h4 {
 
 body.menu-open #site-content {
   filter: blur(15px);
+  pointer-events: none;
 }
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 const navLinks = [
   { label: "Chi sono", href: "/#chi-sono" },
@@ -13,34 +14,22 @@ const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/sched
 
 export default function HamburgerMenu() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
     return () => document.body.classList.remove("menu-open");
   }, [open]);
 
-  return (
+  const menuContent = (
     <>
-      <button
-        onClick={() => setOpen(!open)}
-        className="relative z-[200] flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
-        aria-label={open ? "Chiudi menu" : "Apri menu"}
-      >
-        <span
-          className={`block h-[2px] w-6 bg-[#15141a] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            open ? "translate-y-[5.5px] rotate-45 !bg-white" : ""
-          }`}
-        />
-        <span
-          className={`block h-[2px] w-6 bg-[#15141a] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            open ? "-translate-y-[5.5px] -rotate-45 !bg-white" : ""
-          }`}
-        />
-      </button>
-
       {/* Overlay */}
       <div
-        className={`fixed inset-0 z-[150] bg-[#17253f]/90 backdrop-blur-xl transition-opacity duration-500 ${
+        className={`fixed inset-0 z-[150] bg-[#15141a]/80 backdrop-blur-md transition-opacity duration-500 ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setOpen(false)}
@@ -48,7 +37,7 @@ export default function HamburgerMenu() {
 
       {/* Panel */}
       <div
-        className={`fixed right-0 top-0 z-[160] flex h-full w-full max-w-md flex-col justify-center gap-6 bg-[#17253f] px-10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed right-0 top-0 z-[160] flex h-full w-full max-w-md flex-col justify-center gap-6 bg-[#15141a] px-10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -72,6 +61,31 @@ export default function HamburgerMenu() {
           Prenota un colloquio gratuito
         </a>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Hamburger button — resta nella navbar */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="relative z-[200] flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
+        aria-label={open ? "Chiudi menu" : "Apri menu"}
+      >
+        <span
+          className={`block h-[2px] w-6 bg-[#15141a] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            open ? "translate-y-[5.5px] rotate-45 !bg-white" : ""
+          }`}
+        />
+        <span
+          className={`block h-[2px] w-6 bg-[#15141a] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            open ? "-translate-y-[5.5px] -rotate-45 !bg-white" : ""
+          }`}
+        />
+      </button>
+
+      {/* Portal: overlay + panel renderizzati su document.body, fuori da #site-content */}
+      {mounted && createPortal(menuContent, document.body)}
     </>
   );
 }
