@@ -46,18 +46,17 @@ export function textHighlightOnScroll(
  */
 export function fadeInUp(selector: string) {
   gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
-    // Reset esplicito prima di animare (fix View Transitions)
-    gsap.set(el, { y: 60, opacity: 0 });
+    gsap.set(el, { y: 40, opacity: 0 });
 
     gsap.to(el, {
       y: 0,
       opacity: 1,
-      duration: 1,
+      duration: 0.8,
       ease: "power3.out",
       scrollTrigger: {
         trigger: el,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
+        start: "top 90%",
+        toggleActions: "play none none none",
       },
     });
   });
