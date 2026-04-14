@@ -31,12 +31,6 @@ const strumenti = [
   { num: "4", title: "Scrittura espressiva e di consapevolezza", desc: "La scrittura può diventare uno spazio di ascolto interiore, per dare forma a emozioni, immagini e vissuti.", icon: "/images/Autograph_1Autograph.png" },
 ];
 
-const puntiChiave = [
-  { title: "Durata incontro", value: "45 minuti", icon: "/images/Timer.png" },
-  { title: "Modalità", value: "Completamente online", icon: "/images/System-Information.png" },
-  { title: "Privacy", value: "Riservatezza garantita", icon: "/images/Privacy.png" },
-  { title: "Costo", value: "70€ a incontro", icon: "/images/Cash.png" },
-];
 ---
 
 <Layout title="Christian Dilorenzo - Counselor">
@@ -381,28 +375,30 @@ const puntiChiave = [
     </div>
   </section>
 
-  <!-- ═══════════ PUNTI CHIAVE ═══════════ -->
-  <section class="bg-[#ebe7e0] py-16 md:py-20">
-    <div class="wrapper px-4 md:px-8 lg:px-12">
-      <div class="text-center max-w-3xl mx-auto mb-12" data-animate="fade-in-up">
-        <p class="sub-title mb-3">[ PUNTI CHIAVE ]</p>
-        <h2 class="text-center">Trasparenza & Riservatezza</h2>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-0 w-full max-w-[80%] mx-auto mb-10" data-animate="fade-in-up">
-        {puntiChiave.map((pk) => (
-          <div class="flex flex-col items-center text-center p-4 md:p-8">
-            <div class="icon-rounded">
-              <img src={pk.icon} alt="" class="w-7 h-7" loading="lazy" />
-            </div>
-            <h3 class="text-base font-medium text-[#3e3e3e] mb-2">{pk.title}</h3>
-            <p class="text-sm text-[#3e3e3e] m-0">{pk.value}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="flex justify-center">
-        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
+  <!-- ═══════════ PUNTI CHIAVE — Marquee ═══════════ -->
+  <section class="bg-[#15141a] py-5 overflow-hidden">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">45 min</strong> <span class="text-white/60">durata incontro</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">Online</strong> <span class="text-white/60">completamente</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">70€</strong> <span class="text-white/60">a incontro</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">100%</strong> <span class="text-white/60">riservatezza garantita</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-white">Primo colloquio</strong> <span class="text-[#2a9d8f]">gratuito</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">45 min</strong> <span class="text-white/60">durata incontro</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">Online</strong> <span class="text-white/60">completamente</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">70€</strong> <span class="text-white/60">a incontro</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-[#2a9d8f]">100%</strong> <span class="text-white/60">riservatezza garantita</span></span>
+        <span class="marquee-dot">·</span>
+        <span class="marquee-item"><strong class="text-white">Primo colloquio</strong> <span class="text-[#2a9d8f]">gratuito</span></span>
+        <span class="marquee-dot">·</span>
       </div>
     </div>
   </section>

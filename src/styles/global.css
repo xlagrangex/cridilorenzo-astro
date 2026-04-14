@@ -451,6 +451,42 @@ h4 {
   gap: 10px;
 }
 
+/* ═══════════ MARQUEE ═══════════ */
+.marquee-track {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  animation: marquee-scroll 25s linear infinite;
+  flex-shrink: 0;
+}
+
+.marquee-item {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+}
+
+.marquee-dot {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 1.5rem;
+  padding: 0 12px;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* Rainbow flow — flow continuo in una direzione (bottone + footer) */
 @keyframes rainbow-flow {
   0% { background-position: 0% 50%; }
