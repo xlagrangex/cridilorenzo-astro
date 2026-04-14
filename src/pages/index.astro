@@ -439,36 +439,92 @@ const strumenti = [
     <div class="wrapper px-4 md:px-8 lg:px-12">
       <div class="text-center mb-12" data-animate="fade-in-up">
         <p class="sub-title mb-3">[ QUALE PERCORSO FA PER TE? ]</p>
-        <h3 class="text-3xl md:text-4xl">Due approcci diversi, <span class="italic">lo stesso rispetto per la persona</span></h3>
+        <h2 class="text-center">Due approcci diversi, <span class="italic">lo stesso rispetto</span></h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-animate="fade-in-up">
-        <!-- Psicologo -->
-        <div class="rounded-[20px] border border-[#43495480] p-8">
-          <h3 class="text-2xl font-medium text-[#15141a] mb-4">Psicologo</h3>
-          <ul class="list-disc pl-5 space-y-2">
-            <li class="regular-text !mb-2 !text-base">Si occupa di diagnosi e trattamento di disturbi psicologici;</li>
-            <li class="regular-text !mb-2 !text-base">Lavora in ambito clinico e sanitario;</li>
-            <li class="regular-text !mb-2 !text-base">Utilizza strumenti terapeutici e protocolli specifici;</li>
-            <li class="regular-text !mb-2 !text-base">Indicato in presenza di sintomi strutturati o sofferenza clinica;</li>
-            <li class="regular-text !mb-0 !text-base">Percorsi regolamentati e orientati alla cura;</li>
+        <!-- Psicologo — neutra -->
+        <div class="rounded-[20px] bg-[#f4f2ee] p-8 border border-[#e4e4e4] transition-all duration-300 hover:shadow-lg">
+          <h3 class="text-2xl font-medium mb-6">Psicologo</h3>
+          <ul class="list-none pl-0 space-y-4">
+            <li class="flex items-start gap-3 text-base">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#e4e4e4] flex items-center justify-center">
+                <svg class="w-3 h-3 text-[#929292]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Si occupa di diagnosi e trattamento di disturbi psicologici
+            </li>
+            <li class="flex items-start gap-3 text-base">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#e4e4e4] flex items-center justify-center">
+                <svg class="w-3 h-3 text-[#929292]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Lavora in ambito clinico e sanitario
+            </li>
+            <li class="flex items-start gap-3 text-base">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#e4e4e4] flex items-center justify-center">
+                <svg class="w-3 h-3 text-[#929292]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Utilizza strumenti terapeutici e protocolli specifici
+            </li>
+            <li class="flex items-start gap-3 text-base">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#e4e4e4] flex items-center justify-center">
+                <svg class="w-3 h-3 text-[#929292]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Indicato in presenza di sintomi strutturati o sofferenza clinica
+            </li>
+            <li class="flex items-start gap-3 text-base">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#e4e4e4] flex items-center justify-center">
+                <svg class="w-3 h-3 text-[#929292]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Percorsi regolamentati e orientati alla cura
+            </li>
           </ul>
         </div>
 
-        <!-- Counselor -->
-        <div class="rounded-[20px] border border-[#43495480] p-8 bg-[#ebe7e0] bg-cover bg-center relative overflow-hidden" style="background-image: url('/images/bg-process_1bg-process.webp');">
-          <div class="absolute inset-0 bg-[#15141a]/60"></div>
-          <div class="relative z-10">
-            <h3 class="text-2xl font-medium text-white mb-4">Counselor</h3>
-            <ul class="list-disc pl-5 space-y-2">
-              <li class="!text-base !mb-2 text-white/90">Offre uno spazio di <strong class="text-white">ascolto e accompagnamento</strong> non clinico;</li>
-              <li class="!text-base !mb-2 text-white/90">Lavora su <strong class="text-white">consapevolezza</strong>, <strong class="text-white">crescita personale</strong> e orientamento;</li>
-              <li class="!text-base !mb-2 text-white/90">Aiuta a <strong class="text-white">comprendere</strong> schemi e <strong class="text-white">blocchi emotivi</strong>;</li>
-              <li class="!text-base !mb-2 text-white/90">Si rivolge a persone che desiderano conoscersi meglio;</li>
-              <li class="!text-base !mb-0 text-white/90">Percorsi orientati all'equilibrio e alle scelte personali;</li>
-            </ul>
-          </div>
+        <!-- Counselor — protagonista -->
+        <div class="rounded-[20px] bg-[#15141a] p-8 border-2 border-[#2a9d8f] relative transition-all duration-300 hover:shadow-xl hover:shadow-[#2a9d8f]/10">
+          <!-- Badge -->
+          <span class="absolute -top-3 right-8 bg-[#2a9d8f] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Il mio approccio</span>
+
+          <h3 class="text-2xl font-medium text-white mb-6">Counselor</h3>
+          <ul class="list-none pl-0 space-y-4">
+            <li class="flex items-start gap-3 text-base text-white/90">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#2a9d8f] flex items-center justify-center">
+                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Offre uno spazio di <strong class="text-white">ascolto e accompagnamento</strong> non clinico
+            </li>
+            <li class="flex items-start gap-3 text-base text-white/90">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#2a9d8f] flex items-center justify-center">
+                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Lavora su <strong class="text-white">consapevolezza</strong>, <strong class="text-white">crescita personale</strong> e orientamento
+            </li>
+            <li class="flex items-start gap-3 text-base text-white/90">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#2a9d8f] flex items-center justify-center">
+                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Aiuta a <strong class="text-white">comprendere</strong> schemi e <strong class="text-white">blocchi emotivi</strong>
+            </li>
+            <li class="flex items-start gap-3 text-base text-white/90">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#2a9d8f] flex items-center justify-center">
+                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Si rivolge a persone che desiderano conoscersi meglio
+            </li>
+            <li class="flex items-start gap-3 text-base text-white/90">
+              <span class="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-[#2a9d8f] flex items-center justify-center">
+                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              Percorsi orientati all'equilibrio e alle scelte personali
+            </li>
+          </ul>
         </div>
+      </div>
+
+      <!-- Frase conclusiva + CTA -->
+      <div class="text-center mt-10" data-animate="fade-in-up">
+        <p class="text-base max-w-xl mx-auto mb-6">Non sai quale percorso fa per te? Il colloquio conoscitivo gratuito serve esattamente a capire insieme la strada giusta.</p>
+        <a href={calendarUrl} target="_blank" class="btn-primary">Prenota un colloquio gratuito</a>
       </div>
     </div>
   </section>
