@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini-Guida all'Interpretazione dei Sogni</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: #3e3e3e;
+    background: #ffffff;
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover {
+    width: 210mm;
+    height: 297mm;
+    background: linear-gradient(160deg, #145e56 0%, #1a7a6f 25%, #2a9d8f 55%, #3bbfad 85%, #4dd4c0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -120px;
+    left: -120px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .cover-inner {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+  }
+
+  .cover-logo {
+    width: 280px;
+    margin-bottom: 55px;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+
+  .cover-ornament {
+    width: 60px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    margin: 0 auto 40px;
+    position: relative;
+  }
+
+  .cover-ornament::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 50%;
+  }
+
+  .cover-label {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.82);
+    font-style: italic;
+    margin-bottom: 55px;
+    line-height: 1.5;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 28px;
+  }
+
+  .cover-author {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.5px;
+  }
+
+  .cover-author strong {
+    color: rgba(255,255,255,0.95);
+    font-weight: 600;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .cover-diamond {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transform: rotate(45deg);
+  }
+
+  /* ===== CONTENT PAGES ===== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 50px 55px 55px;
+    page-break-after: always;
+    position: relative;
+    background: #ffffff;
+  }
+
+  /* Top accent bar */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2a9d8f, #3bbfad);
+  }
+
+  /* Page header */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8e5e0;
+  }
+
+  .page-header-logo {
+    height: 26px;
+    opacity: 0.4;
+  }
+
+  .page-header-text {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #b5b0a8;
+    font-weight: 500;
+  }
+
+  /* Chapter label */
+  .chapter-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2a9d8f;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* Chapter title */
+  .chapter-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #15141a;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  /* Teal underline under title */
+  .title-bar {
+    width: 50px;
+    height: 3px;
+    background: #2a9d8f;
+    border-radius: 2px;
+    margin-bottom: 30px;
+  }
+
+  /* Lead paragraph (italic intro) */
+  .lead {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #15141a;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+
+  /* Body text */
+  p {
+    font-size: 15px;
+    line-height: 1.78;
+    color: #3e3e3e;
+    margin-bottom: 16px;
+    text-align: justify;
+  }
+
+  /* Pull-quote block */
+  .quote {
+    background: linear-gradient(135deg, #f4f2ee 0%, #ebe7e0 100%);
+    border-left: 4px solid #2a9d8f;
+    padding: 22px 26px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quote p {
+    font-style: italic;
+    color: #15141a;
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Callout box (teal tint) */
+  .callout {
+    background: linear-gradient(135deg, #eaf8f6 0%, #d4f1ec 100%);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    position: relative;
+  }
+
+  .callout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #2a9d8f, #3bbfad);
+    border-radius: 10px 10px 0 0;
+  }
+
+  .callout p {
+    color: #15141a;
+    margin-bottom: 0;
+  }
+
+  /* Bullet list with teal dots */
+  .teal-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .teal-list li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 14px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #3e3e3e;
+  }
+
+  .teal-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: #2a9d8f;
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  /* Numbered annotation cards for Ch.6 */
+  .annotation-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    counter-reset: ann;
+  }
+
+  .annotation-list li {
+    counter-increment: ann;
+    position: relative;
+    padding: 18px 20px 18px 62px;
+    margin-bottom: 12px;
+    background: #f4f2ee;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #3e3e3e;
+  }
+
+  .annotation-list li::before {
+    content: counter(ann);
+    position: absolute;
+    left: 18px;
+    top: 17px;
+    width: 30px;
+    height: 30px;
+    background: #2a9d8f;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  /* Teaser CTA box (teal gradient) */
+  .teaser-box {
+    background: linear-gradient(160deg, #1a7a6f 0%, #2a9d8f 50%, #3bbfad 100%);
+    border-radius: 12px;
+    padding: 38px 34px;
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .teaser-box::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .teaser-box p {
+    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .teaser-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #ffffff;
+    color: #2a9d8f;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 30px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== ABOUT + CTA PAGE ===== */
+  .about-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 0;
+    page-break-after: avoid;
+    position: relative;
+    background: #ffffff;
+  }
+
+  .about-top {
+    background: linear-gradient(135deg, #f4f2ee 0%, #ebe7e0 100%);
+    padding: 50px 55px 40px;
+  }
+
+  .about-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2a9d8f, #3bbfad);
+  }
+
+  .about-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #ddd9d2;
+  }
+
+  .about-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #2a9d8f;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .about-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #15141a;
+    margin-bottom: 8px;
+  }
+
+  .about-bar {
+    width: 50px;
+    height: 3px;
+    background: #2a9d8f;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .about-top p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #3e3e3e;
+    margin-bottom: 14px;
+  }
+
+  .about-bottom {
+    padding: 36px 55px 30px;
+  }
+
+  /* CTA card */
+  .cta-card {
+    background: linear-gradient(160deg, #145e56 0%, #1a7a6f 25%, #2a9d8f 55%, #3bbfad 85%);
+    border-radius: 16px;
+    padding: 42px 38px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .cta-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-card .cta-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 26px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-main-btn {
+    display: inline-block;
+    padding: 15px 38px;
+    background: #ffffff;
+    color: #1a7a6f;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 40px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-line {
+    width: 50px;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    margin: 0 auto 22px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-contacts {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-contacts li {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .cta-contacts li strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .cta-contacts a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+  }
+
+  /* Footer at bottom of About page */
+  .about-footer {
+    text-align: center;
+    padding: 22px 55px 30px;
+  }
+
+  .about-footer img {
+    height: 22px;
+    opacity: 0.3;
+    margin-bottom: 6px;
+  }
+
+  .about-footer span {
+    display: block;
+    font-size: 9px;
+    color: #b5b0a8;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== SYMBOLS TABLE ===== */
+  .symbols-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+  }
+
+  .symbols-table tr {
+    page-break-inside: avoid;
+  }
+
+  .symbols-table td {
+    padding: 13px 16px;
+    vertical-align: top;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #3e3e3e;
+    border-bottom: 1px solid #e8e5e0;
+  }
+
+  .symbols-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .symbols-table tr:nth-child(odd) td {
+    background: #f4f2ee;
+  }
+
+  .symbols-table tr:nth-child(even) td {
+    background: #ffffff;
+  }
+
+  .symbols-table tr:first-child td:first-child {
+    border-radius: 8px 0 0 0;
+  }
+
+  .symbols-table tr:first-child td:last-child {
+    border-radius: 0 8px 0 0;
+  }
+
+  .symbols-table tr:last-child td:first-child {
+    border-radius: 0 0 0 8px;
+  }
+
+  .symbols-table tr:last-child td:last-child {
+    border-radius: 0 0 8px 0;
+  }
+
+  .symbol-name {
+    font-weight: 700;
+    color: #2a9d8f;
+    white-space: nowrap;
+    width: 110px;
+    font-size: 14.5px;
+    letter-spacing: 0.2px;
+  }
+
+  .symbol-meaning {
+    text-align: justify;
+  }
+
+  /* "Come posso aiutarti" section */
+  .help-section {
+    margin-top: 6px;
+  }
+
+  .help-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2a9d8f;
+    margin-bottom: 14px;
+  }
+
+  .help-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+  }
+
+  .help-list li {
+    position: relative;
+    padding: 12px 16px 12px 50px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #3e3e3e;
+    border: 1px solid #e8e5e0;
+  }
+
+  .help-list li::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 17px;
+    width: 18px;
+    height: 18px;
+    background: #2a9d8f;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .help-list li::after {
+    content: '\2713';
+    position: absolute;
+    left: 21.5px;
+    top: 16px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .help-list li strong {
+    color: #15141a;
+    font-weight: 600;
+  }
+
+  /* Footer logo + page number on content pages */
+  .page-foot {
+    position: absolute;
+    bottom: 28px;
+    left: 55px;
+    right: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .page-foot img {
+    height: 22px;
+    opacity: 0.4;
+  }
+
+  .page-foot span {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <div class="cover-inner">
+    <img src="../../public/images/logo-dilorenzo.png" alt="Christian Dilorenzo" class="cover-logo">
+
+    <div class="cover-ornament"></div>
+
+    <div class="cover-label">Guida Gratuita</div>
+
+    <h1>MINI-GUIDA<br>ALL'INTERPRETAZIONE<br>DEI SOGNI</h1>
+
+    <p class="cover-subtitle">secondo l'approccio della dott.ssa Gabriella Tupini</p>
+
+    <p class="cover-author" style="margin-top: 30px;">a cura del <strong>dott. Christian Dilorenzo</strong></p>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-diamond"></div>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 1 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 1</span>
+  <h2 class="chapter-title">Che cosa sono i sogni?</h2>
+  <div class="title-bar"></div>
+
+  <p class="lead">Ti capita mai di svegliarti con una strana sensazione addosso, come se avessi vissuto un'altra vita durante la notte, ma senza riuscire a capirne il significato?</p>
+
+  <p>I sogni sono messaggeri silenziosi che puntano verso un'unica direzione: la nostra verit&agrave;. Esistono per aiutarci a capire chi siamo, cosa desideriamo davvero e come percepiamo il mondo, rivelandoci al contempo i segni che il mondo ha lasciato su di noi.</p>
+
+  <p>Sono lo strumento privilegiato che l'inconscio utilizza per parlarci. Attraverso di essi, l'introspezione diventa un ponte naturale verso l'autorealizzazione. I sogni non si limitano a mostrarci inclinazioni e desideri; ci spingono a guardare con coraggio al passato per sciogliere i blocchi, gli schemi ripetitivi e le ansie che appesantiscono il nostro presente.</p>
+
+  <div class="quote">
+    <p>Un vero cammino interiore inizia qui: nel momento in cui decidiamo di mettere in dubbio tutto ci&ograve; che abbiamo accettato senza mai interrogarci.</p>
+  </div>
+
+  <p>Decodificare i simboli onirici significa riscoprire la propria anima &mdash; imparare ci&ograve; che ama e ci&ograve; che rifiuta &mdash; per tornare finalmente a stare bene con se stessi. Solo conoscendo profondamente noi stessi possiamo imparare a comprendere davvero gli altri e la realt&agrave; che ci circonda.</p>
+
+  <div class="callout">
+    <p>&Egrave; un percorso vivo: durante il viaggio troverai sempre una parte di te che spinge per avanzare e un'altra che, per paura, prover&agrave; a trattenerti.</p>
+  </div>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>2</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 2 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 2</span>
+  <h2 class="chapter-title">Perch&eacute; non ricordiamo i sogni?</h2>
+  <div class="title-bar"></div>
+
+  <p class="lead">Forse ti senti frustrato perch&eacute;, nonostante i tuoi sforzi, al risveglio trovi solo il vuoto. Se provi spesso questa sensazione di &ldquo;porta chiusa&rdquo;, sappi che non &egrave; una mancanza di capacit&agrave;, ma spesso un meccanismo di protezione che il tuo inconscio ha attivato per evitarti un dolore che non sei ancora pronto a gestire.</p>
+
+  <p>Molti credono di non sognare, ma la scienza e la psicologia concordano: tutti sogniamo. In media, ogni notte produciamo almeno cinque scenari onirici, eppure per molti il risveglio coincide con il vuoto.</p>
+
+  <p>Spesso questo accade perch&eacute; cerchiamo scorciatoie per il riposo: l'uso di alcol, sonniferi o cannabis, sebbene aiuti ad addormentarsi velocemente, altera le fasi profonde del sonno e agisce come una gomma, cancellando il ricordo dei sogni.</p>
+
+  <div class="quote">
+    <p>Chi non ricorda mai i propri sogni, o lo fa raramente, spesso nasconde una ferita dolorosa antica. L'inconscio, per proteggerci, &ldquo;chiude la porta&rdquo;.</p>
+  </div>
+
+  <p>Ma c'&egrave; una ragione pi&ugrave; profonda, legata alla nostra protezione interiore. Se abbiamo sepolto emozioni troppo dolorose, la mente teme che il sogno possa riportarle a galla, costringendoci a rivivere ci&ograve; che non siamo ancora pronti a guardare.</p>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>3</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 3 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 3</span>
+  <h2 class="chapter-title">Perch&eacute; gli incubi?</h2>
+  <div class="title-bar"></div>
+
+  <p class="lead">Se ti capita di svegliarti col cuore in gola o in preda all'angoscia a causa di un incubo ricorrente, non scacciarlo subito. Quell'urlo che senti &egrave; una parte di te che ha bisogno di essere ascoltata, qualcosa che hai dovuto &ldquo;mettere a tacere&rdquo; tempo fa solo per poter sopravvivere.</p>
+
+  <p>L'incubo &egrave; un messaggio urgente che non pu&ograve; pi&ugrave; essere ignorato: &egrave; un urlo della nostra anima. Spesso, queste visioni angoscianti rappresentano parti di noi che abbiamo &ldquo;segregato&rdquo; o soffocato per troppo tempo e che ora chiedono, con forza, di essere reintegrate.</p>
+
+  <div class="quote">
+    <p>L'incubo segna l'emergere di emozioni insostenibili legate a ferite profonde del passato. Dolori e ferite che abbiamo scelto di dimenticare per pura strategia di sopravvivenza.</p>
+  </div>
+
+  <p>La mente cancella il ricordo per permetterci di andare avanti. Ma nel quotidiano ne restano gli effetti: ansie, blocchi e paure inspiegabili.</p>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>4</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 4 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 4</span>
+  <h2 class="chapter-title">Perch&eacute; &egrave; importante capire<br>il linguaggio dei sogni?</h2>
+  <div class="title-bar"></div>
+
+  <p class="lead">Ti sei mai interrogato sul significato di un sogno strano, o che ti ha lasciato addosso un senso di confusione per tutta la giornata? Spesso etichettiamo queste immagini come &ldquo;sciocchezze&rdquo;, ma la verit&agrave; &egrave; che capire il linguaggio dei sogni &egrave; fondamentale per la nostra evoluzione.</p>
+
+  <p>&Egrave; importante capire i sogni visto che passiamo un terzo della nostra vita a dormire e sognare. I sogni ci aiutano a capire noi stessi e si interpretano con il cuore.</p>
+
+  <div class="callout">
+    <p>Interpretare i sogni significa dialogare con l'anima. Farlo ci permette di:</p>
+  </div>
+
+  <ul class="teal-list">
+    <li>Riconoscere i nostri talenti nascosti</li>
+    <li>Comprendere l'origine di un malessere fisico o emotivo</li>
+    <li>Ricevere consigli pratici sulle decisioni da prendere</li>
+  </ul>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>5</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 5 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 5</span>
+  <h2 class="chapter-title">Come interpretare i sogni?</h2>
+  <div class="title-bar"></div>
+
+  <p class="lead">Ti sei mai chiesto: &ldquo;Come faccio a sapere se l'interpretazione del sogno &egrave; corretta?&rdquo;</p>
+
+  <p>Questa &egrave; una delle domande pi&ugrave; frequenti. Spesso cerchiamo la risposta in un libro o nella logica, ma la verit&agrave; &egrave; che il significato di un sogno non va &ldquo;capito&rdquo; con la testa, va sentito.</p>
+
+  <p>Per sapere se un'interpretazione &egrave; giusta, devi ascoltare il tuo corpo e il tuo cuore: ti risuona? Ti tocca nel profondo? Se, leggendo o pensando a un significato, senti una sorta di &ldquo;click&rdquo; interiore, un'emozione che si muove o un senso di chiarezza improvvisa, allora sei sulla strada giusta.</p>
+
+  <div class="quote">
+    <p>Dobbiamo imparare ad affidarci all'istinto per sentire. Se un'interpretazione ti lascia indifferente, probabilmente &egrave; solo un esercizio mentale. Se invece ti scuote, ti commuove o ti d&agrave; un senso di pace &mdash; anche se la verit&agrave; emersa &egrave; scomoda &mdash; allora quella &egrave; la voce della tua anima che ti sta confermando: &ldquo;S&igrave;, &egrave; proprio cos&igrave;&rdquo;.</p>
+  </div>
+
+  <p>I sogni non si interpretano con la mente, ma con il cuore. Per comprenderli, dobbiamo prima abbattere le barriere dei nostri schemi mentali. Senza la chiave di lettura dei sogni, rischiamo di vivere in superficie. Il sogno, invece, ha il potere di svelare i nostri automatismi: man mano che questi schemi cadono, il linguaggio onirico diventa pi&ugrave; chiaro.</p>
+
+  <div class="callout">
+    <p>Molto spesso i sogni, per far capire delle verit&agrave; e sfuggire alla censura della mente condizionata, usano figure di copertura. In generale, i nostri genitori nei sogni sono sempre loro. Mentre tutte le figure che sembrano nostri coetanei rappresentano parti di noi.</p>
+  </div>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>6</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 6 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 6</span>
+  <h2 class="chapter-title">Come annotare i sogni?</h2>
+  <div class="title-bar"></div>
+
+  <p>Utilizza un quaderno, un diario o anche il tuo cellulare. Ecco cosa annotare:</p>
+
+  <ol class="annotation-list">
+    <li>La data del sogno</li>
+    <li>L'emozione che hai provato da sveglio, finito il sonno</li>
+    <li>Cosa ti hanno generato (come emozione o sensazione) tutti i personaggi che hai sognato</li>
+    <li>Cosa ti hanno fatto pensare quei personaggi e i loro comportamenti. Assomigliano a qualcuno che conosci?</li>
+  </ol>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>7</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 7 — DIZIONARIO ==================== -->
+<div class="page" style="page-break-after: auto;">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <span class="chapter-label">Capitolo 7</span>
+  <h2 class="chapter-title">Piccolo Dizionario dei Simboli</h2>
+  <div class="title-bar"></div>
+
+  <p style="font-style: italic; color: #777; margin-bottom: 8px; font-size: 13px;">Nota: Il significato dipende sempre dal contesto del sognatore.</p>
+  <p class="body-text">Ogni simbolo onirico porta con sé un universo di significati che variano a seconda della storia personale, delle emozioni e del momento di vita di chi sogna.</p>
+
+  <table style="width: 100%; border-collapse: separate; border-spacing: 0 6px; margin-top: 16px; font-size: 13px;">
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Acqua</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Rappresenta le nostre emozioni. Se l'acqua è limpida e non ci sono pericoli in vista, si può sondare l'inconscio senza incontrare contenuti dolorosi o paurosi.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Fuoco</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Trasformazione, passione o rabbia che brucia. È l'energia che distrugge per creare il nuovo.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Macchina</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">È la mente o la mente condizionata. Ci permette di camminare per il mondo e incontrare gli altri proteggendoci in parte dalle emozioni. Chi guida? Abbiamo il controllo o siamo passeggeri?</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Denti</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Sono legati all'aggressività e alla capacità di "mordere" la vita. Perderli può indicare perdita di energia.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Scuola</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">È il luogo che racchiude tanti schemi. Rappresenta il mondo dei doveri e dell'autorità scolastica che deriva dall'autorità genitoriale.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Chiesa</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Indica il nostro rapporto con il sacro e con i valori morali. A volte fa riferimento alla figura genitoriale della madre.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Soldi</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Rappresentano le nostre energie.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+    <tr style="page-break-inside: avoid;"><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Cane</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">È l'immagine del nostro istinto. È facile da addomesticare per cui può avere due valenze: un istinto troppo condizionato o un forte alleato.</td></tr>
+    <tr style="height: 6px;"><td colspan="2"></td></tr>
+  </table>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>8</span>
+  </div>
+</div>
+
+<!-- ==================== CHAPTER 7 — PAGINA 2 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <table style="width: 100%; border-collapse: separate; border-spacing: 0 5px; font-size: 12.5px; margin-top: 10px;">
+    <tr><td style="padding: 10px 14px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 95px; vertical-align: top;">Gatto</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Rappresenta una parte nostra istintuale che si affaccia alla coscienza per ricordarci il valore dell'autonomia. Il gatto non si lascia addomesticare dai condizionamenti.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Serpente</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Simbolo della terra, dell'istinto primitivo, non condizionato. Il suo morso comunica conoscenza, ma fa male perché abbatte le illusioni. È la salvezza e il risveglio doloroso.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Ladro</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Le cose rubate sono in genere le ferite del passato dell'infanzia. Il ladro è lo sconosciuto che popola i nostri incubi. Di solito è un genitore inquietante o chi per lui.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Assassino</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">A volte è una parte di noi. Altre volte indica qualcuno che ci ha provocato uno spavento o una ferita dolorosa che abbiamo cancellato.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Demone</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Indica una parte aggressiva di noi. Spesso i demoni che i bambini sognano sono parti loro molto arrabbiate, rifiutate dai genitori e dalle religioni.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Diavolo</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">È simbolo dell'istinto ribelle. Da piccoli spesso genera incubi, per paura di essere puniti qualora ci si ribelli all'autorità.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Fantasma</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Qualcosa del passato che non è ancora stato "sepolto" o risolto. I fantasmi alludono a contenuti emotivamente forti del passato.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Siringa</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">In genere indica una ferita dolorosa che ci è stata fatta.</td></tr>
+    <tr><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 8px 0 0 8px; font-weight: 600; color: #2a9d8f; width: 100px; vertical-align: top;">Coltelli</td><td style="padding: 12px 16px; background: #f4f2ee; border-radius: 0 8px 8px 0;">Strumenti atti a colpire e ferire, in genere sono relativi a figure del passato che ci hanno fatto del male.</td></tr>
+  </table>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>9</span>
+  </div>
+</div>
+
+<!-- ==================== CHI SONO + CTA ==================== -->
+<div class="page" style="page-break-before: always; background: #f4f2ee;">
+  <div class="page-header">
+    <img src="../../public/images/logo-dilorenzo.png" alt="" class="page-header-logo">
+  </div>
+
+  <!-- Bio con foto a destra, bordo nero -->
+  <div style="display: flex; gap: 20px; align-items: flex-start; margin-bottom: 16px;">
+    <div style="flex: 1;">
+      <h2 style="font-size: 22px; font-weight: 600; color: #15141a; margin-bottom: 4px;">Christian Dilorenzo</h2>
+      <p style="font-size: 10px; color: #2a9d8f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Counselor Professionista</p>
+      <p style="font-size: 13px; margin-bottom: 0; line-height: 160%;">Dopo una laurea in Strategie d'impresa e Management e diversi anni nel mondo del digital marketing, ho scelto di cambiare rotta per rispondere a una chiamata più profonda: la comprensione dell'essere umano.</p>
+    </div>
+    <div style="flex-shrink: 0; width: 110px; height: 140px; border-radius: 12px; overflow: hidden; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+      <img src="../../public/images/christian-hero-section.webp" alt="Christian Dilorenzo" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+  </div>
+
+  <p style="font-size: 13px; margin-bottom: 6px; line-height: 160%;">Il mio percorso di counseling nasce da un'esperienza personale di ricerca interiore. La svolta radicale è avvenuta grazie all'incontro con la psicoterapeuta <strong>Gabriella Tupini</strong>, un cammino che mi ha permesso di smontare i condizionamenti ereditati, portandomi a scoprire chi fossi davvero oltre gli schemi sociali e familiari.</p>
+  <p style="font-size: 13px; margin-bottom: 14px; line-height: 160%;">Oggi metto a disposizione di chi desidera conoscersi, gli strumenti che io stesso ho sperimentato e integrato nel mio approccio: l'interpretazione dei sogni, l'Enneagramma, il Genogramma, le Costellazioni Familiari.</p>
+
+  <!-- Come posso aiutarti -->
+  <h3 style="font-size: 15px; color: #15141a; margin-bottom: 8px;">Come posso aiutarti concretamente</h3>
+  <p style="font-size: 13px; margin-bottom: 6px; line-height: 160%;">Il mio lavoro non mira a un generico "miglioramento", ma a un incontro autentico con te stesso. Posso accompagnarti in un percorso di:</p>
+  <ul style="list-style: none; padding: 0; margin-bottom: 16px;">
+    <li style="padding: 6px 0; border-bottom: 1px solid #d8d0c1; font-size: 13px; line-height: 155%;"><strong style="color: #2a9d8f;">Interpretazione dei sogni:</strong> per decodificare i messaggi del tuo inconscio e trasformarli in chiavi di consapevolezza quotidiana.</li>
+    <li style="padding: 6px 0; border-bottom: 1px solid #d8d0c1; font-size: 13px; line-height: 155%;"><strong style="color: #2a9d8f;">Superamento degli schemi:</strong> per identificare i condizionamenti che bloccano la tua realizzazione.</li>
+    <li style="padding: 6px 0; font-size: 13px; line-height: 155%;"><strong style="color: #2a9d8f;">Integrazione interiore:</strong> per accogliere e comprendere quelle parti di te che hai dovuto "silenziare" per sopravvivere.</li>
+  </ul>
+
+  <!-- CTA -->
+  <div style="background: linear-gradient(135deg, #1a7a6f, #2a9d8f, #3bbfad); border-radius: 12px; padding: 20px; text-align: center;">
+    <h3 style="color: white; font-size: 16px; margin-bottom: 5px;">Inizia il tuo percorso di consapevolezza</h3>
+    <p style="color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 14px; text-align: center;">Il primo colloquio conoscitivo è gratuito e senza impegno.</p>
+    <a href="https://calendar.app.google/9syiq85KqVwSDBSEA" style="display: inline-block; background: white; color: #15141a; padding: 10px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 13px;">Prenota un colloquio conoscitivo gratuito</a>
+    <div style="margin-top: 12px; color: rgba(255,255,255,0.6); font-size: 11px;">
+      info@cridilorenzo.com · WhatsApp: 347 330 1278 · www.cridilorenzo.com
+    </div>
+  </div>
+
+  <p style="text-align: center; font-size: 9px; color: #c0c0c0; margin-top: 14px;">&copy; Christian Dilorenzo — Counselor Professionista — Tutti i diritti riservati</p>
+
+  <div class="page-foot">
+    <img src="../../public/images/logo-dilorenzo.png" alt="">
+    <span>10</span>
+  </div>
+</div>
+
+</body>
+</html>
