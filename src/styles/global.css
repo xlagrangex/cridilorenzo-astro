@@ -456,14 +456,17 @@ h4 {
   display: flex;
   overflow: hidden;
   white-space: nowrap;
+  width: 100%;
 }
 
 .marquee-content {
   display: flex;
   align-items: center;
   gap: 0;
-  animation: marquee-scroll 25s linear infinite;
+  animation: marquee-scroll 30s linear infinite;
   flex-shrink: 0;
+  min-width: 100%;
+  will-change: transform;
 }
 
 .marquee-item {
@@ -484,7 +487,7 @@ h4 {
 
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-100%); }
 }
 
 /* Rainbow flow — flow continuo in una direzione (bottone + footer) */

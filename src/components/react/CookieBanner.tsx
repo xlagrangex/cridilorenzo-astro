@@ -95,29 +95,13 @@ export default function CookieBanner() {
           aria-labelledby="cc-title"
           className="fixed z-[9999] bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 md:max-w-md bg-[#15141a] text-white rounded-2xl shadow-2xl border border-white/10 p-6 animate-[ccSlide_.4s_cubic-bezier(0.16,1,0.3,1)]"
         >
-          <div className="flex items-start gap-3 mb-3">
-            <div
-              className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1a7a6f 0%, #2a9d8f 50%, #3bbfad 100%)",
-              }}
-            >
-              <svg
-                className="w-5 h-5 text-white"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.8 14.1a9 9 0 11-11.9-11.9 4 4 0 004 4 4 4 0 004 4 4 4 0 004 4zM8 10h.01M12 15h.01M17 13h.01M9 15h.01"
-                />
-              </svg>
-            </div>
-            <h2 id="cc-title" className="text-lg font-medium leading-tight">
+          <div className="mb-4">
+            <img
+              src="/images/logo-dilorenzo.png"
+              alt="Christian DiLorenzo"
+              className="h-7 w-auto brightness-0 invert mb-3"
+            />
+            <h2 id="cc-title" className="text-sm font-medium leading-tight text-white/90 m-0">
               Rispettiamo la tua privacy
             </h2>
           </div>

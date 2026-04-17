@@ -1,5 +1,6 @@
 ---
 import HamburgerMenu from "./react/HamburgerMenu.tsx";
+import { getSiteSettings, sanityImageUrl, pick } from "../lib/sanity";
 
 const navLinks = [
   { label: "Chi sono", href: "/#chi-sono" },
@@ -10,7 +11,13 @@ const navLinks = [
   { label: "Contatti", href: "/#contact" },
 ];
 
-const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC";
+const settings = await getSiteSettings();
+const calendarUrl = pick(
+  settings?.calendarUrl,
+  "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0hE4rG_WwpeS2ck-0o1mnjaoGD6FtqZjcZZgwkNXOB7dSspKlguUEIV4RFzX8DBvZz3v8NjktC"
+);
+const logoSrc = sanityImageUrl(settings?.logo, "/images/logo-dilorenzo.png");
+const logoAlt = pick(settings?.logoAlt, "Christian DiLorenzo — Counselor Professionista");
 ---
 
 <nav class="fixed top-0 z-[100] w-full bg-[#f4f2ee]/90 pt-2 backdrop-blur-[14px]">
@@ -19,7 +26,7 @@ const calendarUrl = "https://calendar.google.com/calendar/u/0/appointments/sched
       <div class="flex items-center justify-between">
         <!-- Brand -->
         <a href="/" class="inline-block">
-          <img src="/images/logo-dilorenzo.png" alt="Christian DiLorenzo — Counselor Professionista" class="h-10 md:h-12 w-auto" />
+          <img src={logoSrc} alt={logoAlt} class="h-10 md:h-12 w-auto" />
         </a>
 
         <!-- Desktop links -->

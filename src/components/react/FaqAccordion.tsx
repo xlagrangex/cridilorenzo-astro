@@ -5,7 +5,7 @@ interface FaqItem {
   answer: string;
 }
 
-const faqs: FaqItem[] = [
+const defaultFaqs: FaqItem[] = [
   {
     question: "A cosa serve il counseling?",
     answer: "Serve a capire meglio se stessi, affrontare momenti di confusione o blocco, migliorare le relazioni, gestire stress, paure e cambiamenti, e ritrovare una direzione più chiara nella propria vita."
@@ -40,8 +40,13 @@ const faqs: FaqItem[] = [
   },
 ];
 
-export default function FaqAccordion() {
+interface Props {
+  items?: FaqItem[];
+}
+
+export default function FaqAccordion({ items }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqs = items && items.length > 0 ? items : defaultFaqs;
 
   return (
     <div className="flex flex-col">
@@ -55,7 +60,6 @@ export default function FaqAccordion() {
               {faq.question}
             </h3>
             <div className="relative flex h-6 w-6 flex-shrink-0 items-center justify-center">
-              {/* Plus / Minus */}
               <span className="absolute h-[2px] w-4 bg-[#15141a] transition-transform duration-300" />
               <span
                 className={`absolute h-[2px] w-4 bg-[#15141a] transition-transform duration-300 ${
