@@ -98,7 +98,7 @@ export default function CookieBanner() {
           <div className="mb-4">
             <img
               src="/images/logo-dilorenzo.png"
-              alt="Christian DiLorenzo"
+              alt="Christian Dilorenzo"
               className="h-7 w-auto brightness-0 invert mb-3"
             />
             <h2 id="cc-title" className="text-sm font-medium leading-tight text-white/90 m-0">

@@ -451,11 +451,35 @@ h4 {
   gap: 10px;
 }
 
+/* ═══════════ NAVBAR — stati background ═══════════ */
+.site-nav--default {
+  background-color: rgba(244, 242, 238, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.site-nav--home {
+  background-color: #ffffff;
+  transition: background-color .45s ease, backdrop-filter .45s ease, -webkit-backdrop-filter .45s ease;
+}
+.site-nav--home.is-scrolled {
+  background-color: rgba(244, 242, 238, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.site-nav-divider {
+  transition: opacity .45s ease;
+}
+.site-nav--home:not(.is-scrolled) .site-nav-divider {
+  opacity: 0;
+}
+
 /* ═══════════ PERCHÉ SCEGLIERMI — Cards ═══════════ */
 .perche-card {
   position: relative;
   overflow: hidden;
-  background: #ebe7e0;
+  background: #fdfcfa;
   border-radius: 20px;
   padding: 36px 30px 30px;
   display: flex;
@@ -464,7 +488,7 @@ h4 {
   justify-content: center;
   text-align: left;
   min-height: 240px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(42, 157, 143, 0.12);
   transition: border-color .5s ease, box-shadow .5s ease;
   isolation: isolate;
 }
@@ -503,9 +527,9 @@ h4 {
   inset: 0;
   background: radial-gradient(
     ellipse 85% 90% at 25% 55%,
-    rgba(235, 231, 224, 0.95) 0%,
-    rgba(235, 231, 224, 0.55) 50%,
-    rgba(235, 231, 224, 0) 80%
+    rgba(253, 252, 250, 0.95) 0%,
+    rgba(253, 252, 250, 0.55) 50%,
+    rgba(253, 252, 250, 0) 80%
   );
   pointer-events: none;
   z-index: 1;
@@ -572,6 +596,94 @@ h4 {
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* ═══════════ STRUMENTI — Timeline curva ═══════════ */
+.strumenti-wrap {
+  position: relative;
+  padding: 30px 0 160px;
+}
+.strumenti-path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  display: none;
+}
+@media (min-width: 1024px) {
+  .strumenti-path { display: block; }
+}
+
+.strumenti-timeline {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .strumenti-timeline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 3rem;
+  }
+  .strumento-cell {
+    transform: translateY(var(--offset, 0));
+  }
+}
+
+.strumento-card {
+  background: #fdfcfa;
+  border: 1px solid rgba(42, 157, 143, 0.18);
+  border-radius: 20px;
+  padding: 28px 26px;
+  position: relative;
+  transition: transform .5s cubic-bezier(0.16,1,0.3,1), box-shadow .5s ease, border-color .5s ease;
+  box-shadow: 0 2px 14px -6px rgba(0,0,0,0.08);
+}
+@media (min-width: 768px) {
+  .strumento-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px -18px rgba(26, 122, 111, 0.35);
+    border-color: rgba(42, 157, 143, 0.5);
+  }
+}
+
+.strumento-icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a7a6f 0%, #2a9d8f 50%, #3bbfad 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 20px -8px rgba(26, 122, 111, 0.5);
+}
+.strumento-icon {
+  width: 36px;
+  height: 36px;
+  filter: brightness(0) invert(1);
+}
+
+.strumento-title {
+  font-size: 1.65rem;
+  font-weight: 500;
+  color: #15141a;
+  margin: 0 0 12px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.strumento-desc {
+  font-size: 1.1rem;
+  color: #3e3e3e;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ═══════════ MARQUEE ═══════════ */

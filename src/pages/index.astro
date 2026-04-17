@@ -142,8 +142,8 @@ const comeFunziona = {
   headingItalic: pick(h.comeFunziona?.headingItalic, "chiaro e trasparente"),
   body: pick(h.comeFunziona?.body, "Dal primo contatto gratuito all'accompagnamento nel tempo, ogni passo è pensato per offrirti ascolto autentico e un sostegno costante."),
   image: sanityImageUrl(h.comeFunziona?.image, "/images/councelor.webp"),
-  stepsHeadingStart: pick(h.comeFunziona?.stepsHeadingStart, "Il"),
-  stepsHeadingItalic: pick(h.comeFunziona?.stepsHeadingItalic, "percorso"),
+  stepsHeadingStart: pick(h.comeFunziona?.stepsHeadingStart, "Il percorso"),
+  stepsHeadingItalic: pick(h.comeFunziona?.stepsHeadingItalic, "individuale"),
   stepsIntro: pick(h.comeFunziona?.stepsIntro, "Nessun pacchetto obbligatorio. Paghi solo gli incontri che fai, senza vincoli."),
   steps: (h.comeFunziona?.steps && h.comeFunziona.steps.length > 0
     ? h.comeFunziona.steps.map((s) => ({
@@ -247,7 +247,7 @@ const contatti = {
 <Layout title="Christian Dilorenzo - Counselor">
 
   {isVisible(h.hero) && (
-  <section class="pt-24 md:pt-32 pb-16">
+  <section class="pt-14 md:pt-20 pb-16">
     <div class="wrapper px-4 md:px-8 lg:px-12">
       <div class="mx-auto" data-animate="fade-in-up">
         <div class="flex flex-col lg:flex-row gap-7">
@@ -282,8 +282,8 @@ const contatti = {
               <p class="text-[#373737cc] text-base m-0 transition-colors duration-300 group-hover:text-[#15141a]">{hero.ratingDesc}</p>
             </a>
 
-            <img loading="lazy" src={hero.image} alt="Christian DiLorenzo" class="lg:hidden w-full max-w-[280px] mx-auto mt-4 object-contain" />
-            <img loading="lazy" src={hero.image} alt="Christian DiLorenzo" class="hidden lg:block absolute top-0 bottom-0 right-0 z-[1] h-full w-auto object-contain transition-transform duration-700 ease-out group-hover/hero:scale-[1.03]" />
+            <img loading="lazy" src={hero.image} alt="Christian Dilorenzo" class="lg:hidden w-full max-w-[280px] mx-auto mt-4 object-contain" />
+            <img loading="lazy" src={hero.image} alt="Christian Dilorenzo" class="hidden lg:block absolute top-0 bottom-0 right-0 z-[1] h-full w-auto object-contain transition-transform duration-700 ease-out group-hover/hero:scale-[1.03]" />
             <div class="hidden lg:block absolute bottom-0 right-0 z-[2] w-[50%] h-[30%] bg-gradient-to-t from-[#f4f2ee] to-transparent pointer-events-none"></div>
           </div>
         </div>
@@ -298,7 +298,7 @@ const contatti = {
       <div class="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 items-center mb-12" data-animate="fade-in-up">
         <div class="relative">
           <div class="aspect-[3/2] overflow-hidden rounded-[20px]">
-            <img src={chiSono.image1} alt="Studio" loading="lazy" class="w-full h-full object-cover" />
+            <img src={chiSono.image2} alt="Christian" loading="lazy" class="w-full h-full object-cover" />
           </div>
         </div>
         <div class="flex flex-col gap-2.5 max-w-[469px]">
@@ -317,7 +317,7 @@ const contatti = {
         </div>
         <div class="relative order-1 md:order-2">
           <div class="aspect-[3/2] overflow-hidden rounded-[20px]">
-            <img src={chiSono.image2} alt="Christian" loading="lazy" class="w-full h-full object-cover" />
+            <img src={chiSono.image1} alt="Studio" loading="lazy" class="w-full h-full object-cover" />
           </div>
         </div>
       </div>
@@ -512,7 +512,7 @@ const contatti = {
   )}
 
   {isVisible(h.strumenti) && (
-  <section id="strumenti" class="py-16 md:py-24 overflow-hidden">
+  <section id="strumenti" class="strumenti-section py-16 md:py-24 overflow-hidden">
     <div class="wrapper px-4 md:px-8 lg:px-12">
       <div class="max-w-2xl mb-10" data-animate="fade-in-up">
         <p class="sub-title mb-3">{strumenti.subtitle}</p>
@@ -520,22 +520,51 @@ const contatti = {
         <p class="regular-text mt-5">{strumenti.body}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5" data-animate="fade-in-up">
-        {strumenti.items.map((s) => (
-          <div class="bg-[#ebe7e0] rounded-[20px] p-8 border border-[#e4e4e4] transition-all duration-300 hover:shadow-lg hover:border-[#b8ad9e] hover:-translate-y-1">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-5xl font-bold text-[#b8ad9e]/40 leading-none">{s.num}</span>
-              <div class="w-12 h-12 rounded-[10px] bg-[#d8d0c1] flex items-center justify-center">
-                <img src={s.icon} alt="" class="w-7 h-7" loading="lazy" />
-              </div>
-            </div>
-            <h3 class="text-xl font-medium mb-3">{s.title}</h3>
-            <p class="text-base m-0 leading-[160%]">{s.desc}</p>
-          </div>
-        ))}
+      <div class="strumenti-wrap">
+        <svg class="strumenti-path" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="strumenti-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1a7a6f" />
+              <stop offset="50%" stop-color="#2a9d8f" />
+              <stop offset="100%" stop-color="#3bbfad" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M 180 140 C 450 80 700 250 950 200 C 1150 170 1150 380 900 420 C 650 450 450 380 250 500 C 400 580 750 630 1050 620"
+            stroke="rgba(42, 157, 143, 0.14)"
+            stroke-width="3"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            class="strumenti-path-progress"
+            d="M 180 140 C 450 80 700 250 950 200 C 1150 170 1150 380 900 420 C 650 450 450 380 250 500 C 400 580 750 630 1050 620"
+            stroke="url(#strumenti-gradient)"
+            stroke-width="5"
+            fill="none"
+            stroke-linecap="round"
+          />
+        </svg>
+
+        <ol class="strumenti-timeline">
+          {strumenti.items.map((s, i) => {
+            const offsets = ["0px", "90px", "30px", "120px"];
+            return (
+              <li class="strumento-cell" style={`--offset: ${offsets[i] || "0px"}`}>
+                <article class="strumento-card">
+                  <div class="strumento-icon-box">
+                    <img src={s.icon} alt="" class="strumento-icon" loading="lazy" />
+                  </div>
+                  <h3 class="strumento-title">{s.title}</h3>
+                  <p class="strumento-desc">{s.desc}</p>
+                </article>
+              </li>
+            );
+          })}
+        </ol>
       </div>
 
-      <div class="flex justify-center mt-10">
+      <div class="flex justify-center mt-10" data-animate="fade-in-up">
         <a href={calendarUrl} target="_blank" class="btn-primary">{strumenti.ctaLabel}</a>
       </div>
     </div>
@@ -711,11 +740,13 @@ const contatti = {
 </Layout>
 
 <script>
-  import { fadeInUp, staggerIn } from "../lib/animations";
+  import { fadeInUp, staggerIn, drawPathOnScroll } from "../lib/animations";
 
   document.addEventListener("astro:page-load", () => {
     fadeInUp('[data-animate="fade-in-up"]');
     staggerIn(".perche-card", { stagger: 0.1, y: 36 });
+    staggerIn(".strumento-card", { stagger: 0.12, y: 30, trigger: ".strumenti-section" });
+    drawPathOnScroll(".strumenti-path-progress", { trigger: ".strumenti-timeline", start: "top 90%", end: "bottom 70%" });
   });
 </script>
 

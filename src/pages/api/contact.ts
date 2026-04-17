@@ -14,7 +14,7 @@ function emailWrapper(content: string, recipientEmail?: string) {
     <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
       <!-- Header con logo -->
       <div style="text-align: center; padding: 32px 24px 24px; border-bottom: 2px solid #f4f2ee;">
-        <img src="${LOGO_URL}" alt="Christian DiLorenzo" style="height: 40px; width: auto;" />
+        <img src="${LOGO_URL}" alt="Christian Dilorenzo" style="height: 64px; width: auto; max-width: 100%;" />
       </div>
 
       <!-- Contenuto -->
@@ -25,7 +25,7 @@ function emailWrapper(content: string, recipientEmail?: string) {
       <!-- Footer email -->
       <div style="padding: 24px; background: #f4f2ee; text-align: center; border-radius: 0 0 10px 10px;">
         <p style="margin: 0 0 12px; font-size: 13px; color: #3e3e3e;">
-          <strong>Christian DiLorenzo</strong> — Counselor Professionista
+          <strong>Christian Dilorenzo</strong> — Counselor Professionista
         </p>
         <p style="margin: 0 0 16px; font-size: 12px; color: #929292;">
           info@cridilorenzo.com · +39 347 330 1278 · Milano
@@ -58,7 +58,7 @@ async function sendBrevoEmail(to: string, subject: string, htmlContent: string, 
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      sender: { name: "Christian DiLorenzo", email: "info@cridilorenzo.com" },
+      sender: { name: "Christian Dilorenzo", email: "info@cridilorenzo.com" },
       to: [{ email: to }],
       subject,
       htmlContent,
@@ -142,7 +142,7 @@ export const POST: APIRoute = async ({ request }) => {
       if (tipo === "Contatto") {
         confirmPromise = sendBrevoEmail(
           email,
-          "Ho ricevuto il tuo messaggio — Christian DiLorenzo",
+          "Ho ricevuto il tuo messaggio — Christian Dilorenzo",
           emailWrapper(`
             <h2 style="color: #2a9d8f; margin: 0 0 16px; font-size: 22px;">Grazie per avermi scritto${name && name !== "—" ? `, ${name}` : ""}!</h2>
             <p style="font-size: 15px; color: #3e3e3e; line-height: 170%; margin: 0 0 8px;">
@@ -161,7 +161,7 @@ export const POST: APIRoute = async ({ request }) => {
       } else {
         confirmPromise = sendBrevoEmail(
           email,
-          "Benvenuto! Ecco la tua guida gratuita — Christian DiLorenzo",
+          "Benvenuto! Ecco la tua guida gratuita — Christian Dilorenzo",
           emailWrapper(`
             <h2 style="color: #2a9d8f; margin: 0 0 16px; font-size: 22px;">Grazie per esserti iscritto!</h2>
             <p style="font-size: 15px; color: #3e3e3e; line-height: 170%; margin: 0 0 8px;">

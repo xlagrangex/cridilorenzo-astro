@@ -88,6 +88,33 @@ export function staggerIn(
 }
 
 /**
+ * Disegna un path SVG progressivamente man mano che l'utente scrolla
+ */
+export function drawPathOnScroll(
+  selector: string,
+  options?: { trigger?: string; start?: string; end?: string }
+) {
+  const paths = document.querySelectorAll<SVGPathElement>(selector);
+  paths.forEach((path) => {
+    const length = path.getTotalLength();
+    gsap.set(path, {
+      strokeDasharray: length,
+      strokeDashoffset: length,
+    });
+    gsap.to(path, {
+      strokeDashoffset: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: options?.trigger ?? path,
+        start: options?.start ?? "top 75%",
+        end: options?.end ?? "bottom 40%",
+        scrub: 0.5,
+      },
+    });
+  });
+}
+
+/**
  * Parallax su elemento
  */
 export function parallax(selector: string, speed: number = 0.5) {

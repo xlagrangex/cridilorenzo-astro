@@ -38,15 +38,15 @@ const jsonLd = {
   headline: post.title,
   description: post.description,
   datePublished: post.date,
-  author: { "@type": "Person", name: "Christian DiLorenzo", url: "https://cridilorenzo.com", jobTitle: "Counselor Professionista" },
-  publisher: { "@type": "Person", name: "Christian DiLorenzo" },
+  author: { "@type": "Person", name: "Christian Dilorenzo", url: "https://cridilorenzo.com", jobTitle: "Counselor Professionista" },
+  publisher: { "@type": "Person", name: "Christian Dilorenzo" },
   mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
   ...(post.image?.asset?.url && { image: post.image.asset.url }),
   ...(post.tags && { keywords: post.tags.join(", ") }),
 };
 ---
 
-<Layout title={`${post.title} — Christian DiLorenzo`} description={post.description}>
+<Layout title={`${post.title} — Christian Dilorenzo`} description={post.description}>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <article class="pt-28 md:pt-36 pb-16">
@@ -72,9 +72,9 @@ const jsonLd = {
         <p class="text-xl text-[#3e3e3e] leading-[160%] mb-6 max-w-3xl">{post.description}</p>
         <div class="flex flex-wrap items-center gap-4 text-sm text-[#373737cc] border-b border-[#e4e4e4] pb-6">
           <div class="flex items-center gap-3">
-            <img src="/images/christian-avatar.png" alt="Christian DiLorenzo" class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+            <img src="/images/christian-avatar.png" alt="Christian Dilorenzo" class="w-10 h-10 rounded-full object-cover" loading="lazy" />
             <div>
-              <p class="text-[#15141a] font-medium m-0">Christian DiLorenzo</p>
+              <p class="text-[#15141a] font-medium m-0">Christian Dilorenzo</p>
               <p class="text-xs text-[#373737cc] m-0">Counselor Professionista</p>
             </div>
           </div>
@@ -116,9 +116,9 @@ const jsonLd = {
       </div>
 
       <div class="mt-14 p-6 md:p-8 bg-[#f4f2ee] rounded-[20px] flex flex-col md:flex-row items-start gap-5" data-animate="fade-in-up">
-        <img src="/images/christian-avatar.png" alt="Christian DiLorenzo" class="w-16 h-16 rounded-full object-cover flex-shrink-0" loading="lazy" />
+        <img src="/images/christian-avatar.png" alt="Christian Dilorenzo" class="w-16 h-16 rounded-full object-cover flex-shrink-0" loading="lazy" />
         <div>
-          <h3 class="text-lg font-medium text-[#15141a] mb-1 !mt-0">Christian DiLorenzo</h3>
+          <h3 class="text-lg font-medium text-[#15141a] mb-1 !mt-0">Christian Dilorenzo</h3>
           <p class="text-sm text-[#373737cc] mb-3">Counselor Professionista — Accompagno le persone in percorsi di ascolto, consapevolezza e crescita personale.</p>
           <a href={calendarUrl} target="_blank" class="btn-primary !py-2.5 !px-4 !text-sm">Prenota un colloquio gratuito</a>
         </div>
