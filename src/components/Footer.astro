@@ -198,10 +198,23 @@ const pageLinks = [
       <div class="flex items-center gap-4">
         <a href="https://www.iubenda.com/privacy-policy/19514849" class="iubenda-white iubenda-noiframe iubenda-embed text-white/40 text-xs hover:text-white/70 transition-colors" title="Privacy Policy">Privacy Policy</a>
         <a href="https://www.iubenda.com/privacy-policy/19514849/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed text-white/40 text-xs hover:text-white/70 transition-colors" title="Cookie Policy">Cookie Policy</a>
+        <button type="button" id="open-cookie-prefs" class="text-white/40 text-xs hover:text-white/70 transition-colors cursor-pointer bg-transparent border-0 p-0">Gestisci cookie</button>
       </div>
     </div>
     <script is:inline>
       (function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);
+    </script>
+    <script is:inline>
+      document.addEventListener("astro:page-load", function() {
+        var btn = document.getElementById("open-cookie-prefs");
+        if (!btn) return;
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          if (typeof window.openCookiePreferences === "function") {
+            window.openCookiePreferences();
+          }
+        });
+      });
     </script>
 
   </div>
