@@ -33,11 +33,11 @@ const serviziFallback = [
 ];
 
 const percheScegliermiFallback = [
-  { title: "Ho attraversato il mio cammino interiore", desc: "Prima di accompagnare gli altri, ho attraversato il mio percorso personale, chiamato \"opera al nero\": anni di lavoro interiore e confronto con le mie ombre.", icon: "/images/Compass_1Compass.png" },
-  { title: "Un lavoro profondo sui sogni", desc: "Integro l'interpretazione dei sogni secondo l'approccio di Gabriella Tupini, uno strumento prezioso per accedere ai contenuti inconsci.", icon: "/images/Crescent-Moon_1Crescent-Moon.png" },
-  { title: "Nessuna lente ideologica", desc: "Non porto credenze religiose o filosofiche nel percorso. Lo spazio che costruisco è neutro, aperto, libero.", icon: "/images/Scales_1Scales.png" },
-  { title: "Un percorso costruito insieme", desc: "Ogni cammino nasce dall'ascolto autentico e si costruisce passo dopo passo, rispettando la tua storia, le tue relazioni e il tuo tempo.", icon: "/images/Heart_1Heart.png" },
-  { title: "Oltre gli schemi mentali", desc: "Ho lavorato per sciogliere condizionamenti e automatismi della mente. Questo mi consente di ascoltare davvero.", icon: "/images/Ocean-Wave_1Ocean-Wave.png" },
+  { title: "Ho attraversato il mio cammino interiore", desc: "Prima di accompagnare gli altri, ho attraversato il mio percorso personale, chiamato \"opera al nero\": anni di lavoro interiore e confronto con le mie ombre.", icon: "/images/icons/compass.svg" },
+  { title: "Un lavoro profondo sui sogni", desc: "Integro l'interpretazione dei sogni secondo l'approccio di Gabriella Tupini, uno strumento prezioso per accedere ai contenuti inconsci.", icon: "/images/icons/moon-star.svg" },
+  { title: "Nessuna lente ideologica", desc: "Non porto credenze religiose o filosofiche nel percorso. Lo spazio che costruisco è neutro, aperto, libero.", icon: "/images/icons/scale.svg" },
+  { title: "Un percorso costruito insieme", desc: "Ogni cammino nasce dall'ascolto autentico e si costruisce passo dopo passo, rispettando la tua storia, le tue relazioni e il tuo tempo.", icon: "/images/icons/heart.svg" },
+  { title: "Oltre gli schemi mentali", desc: "Ho lavorato per sciogliere condizionamenti e automatismi della mente. Questo mi consente di ascoltare davvero.", icon: "/images/icons/waves.svg" },
 ];
 
 const strumentiFallback = [
@@ -209,7 +209,7 @@ const marqueeBase = (h.marquee?.items && h.marquee.items.length > 0
       highlight: !!s.highlight,
     }))
   : marqueeFallback);
-const marqueeItems = [...marqueeBase, ...marqueeBase];
+const marqueeItems = marqueeBase;
 
 const confronto = {
   subtitle: pick(h.confronto?.subtitle, "[ QUALE PERCORSO FA PER TE? ]"),
@@ -453,28 +453,58 @@ const contatti = {
         <p class="regular-text mt-5 text-center">{perche.body}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" data-animate="fade-in-up">
-        {perche.items.slice(0, 3).map((item) => (
-          <div class="bg-[#ebe7e0] rounded-[20px] p-5 flex flex-col items-center text-center">
-            <div class="icon-rounded">
-              <img src={item.icon} alt="" class="w-7 h-7" loading="lazy" />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" id="perche-grid-1">
+        {perche.items.slice(0, 3).map((item, i) => {
+          const maskStyle = `-webkit-mask-image: url('${item.icon}'); mask-image: url('${item.icon}');`;
+          return (
+            <div class="perche-card">
+              <span class="perche-card-watermark" aria-hidden="true" style={maskStyle}></span>
+              <div class="perche-card-spotlight" aria-hidden="true"></div>
+              <div class="perche-card-scrim" aria-hidden="true"></div>
+              {i === 0 && (
+                <h3 class="perche-card-title">
+                  Ho attraversato il mio <em>cammino interiore</em>
+                </h3>
+              )}
+              {i === 1 && (
+                <h3 class="perche-card-title">
+                  Un <em>lavoro profondo</em> sui sogni
+                </h3>
+              )}
+              {i === 2 && (
+                <h3 class="perche-card-title">
+                  Nessuna lente <em>ideologica</em>
+                </h3>
+              )}
+              <p class="perche-card-desc">{item.desc}</p>
             </div>
-            <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">{item.title}</h3>
-            <p class="text-base text-[#3e3e3e] m-0">{item.desc}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
       {perche.items.length > 3 && (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-animate="fade-in-up">
-        {perche.items.slice(3).map((item) => (
-          <div class="bg-[#ebe7e0] rounded-[20px] p-5 flex flex-col items-center text-center">
-            <div class="icon-rounded">
-              <img src={item.icon} alt="" class="w-7 h-7" loading="lazy" />
+      <div class="flex flex-col md:flex-row md:justify-center gap-6" id="perche-grid-2">
+        {perche.items.slice(3).map((item, i) => {
+          const maskStyle = `-webkit-mask-image: url('${item.icon}'); mask-image: url('${item.icon}');`;
+          const absIdx = 3 + i;
+          return (
+            <div class="perche-card md:w-[calc((100%-3rem)/3)] md:shrink-0">
+              <span class="perche-card-watermark" aria-hidden="true" style={maskStyle}></span>
+              <div class="perche-card-spotlight" aria-hidden="true"></div>
+              <div class="perche-card-scrim" aria-hidden="true"></div>
+              {absIdx === 3 && (
+                <h3 class="perche-card-title">
+                  Un percorso <em>costruito insieme</em>
+                </h3>
+              )}
+              {absIdx === 4 && (
+                <h3 class="perche-card-title">
+                  Oltre gli <em>schemi mentali</em>
+                </h3>
+              )}
+              <p class="perche-card-desc">{item.desc}</p>
             </div>
-            <h3 class="text-xl font-medium text-[#3e3e3e] mb-5">{item.title}</h3>
-            <p class="text-base text-[#3e3e3e] m-0">{item.desc}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
       )}
     </div>
@@ -514,25 +544,56 @@ const contatti = {
 
   {isVisible(h.marquee) && (
   <section class="bg-[#ebe7e0] py-8 overflow-hidden">
-    <div class="marquee-track">
-      <div class="marquee-content">
-        {marqueeItems.map((item, i) => (
-          <>
-            <span class="marquee-item">
-              {item.iconKey === "clock" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>}
-              {item.iconKey === "screen" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>}
-              {item.iconKey === "wallet" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>}
-              {item.iconKey === "shield" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>}
-              {item.iconKey === "gift" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>}
-              <strong class="text-[#15141a] text-lg">{item.strong}</strong> <span class={item.highlight ? "text-[#2a9d8f] font-semibold" : "text-[#3e3e3e]"}>{item.label}</span>
-            </span>
-            {i < marqueeItems.length - 1 && <span class="marquee-dot">·</span>}
-          </>
-        ))}
-      </div>
+    <div class="marquee-track" data-marquee>
+      {[0, 1].map((copy) => (
+        <div class="marquee-content" aria-hidden={copy === 1 ? "true" : undefined}>
+          {marqueeItems.map((item) => (
+            <>
+              <span class="marquee-item">
+                {item.iconKey === "clock" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>}
+                {item.iconKey === "screen" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>}
+                {item.iconKey === "wallet" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>}
+                {item.iconKey === "shield" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>}
+                {item.iconKey === "gift" && <svg class="w-7 h-7 text-[#2a9d8f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>}
+                <strong class="text-[#15141a] text-lg">{item.strong}</strong> <span class={item.highlight ? "text-[#2a9d8f] font-semibold" : "text-[#3e3e3e]"}>{item.label}</span>
+              </span>
+              <span class="marquee-dot">·</span>
+            </>
+          ))}
+        </div>
+      ))}
     </div>
   </section>
   )}
+  <script is:inline>
+    (function () {
+      function fill() {
+        document.querySelectorAll("[data-marquee]").forEach(function (track) {
+          var contents = track.querySelectorAll(".marquee-content");
+          if (contents.length < 1) return;
+          var first = contents[0];
+          first.querySelectorAll("[data-mq-fill]").forEach(function (n) { n.remove(); });
+          var base = Array.prototype.slice.call(first.children);
+          var safety = 0;
+          while (first.scrollWidth < track.offsetWidth && safety++ < 20) {
+            base.forEach(function (ch) {
+              var c = ch.cloneNode(true);
+              c.setAttribute("data-mq-fill", "");
+              first.appendChild(c);
+            });
+          }
+          for (var i = 1; i < contents.length; i++) {
+            contents[i].innerHTML = first.innerHTML;
+          }
+        });
+      }
+      var t;
+      function schedule() { clearTimeout(t); t = setTimeout(fill, 80); }
+      document.addEventListener("astro:page-load", schedule);
+      window.addEventListener("resize", schedule);
+      if (document.readyState !== "loading") schedule(); else document.addEventListener("DOMContentLoaded", schedule);
+    })();
+  </script>
 
   {isVisible(h.confronto) && (
   <section class="py-16 md:py-24">
@@ -650,10 +711,11 @@ const contatti = {
 </Layout>
 
 <script>
-  import { fadeInUp } from "../lib/animations";
+  import { fadeInUp, staggerIn } from "../lib/animations";
 
   document.addEventListener("astro:page-load", () => {
     fadeInUp('[data-animate="fade-in-up"]');
+    staggerIn(".perche-card", { stagger: 0.1, y: 36 });
   });
 </script>
 

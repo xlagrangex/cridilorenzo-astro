@@ -64,6 +64,30 @@ export function fadeInUp(selector: string) {
 }
 
 /**
+ * Stagger entrance — una serie di elementi entra uno dopo l'altro
+ */
+export function staggerIn(
+  selector: string,
+  options?: { stagger?: number; trigger?: string; y?: number }
+) {
+  const elements = gsap.utils.toArray<HTMLElement>(selector);
+  if (elements.length === 0) return;
+  gsap.set(elements, { y: options?.y ?? 40, opacity: 0 });
+  gsap.to(elements, {
+    y: 0,
+    opacity: 1,
+    duration: 0.9,
+    ease: "power3.out",
+    stagger: options?.stagger ?? 0.12,
+    scrollTrigger: {
+      trigger: options?.trigger ?? elements[0],
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+    },
+  });
+}
+
+/**
  * Parallax su elemento
  */
 export function parallax(selector: string, speed: number = 0.5) {

@@ -451,6 +451,129 @@ h4 {
   gap: 10px;
 }
 
+/* ═══════════ PERCHÉ SCEGLIERMI — Cards ═══════════ */
+.perche-card {
+  position: relative;
+  overflow: hidden;
+  background: #ebe7e0;
+  border-radius: 20px;
+  padding: 36px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  min-height: 240px;
+  border: 1px solid transparent;
+  transition: border-color .5s ease, box-shadow .5s ease;
+  isolation: isolate;
+}
+.perche-card:hover {
+  border-color: rgba(42, 157, 143, 0.35);
+  box-shadow: 0 14px 40px -18px rgba(26, 122, 111, 0.35);
+}
+
+.perche-card-watermark {
+  position: absolute;
+  top: -40px;
+  right: -50px;
+  width: 280px;
+  height: 280px;
+  background: linear-gradient(135deg, #1a7a6f 0%, #2a9d8f 50%, #3bbfad 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  opacity: 0.18;
+  pointer-events: none;
+  transition: opacity .6s ease, transform .8s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+  will-change: transform, opacity;
+}
+.perche-card:hover .perche-card-watermark {
+  opacity: 0.32;
+  transform: scale(1.06) rotate(-4deg);
+}
+
+/* Scrim: layer morbido tra watermark e testo per salvare leggibilità */
+.perche-card-scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 85% 90% at 25% 55%,
+    rgba(235, 231, 224, 0.95) 0%,
+    rgba(235, 231, 224, 0.55) 50%,
+    rgba(235, 231, 224, 0) 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glow fisso bottom-left, appare solo in hover */
+.perche-card-spotlight {
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 157, 143, 0.28) 0%, transparent 70%);
+  filter: blur(36px);
+  opacity: 0;
+  transition: opacity .6s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+  z-index: 0;
+}
+.perche-card:hover .perche-card-spotlight {
+  opacity: 1;
+}
+
+.perche-card-title {
+  position: relative;
+  z-index: 2;
+  color: #15141a;
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 0 0 18px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.perche-card-title::after {
+  content: "";
+  display: block;
+  width: 76px;
+  height: 3px;
+  background: linear-gradient(90deg, #1a7a6f 0%, #2a9d8f 50%, #3bbfad 100%);
+  border-radius: 2px;
+  margin-top: 18px;
+}
+.perche-card-title em {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: inherit;
+  font-size: 1.1em;
+}
+
+.perche-card-desc {
+  position: relative;
+  z-index: 2;
+  color: #3e3e3e;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .perche-card, .perche-card *, .perche-card-watermark, .perche-card-spotlight, .perche-card-scrim {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 /* ═══════════ MARQUEE ═══════════ */
 .marquee-track {
   display: flex;
@@ -463,9 +586,8 @@ h4 {
   display: flex;
   align-items: center;
   gap: 0;
-  animation: marquee-scroll 30s linear infinite;
+  animation: marquee-scroll 50s linear infinite;
   flex-shrink: 0;
-  min-width: 100%;
   will-change: transform;
 }
 
