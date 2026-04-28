@@ -50,6 +50,47 @@ function emailWrapper(content: string, recipientEmail?: string) {
   `;
 }
 
+const BREVO_LIST_CONTATTI = 3;
+const BREVO_LIST_NEWSLETTER = 4;
+
+async function upsertBrevoContact(params: {
+  email: string;
+  name?: string;
+  phone?: string;
+  message?: string;
+  tipo: string;
+}) {
+  if (!BREVO_API_KEY || !params.email) return;
+  const [firstname, ...rest] = (params.name || "").trim().split(/\s+/);
+  const lastname = rest.join(" ");
+  const isContatto = params.tipo === "Contatto";
+  const listId = isContatto ? BREVO_LIST_CONTATTI : BREVO_LIST_NEWSLETTER;
+
+  const attributes: Record<string, string> = {
+    DATA_LEAD: new Date().toISOString().split("T")[0],
+    TIPO_LEAD: isContatto ? "Contatto" : "Newsletter",
+    SORGENTE: isContatto ? "Form contatti sito" : "Iscrizione guida sogni",
+  };
+  if (firstname) attributes.NOME = firstname;
+  if (lastname) attributes.COGNOME = lastname;
+  if (params.phone) attributes.LANDLINE_NUMBER = params.phone;
+  if (params.message) attributes.MESSAGGIO = params.message;
+
+  return fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+      "api-key": BREVO_API_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: params.email,
+      attributes,
+      listIds: [listId],
+      updateEnabled: true,
+    }),
+  });
+}
+
 async function sendBrevoEmail(to: string, subject: string, htmlContent: string, replyTo?: string) {
   return fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
@@ -183,8 +224,11 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
+    // 4. Upsert contatto su Brevo CRM (lista in base al tipo)
+    const brevoContactPromise = upsertBrevoContact({ email, name, phone, message, tipo });
+
     // Esegui tutto in parallelo
-    const results = await Promise.allSettled([sheetPromise, notifyPromise, confirmPromise].filter(Boolean));
+    const results = await Promise.allSettled([sheetPromise, notifyPromise, confirmPromise, brevoContactPromise].filter(Boolean));
 
     const errors = results
       .filter((r): r is PromiseRejectedResult => r.status === "rejected")
