@@ -66,8 +66,26 @@ async function upsertBrevoContact(params: {
   const isContatto = params.tipo === "Contatto";
   const listId = isContatto ? BREVO_LIST_CONTATTI : BREVO_LIST_NEWSLETTER;
 
-  const attributes: Record<string, string> = {
-    DATA_LEAD: new Date().toISOString().split("T")[0],
+  const today = new Date().toISOString().split("T")[0];
+
+  let prevCount = 0;
+  let prevDataLead: string | undefined;
+  try {
+    const existing = await fetch(
+      `https://api.brevo.com/v3/contacts/${encodeURIComponent(params.email)}`,
+      { headers: { "api-key": BREVO_API_KEY } }
+    );
+    if (existing.ok) {
+      const data = await existing.json();
+      prevCount = Number(data?.attributes?.INTERACTION_COUNT) || 0;
+      prevDataLead = data?.attributes?.DATA_LEAD;
+    }
+  } catch {}
+
+  const attributes: Record<string, string | number> = {
+    DATA_LEAD: prevDataLead || today,
+    LAST_INTERACTION: today,
+    INTERACTION_COUNT: prevCount + 1,
     TIPO_LEAD: isContatto ? "Contatto" : "Newsletter",
     SORGENTE: isContatto ? "Form contatti sito" : "Iscrizione guida sogni",
   };

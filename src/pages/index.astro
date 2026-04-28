@@ -100,8 +100,8 @@ const marqueeFallback = [
 const h = homepage || {};
 
 const hero = {
-  headingTop: pick(h.hero?.headingTop, "Uno spazio per"),
-  headingItalic: pick(h.hero?.headingItalic, "fermarti e fare chiarezza"),
+  headingTop: pick(h.hero?.headingTop, "Uno spazio"),
+  headingItalic: pick(h.hero?.headingItalic, "per fermarti e fare chiarezza"),
   body: pick(h.hero?.body, "Se stai vivendo un periodo di difficoltà, cambiamento o smarrimento, possiamo lavorarci insieme. Gli incontri sono <strong>un tempo dedicato a te</strong>, per comprendere meglio ciò che accade dentro e trasformarlo in <strong>consapevolezza, benessere ed equilibrio</strong>."),
   primaryCta: pick(h.hero?.primaryCtaLabel, "Prenota un colloquio gratuito"),
   secondaryCta: pick(h.hero?.secondaryCtaLabel, "Chi sono"),
@@ -260,7 +260,7 @@ const contatti = {
               <div class="flex flex-wrap items-center gap-4">
                 <RainbowButton href={calendarUrl} client:load>
                   {hero.primaryCta}
-                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  <svg class="hidden md:inline w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </RainbowButton>
                 <a href="#chi-sono" class="btn-secondary group">
                   <span class="inline-flex items-center gap-2">
