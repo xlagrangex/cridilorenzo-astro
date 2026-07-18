@@ -775,6 +775,8 @@ const contatti = {
       })
       .then(function(res) {
         if (res.ok) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "generate_lead", form_id: "contact", lead_type: "Contatto" });
           form.reset();
           if (window.showToast) window.showToast("Messaggio inviato! Ti risponderò il prima possibile.", "success");
         } else {

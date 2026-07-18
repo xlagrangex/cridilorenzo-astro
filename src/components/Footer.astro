@@ -93,6 +93,8 @@ const pageLinks = [
               fetch("/api/contact", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(jsonData) })
                 .then(function(res) {
                   if (res.ok) {
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({ event: "newsletter_signup", form_id: "newsletter", lead_type: "Newsletter" });
                     form.reset();
                     if (window.showToast) window.showToast("Iscrizione confermata! Controlla la tua email.", "success");
                   } else {

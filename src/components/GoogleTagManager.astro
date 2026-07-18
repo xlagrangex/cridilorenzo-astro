@@ -1,0 +1,83 @@
+---
+// Google Tag Manager + Google Consent Mode v2.
+// Incluso in <head> del Layout, il piu' in alto possibile.
+// Consenso di default "negato": i tag partono solo dopo la scelta dell'utente
+// nel CookieBanner, che chiama gtag('consent','update', ...) via lib/consent.ts.
+// Per i visitatori di ritorno rileggiamo cc_consent_v1 e riapplichiamo lo stato
+// PRIMA di caricare GTM, cosi' i tag partono subito senza attendere l'idle di React.
+// Le guardie (window.__*) evitano doppie esecuzioni con le View Transitions.
+---
+<!-- Google Consent Mode v2 (default: negato finche' l'utente non sceglie) -->
+<script is:inline>
+  if (!window.__consentInit) {
+    window.__consentInit = true;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      personalization_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500,
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+    // Visitatori di ritorno: riapplica la scelta gia' salvata prima di caricare GTM.
+    try {
+      var raw = localStorage.getItem('cc_consent_v1');
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s && s.version === '1') {
+          gtag('consent', 'update', {
+            ad_storage: s.marketing ? 'granted' : 'denied',
+            ad_user_data: s.marketing ? 'granted' : 'denied',
+            ad_personalization: s.marketing ? 'granted' : 'denied',
+            analytics_storage: s.analytics ? 'granted' : 'denied',
+            personalization_storage: s.preferences ? 'granted' : 'denied',
+          });
+        }
+      }
+    } catch (e) {}
+  }
+</script>
+<!-- Google Tag Manager -->
+<script is:inline>
+  if (!window.__gtmInit) {
+    window.__gtmInit = true;
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N3DKDVMM');
+  }
+</script>
+<!-- End Google Tag Manager -->
+<!-- Pageview virtuale sulle navigazioni client-side (View Transitions) -->
+<script is:inline>
+  if (!window.__gtmSpaHook) {
+    window.__gtmSpaHook = true;
+    document.addEventListener('astro:after-swap', function(){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'spa_page_view',
+        page_path: location.pathname + location.search,
+        page_title: document.title,
+      });
+    });
+  }
+</script>
+<!-- form_start: primo focus dentro un qualsiasi <form> (una volta per form) -->
+<script is:inline>
+  if (!window.__gtmFormHook) {
+    window.__gtmFormHook = true;
+    document.addEventListener('focusin', function(e){
+      var el = e.target;
+      var form = el && el.closest ? el.closest('form') : null;
+      if (form && !form.__fs) {
+        form.__fs = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'form_start', form_id: form.id || form.getAttribute('name') || 'form' });
+      }
+    }, true);
+  }
+</script>

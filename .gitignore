@@ -4,3 +4,4 @@ dist/
 .DS_Store
 .vercel
 .env
+docs/ga4/ga4_token.txt
