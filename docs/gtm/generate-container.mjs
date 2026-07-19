@@ -11,8 +11,9 @@ import { writeFileSync } from "node:fs";
 // ---- CONFIG (i 6 valori del setup) ----
 const GTM_ID = "GTM-N3DKDVMM";
 const GA4_ID = "G-J3LKPDQ6PN";
-const ADS_ID = ""; // es. "11506769390" (senza il prefisso AW-)  <-- da compilare dopo
-const ADS_LABEL = ""; // es. "AbC-D_efG..."                       <-- da compilare dopo
+const ADS_ID = "975629142"; // AW-975629142 (azione "Invio modulo per i lead")
+const ADS_LABEL = "ystpCJWFgdMcENbWm9ED";
+const META_PIXEL_ID = "26796547666684649"; // vuoto = nessun tag Meta generato
 
 // ---- helper (enum in MAIUSCOLO, come vuole GTM) ----
 const P = (type, key, value) => ({ type, key, value });
@@ -54,6 +55,22 @@ function rawTag(name, type, parameter, firingTriggerId) {
     name, type, parameter, fingerprint: "0",
     firingTriggerId, tagFiringOption: "ONCE_PER_EVENT",
     monitoringMetadata: { type: "MAP" }, consentSettings: { consentStatus: "NOT_SET" },
+  });
+}
+
+// Tag Custom HTML per Meta Pixel, gate-ato sul consenso marketing (ad_storage):
+// il tag NON parte finche' l'utente non accetta i cookie di marketing (GDPR).
+function metaTag(name, html, firingTriggerId) {
+  tags.push({
+    accountId: "0", containerId: "0", tagId: String(++_t),
+    name, type: "html",
+    parameter: [tpl("html", html), bool("supportDocumentWrite", "false")],
+    fingerprint: "0", firingTriggerId, tagFiringOption: "ONCE_PER_EVENT",
+    monitoringMetadata: { type: "MAP" },
+    consentSettings: {
+      consentStatus: "NEEDED",
+      consentType: { type: "LIST", list: [{ type: "TEMPLATE", value: "ad_storage" }] },
+    },
   });
 }
 
@@ -159,6 +176,33 @@ ga4("GA4 - scroll_depth", "scroll_depth", ["60"], [["percent_scrolled", "{{Scrol
 // ---- eventi di visita a pagine chiave (per contare i visitatori per pagina) ----
 pageViewEvent("Blog (indice)", "view_blog", "^/blog/?$", "70", "71");
 pageViewEvent("Articolo blog", "view_article", "^/blog/.+", "72", "73");
+
+// ---- Meta Pixel (Custom HTML, gate-ati sul consenso marketing) ----
+// Genera SOLO se META_PIXEL_ID e' compilato. Mappa gli eventi del dataLayer
+// sugli eventi standard Meta (Lead, Contact, Schedule, CompleteRegistration,
+// ViewContent) + custom (FormStart, SocialClick, FileDownload, ScrollDepth).
+if (META_PIXEL_ID) {
+  const base = `<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','${META_PIXEL_ID}');
+fbq('track','PageView');
+</script>`;
+  metaTag("Meta Pixel - Base + PageView", base, [ALL_PAGES]);
+  metaTag("Meta Pixel - PageView (SPA)", `<script>fbq('track','PageView');</script>`, ["41"]);
+  // conversioni forti
+  metaTag("Meta - Lead (contatto form)", `<script>fbq('track','Lead');</script>`, ["40"]);
+  metaTag("Meta - Contact (WhatsApp)", `<script>fbq('track','Contact',{method:'whatsapp'});</script>`, ["50"]);
+  metaTag("Meta - Contact (telefono)", `<script>fbq('track','Contact',{method:'phone'});</script>`, ["51"]);
+  metaTag("Meta - Schedule (prenotazione)", `<script>fbq('track','Schedule');</script>`, ["53"]);
+  // eventi secondari
+  metaTag("Meta - CompleteRegistration (newsletter)", `<script>fbq('track','CompleteRegistration');</script>`, ["43"]);
+  metaTag("Meta - Contact (email)", `<script>fbq('track','Contact',{method:'email'});</script>`, ["52"]);
+  metaTag("Meta - ViewContent (articolo blog)", `<script>fbq('track','ViewContent',{content_type:'article'});</script>`, ["72", "73"]);
+  metaTag("Meta - FormStart (custom)", `<script>fbq('trackCustom','FormStart');</script>`, ["42"]);
+  metaTag("Meta - SocialClick (custom)", `<script>fbq('trackCustom','SocialClick');</script>`, ["55"]);
+  metaTag("Meta - FileDownload (custom)", `<script>fbq('trackCustom','FileDownload');</script>`, ["56"]);
+  metaTag("Meta - ScrollDepth (custom)", `<script>fbq('trackCustom','ScrollDepth');</script>`, ["60"]);
+}
 
 // ---- built-in variables ----
 const builtInVariable = [

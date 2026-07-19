@@ -16,14 +16,17 @@ SITO ──► [ GTM ] ──► GA4          (statistiche + eventi)
 |---|---|
 | GTM Container | `GTM-N3DKDVMM` |
 | GA4 Measurement ID | `G-J3LKPDQ6PN` |
-| Google Ads — ID cliente | `610-844-4151` |
-| Google Ads — ID conversione | ⏳ da creare (`AW-…`) |
-| Google Ads — Etichetta conversione | ⏳ da creare |
+| Google Ads — ID cliente | `610-844-4151` ⚠️ account **Chiuso** (da riattivare) |
+| Google Ads — ID conversione | `AW-975629142` (azione "Invio modulo per i lead") |
+| Google Ads — Etichetta conversione | `ystpCJWFgdMcENbWm9ED` |
 | Account Google proprietario | `1989dilorenzo@gmail.com` |
+| Meta Pixel ID | `26796547666684649` (tag in GTM, gate `ad_storage`) |
+| Meta domain verification | `niphyhidrycqychlyjubxkd9xc33jd` (meta in `Layout.astro`) |
 
-> **Stato:** conversione Ads non ancora creata. Tutto il resto (GA4 + Conversion Linker
-> + eventi) è attivo. Appena l'azione di conversione esiste in Ads, vedi
-> [Aggiungere la conversione Ads](#aggiungere-la-conversione-ads).
+> **Stato:** tag conversione Ads cablato nel container e attivo in GTM. L'account Ads
+> `610-844-4151` è però **Chiuso**: il tag scatta e invia i dati, ma Ads **non
+> registrerà le conversioni** finché l'account non viene riattivato (fatturazione).
+> Da fare ancora: riattivazione account + collegamento GA4 ↔ Ads.
 
 ## Architettura nel codice
 
@@ -57,6 +60,30 @@ SITO ──► [ GTM ] ──► GA4          (statistiche + eventi)
 > **Nota WhatsApp:** la conversione matcha solo `api.whatsapp.com` (pulsante flottante +
 > footer). Lo share del blog usa `wa.me/?text=` ed è classificato come `social_click`,
 > **non** come lead.
+
+## Meta Pixel (in GTM, gate consenso marketing)
+
+Il Pixel `26796547666684649` è cablato **dentro GTM** come tag Custom HTML, **non**
+sul sito. Tutti i tag Meta hanno `consentSettings: ad_storage` → partono solo dopo
+"Accetta marketing" (il Consent Mode di Google non copre i tag Custom HTML). Mappa
+evento dataLayer → evento Meta:
+
+| dataLayer | Evento Meta | Tipo |
+|---|---|---|
+| page load / `spa_page_view` | `PageView` | standard |
+| `generate_lead` | `Lead` | standard 🔥 |
+| `whatsapp_click` / `phone_click` / `email_click` | `Contact` (`method`) | standard |
+| `booking_click` | `Schedule` | standard 🔥 |
+| `newsletter_signup` | `CompleteRegistration` | standard |
+| `view_article` | `ViewContent` | standard |
+| `form_start` | `FormStart` | custom |
+| `social_click` | `SocialClick` | custom |
+| `file_download` | `FileDownload` | custom |
+| `scroll_depth` | `ScrollDepth` | custom |
+
+Le **Conversioni Personalizzate** in Meta Ads Manager si creano da questi eventi
+(Gestione eventi → Conversioni personalizzate). Per aggiungere/togliere Meta:
+`META_PIXEL_ID` in `docs/gtm/generate-container.mjs` (vuoto = nessun tag Meta).
 
 ## Mappa delle dipendenze di tracciamento
 
