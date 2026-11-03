@@ -34,7 +34,7 @@ export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
     `*[_type == "post" && slug.current == $slug][0] {
       _id, title, slug, description, date, tags, draft,
       image { asset-> { url } },
-      body
+      body[] { ..., _type == "image" => { ..., asset-> { url } } }
     }`,
     { slug }
   );
@@ -238,38 +238,99 @@ export function sanityImageUrl(
   return img?.asset?.url || fallback;
 }
 
+function escapeAttribute(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
+const DECORATOR_TAGS: Record<string, string> = {
+  strong: "strong",
+  em: "em",
+  underline: "u",
+  "strike-through": "s",
+  code: "code",
+};
+
+function linkAttributes(rawHref: string): string {
+  const href = /^www\./i.test(rawHref) ? `https://${rawHref}` : rawHref;
+  const external =
+    /^https?:\/\//i.test(href) && !/^https?:\/\/(www\.)?cridilorenzo\.com/i.test(href);
+  return `href="${escapeAttribute(href)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}`;
+}
+
+function renderSpans(block: any): string {
+  const links = new Map<string, string>(
+    (block.markDefs || [])
+      .filter((def: any) => def._type === "link" && def.href)
+      .map((def: any) => [def._key, def.href])
+  );
+
+  // Sanity spezza un link in più span quando una parte è in grassetto o corsivo:
+  // gli span consecutivi con lo stesso link vanno dentro un unico <a>.
+  let html = "";
+  let openLink: string | null = null;
+  for (const child of block.children || []) {
+    const marks: string[] = child.marks || [];
+    // Testo non escapato: negli articoli Christian incolla gli embed YouTube
+    // (<iframe>) direttamente nel testo e devono restare video.
+    let text = child.text || "";
+    for (const mark of marks) {
+      const tag = DECORATOR_TAGS[mark];
+      if (tag) text = `<${tag}>${text}</${tag}>`;
+    }
+
+    const linkKey = marks.find((mark) => links.has(mark)) ?? null;
+    if (linkKey !== openLink) {
+      if (openLink) html += "</a>";
+      if (linkKey) html += `<a ${linkAttributes(links.get(linkKey)!)}>`;
+      openLink = linkKey;
+    }
+    html += text;
+  }
+  if (openLink) html += "</a>";
+  return html;
+}
+
+function renderBlock(block: any): string {
+  if (block._type === "image") {
+    const url = block.asset?.url;
+    return url ? `<img src="${escapeAttribute(url)}" alt="" />` : "";
+  }
+
+  if (block._type !== "block") return "";
+
+  const children = renderSpans(block);
+  if (!children.trim()) return "";
+
+  if (block.listItem) return `<li>${children}</li>`;
+
+  const style = block.style || "normal";
+  // L'h1 della pagina è già il titolo dell'articolo.
+  if (style === "h1") return `<h2>${children}</h2>`;
+  if (/^h[2-6]$/.test(style)) return `<${style}>${children}</${style}>`;
+  if (style === "blockquote") return `<blockquote><p>${children}</p></blockquote>`;
+
+  return `<p>${children}</p>`;
+}
+
 // Converte Portable Text in HTML semplice
 export function portableTextToHtml(blocks: any[]): string {
   if (!blocks || !Array.isArray(blocks)) return "";
 
-  return blocks.map((block) => {
-    if (block._type === "image") {
-      const url = block.asset?.url || block.asset?._ref;
-      return url ? `<img src="${url}" alt="" />` : "";
+  const html: string[] = [];
+  let openList: string | null = null;
+  for (const block of blocks) {
+    const listTag =
+      block._type === "block" && block.listItem
+        ? block.listItem === "number" ? "ol" : "ul"
+        : null;
+    if (listTag !== openList) {
+      if (openList) html.push(`</${openList}>`);
+      if (listTag) html.push(`<${listTag}>`);
+      openList = listTag;
     }
+    html.push(renderBlock(block));
+  }
+  if (openList) html.push(`</${openList}>`);
 
-    if (block._type !== "block") return "";
-
-    const children = (block.children || [])
-      .map((child: any) => {
-        let text = child.text || "";
-        if (child.marks?.includes("strong")) text = `<strong>${text}</strong>`;
-        if (child.marks?.includes("em")) text = `<em>${text}</em>`;
-        return text;
-      })
-      .join("");
-
-    if (!children.trim()) return "";
-
-    const style = block.style || "normal";
-    if (style === "h2") return `<h2>${children}</h2>`;
-    if (style === "h3") return `<h3>${children}</h3>`;
-    if (style === "h4") return `<h4>${children}</h4>`;
-    if (style === "blockquote") return `<blockquote><p>${children}</p></blockquote>`;
-
-    if (block.listItem === "bullet") return `<li>${children}</li>`;
-    if (block.listItem === "number") return `<li>${children}</li>`;
-
-    return `<p>${children}</p>`;
-  }).join("\n");
+  return html.filter(Boolean).join("\n");
 }

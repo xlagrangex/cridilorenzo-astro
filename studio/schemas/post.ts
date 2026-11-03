@@ -55,7 +55,36 @@ export const post = defineType({
       title: "Contenuto",
       type: "array",
       of: [
-        { type: "block" },
+        {
+          type: "block",
+          marks: {
+            annotations: [
+              {
+                name: "link",
+                title: "Link",
+                type: "object",
+                fields: [
+                  defineField({
+                    name: "href",
+                    title: "Indirizzo",
+                    type: "url",
+                    description:
+                      "Sito esterno con https:// davanti (es. https://www.sito.it) oppure pagina di questo sito (es. /blog/sogni-ricorrenti).",
+                    validation: (Rule) =>
+                      Rule.uri({
+                        allowRelative: true,
+                        scheme: ["http", "https", "mailto", "tel"],
+                      }).custom((href) =>
+                        typeof href === "string" && /^www\./i.test(href)
+                          ? "Aggiungi https:// davanti all'indirizzo"
+                          : true
+                      ),
+                  }),
+                ],
+              },
+            ],
+          },
+        },
         { type: "image", options: { hotspot: true } },
       ],
     }),
