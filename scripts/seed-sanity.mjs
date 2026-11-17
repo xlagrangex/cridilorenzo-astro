@@ -72,7 +72,7 @@ async function build() {
       tags: ["Chi sono", "counselor professionista"],
       heading: "Ciao, sono Christian",
       body1: "Sono una persona che ha imparato, nel tempo, a <strong>fermarsi e ad ascoltarsi davvero</strong>. E oggi faccio questo anche con gli altri.<br><br>Sono counselor e accompagno le persone in uno <strong>spazio di ascolto</strong> e di <strong>esplorazione interiore</strong>, principalmente online.<br>Un luogo semplice, umano, dove poter portare ciò che si sente — <strong>confusione, stanchezza, emozioni che pesano, momenti di blocco</strong> — senza dover dimostrare nulla.<br><br>Il mio modo di lavorare nasce dal mio <strong>percorso personale</strong>.<br>So cosa significa sentirsi lontani da sé, non capirsi, vivere <strong>schemi che sembrano ripetersi</strong>.",
-      body2: "So quanto può fare la differenza incontrare qualcuno che ti aiuta a guardarti dentro con <strong>rispetto e senza giudizio</strong>.<br><br>Uno degli strumenti che utilizzo è l'<strong>interpretazione dei sogni</strong>, perché i sogni parlano di noi in modo sincero e profondo.<br>A volte mostrano parti che durante il giorno non riusciamo a vedere, ma che hanno molto da dire sulla nostra vita, sulle nostre ferite e anche sulle nostre risorse.<br><br>Negli incontri non si tratta di \"aggiustare\" qualcosa, ma di <strong>incontrarsi</strong>, fare chiarezza, dare un nome a ciò che si muove dentro e <strong>ritrovare un po' più di spazio, respiro e libertà</strong> nel proprio modo di vivere.",
+      body2: "So quanto può fare la differenza incontrare qualcuno che ti aiuta a guardarti dentro con <strong>rispetto e senza giudizio</strong>.<br><br>Uno degli strumenti che utilizzo è il <strong>lavoro sui sogni</strong>, perché i sogni parlano di noi in modo sincero e profondo.<br>A volte mostrano parti che durante il giorno non riusciamo a vedere, ma che hanno molto da dire sulla nostra vita, sulle nostre ferite e anche sulle nostre risorse.<br><br>Negli incontri non si tratta di \"aggiustare\" qualcosa, ma di <strong>incontrarsi</strong>, fare chiarezza, dare un nome a ciò che si muove dentro e <strong>ritrovare un po' più di spazio, respiro e libertà</strong> nel proprio modo di vivere.",
       image1: await img("/images/studio-da-councelor.webp"),
       image2: await img("/images/chi-sono_.webp"),
       ctaLabel: "Prenota un colloquio gratuito",
@@ -111,7 +111,7 @@ async function build() {
       steps: keyed([
         { label: "Passo 1", title: "Prenota il colloquio conoscitivo gratuito", price: "Gratuito", priceSuffix: "", details: "Prenota un <strong>incontro gratuito di 45 minuti</strong> per conoscerci, comprendere la tua situazione e ascoltare le tue esigenze.", bulletPoints: [], highlighted: false },
         { label: "Passo 2", title: "Ricevi una proposta per il tuo percorso", price: "Gratuita", priceSuffix: "", details: "Ti sarà inviata una <strong>sintesi</strong> di ciò che è emerso nel <strong>nostro incontro</strong>, insieme a una proposta di percorso e ai primi strumenti che potremo utilizzare.", bulletPoints: [], highlighted: false },
-        { label: "Continuiamo", title: "Ogni incontro successivo", price: "70€", priceSuffix: "/ 45 min", details: "Online, con cadenza da concordare insieme.", bulletPoints: ["Ascolto, dialogo e strumenti dedicati", "Interpretazione dei sogni inclusa", "Nessun vincolo di durata minima", "Puoi interrompere in qualsiasi momento", "Riservatezza totale garantita"], highlighted: true },
+        { label: "Continuiamo", title: "Ogni incontro successivo", price: "70€", priceSuffix: "/ 45 min", details: "Online, con cadenza da concordare insieme.", bulletPoints: ["Ascolto, dialogo e strumenti dedicati", "Lavoro sui sogni incluso", "Nessun vincolo di durata minima", "Puoi interrompere in qualsiasi momento", "Riservatezza totale garantita"], highlighted: true },
       ], "step"),
       ctaLabel: "Prenota un colloquio gratuito",
     },
@@ -123,7 +123,7 @@ async function build() {
       body: "Scegliere qualcuno con cui intraprendere un percorso interiore è una decisione delicata. Al di là dei titoli, ci sono qualità umane e professionali fondamentali.",
       items: keyed([
         { title: "Ho attraversato il mio cammino interiore", desc: "Prima di accompagnare gli altri, ho attraversato il mio percorso personale, chiamato \"opera al nero\": anni di lavoro interiore e confronto con le mie ombre.", icon: await img("/images/icons/compass.svg") },
-        { title: "Un lavoro profondo sui sogni", desc: "Integro l'interpretazione dei sogni secondo l'approccio di Gabriella Tupini, uno strumento prezioso per accedere ai contenuti inconsci.", icon: await img("/images/icons/moon-star.svg") },
+        { title: "Un lavoro profondo sui sogni", desc: "Integro il lavoro sui sogni secondo l'approccio di Gabriella Tupini, uno strumento prezioso per accedere ai contenuti inconsci.", icon: await img("/images/icons/moon-star.svg") },
         { title: "Nessuna lente ideologica", desc: "Non porto credenze religiose o filosofiche nel percorso. Lo spazio che costruisco è neutro, aperto, libero.", icon: await img("/images/icons/scale.svg") },
         { title: "Un percorso costruito insieme", desc: "Ogni cammino nasce dall'ascolto autentico e si costruisce passo dopo passo, rispettando la tua storia, le tue relazioni e il tuo tempo.", icon: await img("/images/icons/heart.svg") },
         { title: "Oltre gli schemi mentali", desc: "Ho lavorato per sciogliere condizionamenti e automatismi della mente. Questo mi consente di ascoltare davvero.", icon: await img("/images/icons/waves.svg") },
@@ -137,7 +137,7 @@ async function build() {
       headingItalic: "consapevolezza e crescita personale",
       items: keyed([
         { title: "Percorso di Counseling", desc: "Uno spazio di ascolto e accompagnamento per fare chiarezza, comprendere ciò che stai vivendo e ritrovare una direzione più autentica.", image: await img("/images/Why-Chose-Img-01_1Why-Chose-Img-01.avif") },
-        { title: "Interpretazione dei Sogni", desc: "I sogni come linguaggio simbolico dell'inconscio: uno strumento prezioso per esplorare parti profonde di te.", image: await img("/images/interpretazione-sogni-psicoterapia-centro-psicologia-lecco-1.png") },
+        { title: "Lavoro sui Sogni", desc: "I sogni come linguaggio simbolico dell'inconscio: uno strumento prezioso per esplorare parti profonde di te.", image: await img("/images/lavoro-sui-sogni.png") },
         { title: "Supporto relazioni e autostima", desc: "Un accompagnamento per riconoscere schemi relazionali, rafforzare l'autostima e costruire rapporti più consapevoli.", image: await img("/images/counseling-1500x430-1.png") },
       ], "dco"),
     },
@@ -149,7 +149,7 @@ async function build() {
       headingItalic: "del percorso",
       body: "Non esistono tecniche standard o protocolli rigidi. Ogni persona è diversa, e il lavoro nasce da ciò che porti tu, momento per momento.",
       items: keyed([
-        { num: "1", title: "Interpretazione dei sogni", desc: "I sogni parlano attraverso immagini e simboli. Aiutano a comprendere emozioni profonde, parti nascoste di noi e schemi che si ripetono.", icon: await img("/images/Crescent-Moon_1Crescent-Moon.png") },
+        { num: "1", title: "Lavoro sui sogni", desc: "I sogni parlano attraverso immagini e simboli. Aiutano a comprendere emozioni profonde, parti nascoste di noi e schemi che si ripetono.", icon: await img("/images/Crescent-Moon_1Crescent-Moon.png") },
         { num: "2", title: "Genogramma", desc: "Una mappa della storia familiare che aiuta a riconoscere dinamiche e schemi relazionali che influenzano il presente.", icon: await img("/images/Puzzle_1Puzzle.png") },
         { num: "3", title: "Costellazioni familiari", desc: "Permettono di osservare le dinamiche relazionali e familiari che influenzano il presente, per ritrovare il proprio posto con più chiarezza.", icon: await img("/images/Oak-Tree_1Oak-Tree.png") },
         { num: "4", title: "Scrittura espressiva e di consapevolezza", desc: "La scrittura può diventare uno spazio di ascolto interiore, per dare forma a emozioni, immagini e vissuti.", icon: await img("/images/Autograph_1Autograph.png") },
