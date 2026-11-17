@@ -13,11 +13,6 @@ const defaultFaqs: FaqItem[] = [
     note: "Il counseling non sostituisce in alcun modo la psicoterapia o il supporto psicologico. In caso di disagio significativo si consiglia di rivolgersi a un professionista sanitario qualificato."
   },
   {
-    question: "Perché lavorare sull'interpretazione dei sogni?",
-    answer: "I sogni sono un modo attraverso cui il nostro mondo interiore comunica con noi. Aiutano a comprendere emozioni profonde, schemi che si ripetono e risorse nascoste, favorendo una maggiore consapevolezza.",
-    note: "Il counseling non sostituisce in alcun modo la psicoterapia o il supporto psicologico. In caso di disagio significativo si consiglia di rivolgersi a un professionista sanitario qualificato."
-  },
-  {
     question: "Come si svolgono gli incontri?",
     answer: "Gli incontri sono colloqui individuali di 45 minuti, basati sull'ascolto, il dialogo e l'esplorazione delle emozioni. Non servono preparazioni particolari: si parte da ciò che stai vivendo in quel momento."
   },
