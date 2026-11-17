@@ -7,6 +7,8 @@ const logoAlt = pick(settings?.logoAlt, "Christian Dilorenzo");
 const contactEmail = pick(settings?.email, "info@cridilorenzo.com");
 const contactPhone = pick(settings?.phone, "+39 347 330 1278");
 const contactPhoneRaw = contactPhone.replace(/\s+/g, "");
+// Newsletter "guida sogni" sospesa fino alla laurea in psicologia (maggio 2027): rimettere true per riattivarla.
+const showNewsletter = false;
 const whatsappUrl = pick(settings?.whatsappUrl, "https://api.whatsapp.com/send/?phone=393473301278");
 
 const socialLinks = [
@@ -43,6 +45,7 @@ const pageLinks = [
     <!-- Top: Newsletter + Social -->
     <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
       <!-- Left: Newsletter in box gradient -->
+      {showNewsletter && (
       <div class="flex-1 rounded-[20px] p-7 md:p-8 group/nl" style="background: linear-gradient(135deg, #1a7a6f 0%, #2a9d8f 40%, #3bbfad 100%);">
         <div class="flex items-start gap-5 mb-5">
           <!-- Icona regalo/PDF -->
@@ -112,6 +115,7 @@ const pageLinks = [
           });
         </script>
       </div>
+      )}
 
       <!-- Right: Social links -->
       <div class="flex-1 md:max-w-xs">

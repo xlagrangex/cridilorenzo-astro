@@ -3,16 +3,19 @@ import { useState } from "react";
 interface FaqItem {
   question: string;
   answer: string;
+  note?: string;
 }
 
 const defaultFaqs: FaqItem[] = [
   {
     question: "A cosa serve il counseling?",
-    answer: "Serve a capire meglio se stessi, affrontare momenti di confusione o blocco, migliorare le relazioni, gestire stress, paure e cambiamenti, e ritrovare una direzione più chiara nella propria vita."
+    answer: "Serve a capire meglio se stessi, affrontare momenti di confusione o blocco, migliorare le relazioni, gestire stress, paure e cambiamenti, e ritrovare una direzione più chiara nella propria vita.",
+    note: "Il counseling non sostituisce in alcun modo la psicoterapia o il supporto psicologico. In caso di disagio significativo si consiglia di rivolgersi a un professionista sanitario qualificato."
   },
   {
     question: "Perché lavorare sull'interpretazione dei sogni?",
-    answer: "I sogni sono un modo attraverso cui il nostro mondo interiore comunica con noi. Aiutano a comprendere emozioni profonde, schemi che si ripetono e risorse nascoste, favorendo una maggiore consapevolezza."
+    answer: "I sogni sono un modo attraverso cui il nostro mondo interiore comunica con noi. Aiutano a comprendere emozioni profonde, schemi che si ripetono e risorse nascoste, favorendo una maggiore consapevolezza.",
+    note: "Il counseling non sostituisce in alcun modo la psicoterapia o il supporto psicologico. In caso di disagio significativo si consiglia di rivolgersi a un professionista sanitario qualificato."
   },
   {
     question: "Come si svolgono gli incontri?",
@@ -71,13 +74,18 @@ export default function FaqAccordion({ items }: Props) {
           <div
             className="overflow-hidden transition-all duration-300"
             style={{
-              maxHeight: openIndex === i ? "300px" : "0px",
+              maxHeight: openIndex === i ? "600px" : "0px",
               opacity: openIndex === i ? 1 : 0,
             }}
           >
             <p className="pb-5 text-base leading-[160%] text-[#3e3e3e]">
               {faq.answer}
             </p>
+            {faq.note && (
+              <p className="pb-5 text-sm italic leading-[160%] text-[#6b6b6b]">
+                {faq.note}
+              </p>
+            )}
           </div>
         </div>
       ))}
